@@ -8,29 +8,22 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
-
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import HomePage from '../HomePage/Loadable';
+import LoginPage from '../LoginPage/Loadable';
+import FeaturePage from '../FeaturePage/Loadable';
+import NotFoundPage from '../NotFoundPage/Loadable';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import GlobalStyle from '../../global-styles';
-
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
 
 export default function App() {
   return (
-    <AppWrapper>
+    <Container component="main" maxWidth="md">
+      <CssBaseline />
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
@@ -41,10 +34,11 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />
+        <Route path="/login" component={LoginPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
       <GlobalStyle />
-    </AppWrapper>
+    </Container>
   );
 }

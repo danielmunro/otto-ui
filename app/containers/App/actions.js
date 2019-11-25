@@ -15,7 +15,13 @@
  *    }
  */
 
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import {
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+  SUBMIT_LOGIN,
+  SUBMIT_LOGIN_SUCCESS,
+} from './constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -25,6 +31,18 @@ import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
 export function loadRepos() {
   return {
     type: LOAD_REPOS,
+  };
+}
+
+export function submitLogin() {
+  return {
+    type: SUBMIT_LOGIN,
+  };
+}
+
+export function loginLoaded() {
+  return {
+    type: SUBMIT_LOGIN_SUCCESS,
   };
 }
 
