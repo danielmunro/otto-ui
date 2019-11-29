@@ -25,3 +25,9 @@ after_success: 'npm run coveralls'
 cache:
   directories:
     - node_modules
+
+before_deploy:
+  - docker build -t quay.io/danielmunro/otto-ui:build-$(git rev-parse --short ${TRAVIS_COMMIT}) -t quay.io/danielmunro/otto-ui:latest .
+deploy:
+  - provider: script
+    script: bash bin/docker_push
