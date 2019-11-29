@@ -9,6 +9,9 @@ describe('appReducer', () => {
   beforeEach(() => {
     state = {
       loading: false,
+      session: {
+        token: null,
+      },
       error: false,
       currentUser: false,
       userData: {

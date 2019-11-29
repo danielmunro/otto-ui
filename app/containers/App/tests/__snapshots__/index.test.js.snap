@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> should render and match the snapshot 1`] = `
-<ForwardRef>
+<ForwardRef(WithStyles)
+  component="main"
+  maxWidth="md"
+>
+  <CssBaseline />
   <HelmetWrapper
     defaultTitle="React.js Boilerplate"
     defer={true}
@@ -20,9 +24,14 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       path="/"
     />
+    <ProtectedRoute
+      path="/features"
+    >
+      <Unknown />
+    </ProtectedRoute>
     <Route
       component={[Function]}
-      path="/features"
+      path="/login"
     />
     <Route
       component={[Function]}
@@ -31,5 +40,5 @@ exports[`<App /> should render and match the snapshot 1`] = `
   </Switch>
   <Footer />
   <GlobalStyleComponent />
-</ForwardRef>
+</ForwardRef(WithStyles)>
 `;
