@@ -16,6 +16,7 @@ import {
   SUBMIT_LOGIN_ERROR,
   SUBMIT_LOGIN_SUCCESS,
 } from './constants';
+import auth from '../../utils/auth';
 
 // The initial state of the App
 export const initialState = {
@@ -24,6 +25,9 @@ export const initialState = {
   currentUser: false,
   userData: {
     repositories: false,
+  },
+  session: {
+    token: null,
   },
 };
 
@@ -50,6 +54,8 @@ const appReducer = (state = initialState, action) =>
       case SUBMIT_LOGIN_SUCCESS:
         draft.loading = false;
         draft.error = false;
+        draft.session.token = action.session.token;
+        auth().setToken(action.session.token);
         break;
 
       case LOAD_REPOS_SUCCESS:

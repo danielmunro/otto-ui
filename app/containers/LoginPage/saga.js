@@ -2,30 +2,30 @@
  * Gets the repositories of the user from Github
  */
 
-import { put, takeLatest } from 'redux-saga/effects';
-import { SUBMIT_LOGIN } from 'containers/App/constants';
-import {
-  // reposLoaded,
-  repoLoadingError,
-  // loginLoaded,
-} from 'containers/App/actions';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { SUBMIT_LOGIN } from '../App/constants';
+import { repoLoadingError, loginLoaded } from '../App/actions';
 
-// import request from 'utils/request';
-// import { makeSelectUsername } from 'containers/HomePage/selectors';
-// import { makeSelectEmail } from './selectors';
+import request from '../../utils/request';
+import { makeSelectEmail, makeSelectPassword } from './selectors';
 
 /**
  * Github repos request/response handler
  */
 export function* attemptLogin() {
-  // const email = yield select(makeSelectEmail());
-  // const password = yield select(makeSelectEmail());
-  // const requestURL = `https://localhost:8081`;
+  const email = yield select(makeSelectEmail());
+  const password = yield select(makeSelectPassword());
+  const requestURL = `http://localhost:8000/session`;
 
   try {
-    // Call our request helper (see 'utils/request')
-    // const repos = yield call(request, requestURL);
-    // yield put(loginLoaded(repos, username));
+    const session = yield call(request, requestURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    yield put(loginLoaded(session));
   } catch (err) {
     yield put(repoLoadingError(err));
   }

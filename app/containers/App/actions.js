@@ -40,9 +40,10 @@ export function submitLogin() {
   };
 }
 
-export function loginLoaded() {
+export function loginLoaded(session) {
   return {
     type: SUBMIT_LOGIN_SUCCESS,
+    session,
   };
 }
 

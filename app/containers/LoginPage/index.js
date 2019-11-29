@@ -13,8 +13,8 @@ import H2 from '../../components/H2';
 import messages from './messages';
 import { useInjectSaga } from '../../utils/injectSaga';
 import { useInjectReducer } from '../../utils/injectReducer';
-import saga from '../HomePage/saga';
-import reducer from '../HomePage/reducer';
+import saga from './saga';
+import reducer from './reducer';
 import { makeSelectError, makeSelectLoading } from '../App/selectors';
 import { makeSelectEmail, makeSelectPassword } from './selectors';
 import { changeEmail, changePassword } from './actions';
@@ -48,8 +48,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LoginPage({
-  email,
-  password,
+  email = '',
+  password = '',
   onSubmitForm,
   onChangeEmail,
   onChangePassword,

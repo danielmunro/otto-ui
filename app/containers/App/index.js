@@ -19,6 +19,7 @@ import NotFoundPage from '../NotFoundPage/Loadable';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import GlobalStyle from '../../global-styles';
+import ProtectedRoute from './ProtectedRoute';
 
 export default function App() {
   return (
@@ -33,7 +34,9 @@ export default function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
+        <ProtectedRoute path="/features">
+          <FeaturePage />
+        </ProtectedRoute>
         <Route path="/login" component={LoginPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
