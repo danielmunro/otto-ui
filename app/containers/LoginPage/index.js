@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { submitLogin } from '../App/actions';
 import H2 from '../../components/H2';
 import messages from './messages';
@@ -15,9 +16,15 @@ import { useInjectSaga } from '../../utils/injectSaga';
 import { useInjectReducer } from '../../utils/injectReducer';
 import saga from './saga';
 import reducer from './reducer';
-import { makeSelectError, makeSelectLoading } from '../App/selectors';
+import {
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectLoginError,
+  makeSelectAuthResponse,
+} from '../App/selectors';
 import { makeSelectEmail, makeSelectPassword } from './selectors';
 import { changeEmail, changePassword } from './actions';
+import { AUTH_CHALLENGE_NEW_PASSWORD } from '../App/constants';
 
 const key = 'login';
 
@@ -34,8 +41,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    margin: theme.spacing(1),
     width: 300,
   },
   form: {
@@ -53,11 +59,15 @@ function LoginPage({
   onSubmitForm,
   onChangeEmail,
   onChangePassword,
+  loginError = false,
+  authResponse = null,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
   const classes = useStyles();
-
+  if (authResponse === AUTH_CHALLENGE_NEW_PASSWORD) {
+    return <Redirect to="/password-reset" />;
+  }
   return (
     <Container maxWidth="sm">
       <div className={classes.paper}>
@@ -70,9 +80,11 @@ function LoginPage({
             label={messages.loginEmail.defaultMessage}
             name="email"
             required
+            error={loginError}
             onChange={onChangeEmail}
             className={classes.textField}
             value={email}
+            helperText={loginError ? messages.loginError.defaultMessage : ''}
           />
           <TextField
             id="password"
@@ -80,6 +92,7 @@ function LoginPage({
             name="password"
             type="password"
             required
+            error={loginError}
             onChange={onChangePassword}
             className={classes.textField}
             value={password}
@@ -105,6 +118,8 @@ LoginPage.propTypes = {
   onSubmitForm: PropTypes.func,
   onChangeEmail: PropTypes.func,
   onChangePassword: PropTypes.func,
+  loginError: PropTypes.bool,
+  authResponse: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -112,6 +127,8 @@ const mapStateToProps = createStructuredSelector({
   password: makeSelectPassword(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  loginError: makeSelectLoginError(),
+  authResponse: makeSelectAuthResponse(),
 });
 
 export function mapDispatchToProps(dispatch) {

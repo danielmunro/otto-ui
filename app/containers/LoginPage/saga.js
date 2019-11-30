@@ -4,7 +4,7 @@
 
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { SUBMIT_LOGIN } from '../App/constants';
-import { repoLoadingError, loginLoaded } from '../App/actions';
+import { loginLoaded, loginLoadedError } from '../App/actions';
 
 import request from '../../utils/request';
 import { makeSelectEmail, makeSelectPassword } from './selectors';
@@ -18,16 +18,16 @@ export function* attemptLogin() {
   const requestURL = `http://localhost:8000/session`;
 
   try {
-    const session = yield call(request, requestURL, {
+    const response = yield call(request, requestURL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
     });
-    yield put(loginLoaded(session));
+    yield put(loginLoaded(response));
   } catch (err) {
-    yield put(repoLoadingError(err));
+    yield put(loginLoadedError());
   }
 }
 

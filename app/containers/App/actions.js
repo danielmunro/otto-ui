@@ -21,6 +21,7 @@ import {
   LOAD_REPOS_ERROR,
   SUBMIT_LOGIN,
   SUBMIT_LOGIN_SUCCESS,
+  SUBMIT_LOGIN_ERROR,
 } from './constants';
 
 /**
@@ -40,10 +41,17 @@ export function submitLogin() {
   };
 }
 
-export function loginLoaded(session) {
+export function loginLoaded({ authResponse, token }) {
   return {
     type: SUBMIT_LOGIN_SUCCESS,
-    session,
+    sessionToken: token,
+    authResponse,
+  };
+}
+
+export function loginLoadedError() {
+  return {
+    type: SUBMIT_LOGIN_ERROR,
   };
 }
 

@@ -21,10 +21,22 @@ const makeSelectLoading = () =>
     globalState => globalState.loading,
   );
 
+const makeSelectAuthResponse = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.authResponse,
+  );
+
 const makeSelectError = () =>
   createSelector(
     selectGlobal,
     globalState => globalState.error,
+  );
+
+const makeSelectLoginError = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.loginError,
   );
 
 const makeSelectRepos = () =>
@@ -46,4 +58,6 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocation,
+  makeSelectLoginError,
+  makeSelectAuthResponse,
 };

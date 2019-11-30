@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import A from './A';
@@ -8,7 +9,7 @@ import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 import messages from './messages';
 
-function Header() {
+function Header({ sessionToken }) {
   return (
     <div>
       <A href="https://www.reactboilerplate.com/">
@@ -18,12 +19,27 @@ function Header() {
         <HeaderLink to="/">
           <FormattedMessage {...messages.home} />
         </HeaderLink>
-        <HeaderLink to="/features">
-          <FormattedMessage {...messages.features} />
-        </HeaderLink>
+        {sessionToken ? (
+          <span>
+            <HeaderLink to="/features">
+              <FormattedMessage {...messages.features} />
+            </HeaderLink>
+            <HeaderLink to="/logout">
+              <FormattedMessage {...messages.logout} />
+            </HeaderLink>
+          </span>
+        ) : (
+          <HeaderLink to="/login">
+            <FormattedMessage {...messages.login} />
+          </HeaderLink>
+        )}
       </NavBar>
     </div>
   );
 }
+
+Header.propTypes = {
+  sessionToken: PropTypes.string,
+};
 
 export default Header;

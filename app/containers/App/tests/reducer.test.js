@@ -8,10 +8,10 @@ describe('appReducer', () => {
   let state;
   beforeEach(() => {
     state = {
+      authResponse: '',
       loading: false,
-      session: {
-        token: null,
-      },
+      loginError: false,
+      sessionToken: null,
       error: false,
       currentUser: false,
       userData: {

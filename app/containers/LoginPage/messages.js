@@ -20,4 +20,8 @@ export default defineMessages({
     id: `${scope}.login.password`,
     defaultMessage: 'Password',
   },
+  loginError: {
+    id: `${scope}.login.loginError`,
+    defaultMessage: 'Email or password were incorrect',
+  },
 });

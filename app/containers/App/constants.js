@@ -16,3 +16,5 @@ export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
 export const SUBMIT_LOGIN = 'boilerplate/App/SUBMIT_LOGIN';
 export const SUBMIT_LOGIN_SUCCESS = 'boilerplate/App/SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_LOGIN_ERROR = 'boilerplate/App/SUBMIT_LOGIN_ERROR';
+
+export const AUTH_CHALLENGE_NEW_PASSWORD = 'ChallengeNewPassword';
