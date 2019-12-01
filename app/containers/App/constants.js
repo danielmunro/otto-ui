@@ -21,6 +21,10 @@ export const SUBMIT_PW_RESET = 'app/App/SUBMIT_LOGIN';
 export const SUBMIT_PW_RESET_SUCCESS = 'app/App/SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_PW_RESET_ERROR = 'app/App/SUBMIT_LOGIN_ERROR';
 
+export const SUBMIT_SIGNUP = 'app/App/SUBMIT_SIGNUP';
+export const SUBMIT_SIGNUP_SUCCESS = 'app/App/SUBMIT_SIGNUP_SUCCESS';
+export const SUBMIT_SIGNUP_ERROR = 'app/App/SUBMIT_SIGNUP_ERROR';
+
 export const LOGOUT = 'app/App/LOGOUT';
 
 /**

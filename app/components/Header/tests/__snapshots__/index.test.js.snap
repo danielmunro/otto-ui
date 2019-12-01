@@ -32,6 +32,14 @@ exports[`<Header /> should render a div 1`] = `
           Login
         </span>
       </a>
+      <a
+        class="HeaderLink-sc-1mtyaiv-0 hMiTYG"
+        href="/signup"
+      >
+        <span>
+          Signup
+        </span>
+      </a>
     </span>
   </div>
 </div>

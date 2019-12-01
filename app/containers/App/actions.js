@@ -26,6 +26,9 @@ import {
   SUBMIT_PW_RESET_SUCCESS,
   SUBMIT_PW_RESET_ERROR,
   LOGOUT,
+  SUBMIT_SIGNUP,
+  SUBMIT_SIGNUP_SUCCESS,
+  SUBMIT_SIGNUP_ERROR,
 } from './constants';
 
 /**
@@ -49,6 +52,30 @@ export function loginLoaded({ authResponse, token }) {
 export function loginLoadedError() {
   return {
     type: SUBMIT_LOGIN_ERROR,
+  };
+}
+
+/**
+ * Signup, success, error
+ */
+
+export function submitSignup() {
+  return {
+    type: SUBMIT_SIGNUP,
+  };
+}
+
+export function signupLoaded({ authResponse, token }) {
+  return {
+    type: SUBMIT_SIGNUP_SUCCESS,
+    sessionToken: token,
+    authResponse,
+  };
+}
+
+export function signupLoadedError() {
+  return {
+    type: SUBMIT_SIGNUP_ERROR,
   };
 }
 

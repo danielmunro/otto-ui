@@ -12,6 +12,9 @@ export function UnauthenticatedNavigation() {
       <HeaderLink to="/login">
         <FormattedMessage {...messages.login} />
       </HeaderLink>
+      <HeaderLink to="/signup">
+        <FormattedMessage {...messages.signup} />
+      </HeaderLink>
     </span>
   );
 }
