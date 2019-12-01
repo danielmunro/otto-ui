@@ -6,8 +6,9 @@ export default function() {
     getToken() {
       return localStorage.getItem('sessionToken');
     },
-    getAuthResponse() {
-      return localStorage.getItem('authResponse');
+    invalidate() {
+      localStorage.removeItem('sessionToken');
+      localStorage.removeItem('authResponse');
     },
     update({ sessionToken, authResponse }) {
       localStorage.setItem('sessionToken', sessionToken);

@@ -25,6 +25,7 @@ import {
   SUBMIT_PW_RESET,
   SUBMIT_PW_RESET_SUCCESS,
   SUBMIT_PW_RESET_ERROR,
+  LOGOUT,
 } from './constants';
 
 /**
@@ -48,6 +49,16 @@ export function loginLoaded({ authResponse, token }) {
 export function loginLoadedError() {
   return {
     type: SUBMIT_LOGIN_ERROR,
+  };
+}
+
+/**
+ * Logout
+ */
+
+export function logout() {
+  return {
+    type: LOGOUT,
   };
 }
 

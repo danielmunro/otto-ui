@@ -15,6 +15,7 @@ import {
   SUBMIT_LOGIN,
   SUBMIT_LOGIN_ERROR,
   SUBMIT_LOGIN_SUCCESS,
+  LOGOUT,
 } from './constants';
 import auth from '../../utils/auth';
 
@@ -70,6 +71,12 @@ const appReducer = (state = initialState, action) =>
       case LOAD_REPOS_ERROR:
         draft.error = action.error;
         draft.loading = false;
+        break;
+
+      case LOGOUT:
+        draft.authResponse = null;
+        draft.sessionToken = null;
+        auth().invalidate();
         break;
     }
   });

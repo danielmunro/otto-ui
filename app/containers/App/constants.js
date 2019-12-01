@@ -21,4 +21,12 @@ export const SUBMIT_PW_RESET = 'app/App/SUBMIT_LOGIN';
 export const SUBMIT_PW_RESET_SUCCESS = 'app/App/SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_PW_RESET_ERROR = 'app/App/SUBMIT_LOGIN_ERROR';
 
+export const LOGOUT = 'app/App/LOGOUT';
+
+/**
+ * Constant returned from the server during authn. Indicates that the
+ * server requires a password reset from the user.
+ *
+ * @type {string}
+ */
 export const AUTH_CHALLENGE_NEW_PASSWORD = 'ChallengeNewPassword';

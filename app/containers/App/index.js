@@ -14,6 +14,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import HomePage from '../HomePage/Loadable';
 import LoginPage from '../LoginPage/Loadable';
+import LogoutPage from '../LogoutPage/Loadable';
 import FeaturePage from '../FeaturePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import Header from '../../components/Header';
@@ -42,6 +43,7 @@ export default function App() {
           <PasswordResetPage />
         </ProtectedRoute>
         <Route path="/login" component={LoginPage} />
+        <Route path="/logout" component={LogoutPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
