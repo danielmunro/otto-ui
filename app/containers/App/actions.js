@@ -70,6 +70,7 @@ export function signupLoaded({ authResponse, token }) {
     type: SUBMIT_SIGNUP_SUCCESS,
     sessionToken: token,
     authResponse,
+    // authResponse: AUTH_CHALLENGE_NEW_PASSWORD,
   };
 }
 
