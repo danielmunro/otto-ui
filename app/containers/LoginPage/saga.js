@@ -3,10 +3,10 @@
  */
 
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import { SUBMIT_LOGIN } from '../App/constants';
+import { API_ENDPOINT, SUBMIT_LOGIN } from '../App/constants';
 import { loginLoaded, loginLoadedError } from '../App/actions';
 
-import request from '../../utils/request';
+import request, { post } from '../../utils/request';
 import { makeSelectEmail, makeSelectPassword } from './selectors';
 
 /**
@@ -15,16 +15,10 @@ import { makeSelectEmail, makeSelectPassword } from './selectors';
 export function* attemptLogin() {
   const email = yield select(makeSelectEmail());
   const password = yield select(makeSelectPassword());
-  const requestURL = `http://localhost:8000/session`;
+  const requestURL = `${API_ENDPOINT}/session`;
 
   try {
-    const response = yield call(request, requestURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = yield call(request, requestURL, post({ email, password }));
     yield put(loginLoaded(response));
   } catch (err) {
     yield put(loginLoadedError());

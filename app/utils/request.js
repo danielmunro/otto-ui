@@ -42,3 +42,21 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON);
 }
+
+function jsonBody(method, data) {
+  return {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+}
+
+export function post(data) {
+  return jsonBody('POST', data);
+}
+
+export function put(data) {
+  return jsonBody('PUT', data);
+}

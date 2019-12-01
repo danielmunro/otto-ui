@@ -34,3 +34,11 @@ export const LOGOUT = 'app/App/LOGOUT';
  * @type {string}
  */
 export const AUTH_CHALLENGE_NEW_PASSWORD = 'ChallengeNewPassword';
+
+/**
+ * api endpoint
+
+ * @type {string}
+ */
+
+export const API_ENDPOINT = 'http://localhost:8000';

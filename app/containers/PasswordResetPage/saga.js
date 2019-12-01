@@ -1,22 +1,20 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import request from '../../utils/request';
+import request, { put as putJson } from '../../utils/request';
 import { pwResetError, pwResetLoaded } from '../App/actions';
-import { SUBMIT_PW_RESET } from '../App/constants';
+import { API_ENDPOINT, SUBMIT_PW_RESET } from '../App/constants';
 import { makeSelectEmail, makeSelectNewPassword } from './selectors';
 
 export function* attemptPwReset() {
   const email = yield select(makeSelectEmail());
   const password = yield select(makeSelectNewPassword());
-  const requestURL = `http://localhost:8000/session`;
+  const requestURL = `${API_ENDPOINT}/session`;
 
   try {
-    const response = yield call(request, requestURL, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = yield call(
+      request,
+      requestURL,
+      putJson({ email, password }),
+    );
     yield put(pwResetLoaded(response));
   } catch (err) {
     yield put(pwResetError());
