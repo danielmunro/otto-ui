@@ -27,6 +27,12 @@ const makeSelectAuthResponse = () =>
     globalState => globalState.authResponse,
   );
 
+const makeSelectSessionToken = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.sessionToken,
+  );
+
 const makeSelectError = () =>
   createSelector(
     selectGlobal,
@@ -37,6 +43,12 @@ const makeSelectLoginError = () =>
   createSelector(
     selectGlobal,
     globalState => globalState.loginError,
+  );
+
+const makeSelectPwResetError = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.pwResetError,
   );
 
 const makeSelectRepos = () =>
@@ -60,4 +72,6 @@ export {
   makeSelectLocation,
   makeSelectLoginError,
   makeSelectAuthResponse,
+  makeSelectSessionToken,
+  makeSelectPwResetError,
 };

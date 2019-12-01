@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.containers.LoginPage';
+export const scope = 'app.containers.LoginPage';
 
 export default defineMessages({
   loginHeader: {

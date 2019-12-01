@@ -1,37 +1,28 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectSessionToken } from '../../containers/App/selectors';
 
 import A from './A';
 import Img from './Img';
 import NavBar from './NavBar';
-import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
-import messages from './messages';
+import { UnauthenticatedNavigation } from '../UnauthenticatedNavigation';
+import { AuthenticatedNavigation } from '../AuthenticatedNavigation';
 
 function Header({ sessionToken }) {
   return (
     <div>
-      <A href="https://www.reactboilerplate.com/">
+      <A href="/">
         <Img src={Banner} alt="react-boilerplate - Logo" />
       </A>
       <NavBar>
-        <HeaderLink to="/">
-          <FormattedMessage {...messages.home} />
-        </HeaderLink>
         {sessionToken ? (
-          <span>
-            <HeaderLink to="/features">
-              <FormattedMessage {...messages.features} />
-            </HeaderLink>
-            <HeaderLink to="/logout">
-              <FormattedMessage {...messages.logout} />
-            </HeaderLink>
-          </span>
+          <AuthenticatedNavigation />
         ) : (
-          <HeaderLink to="/login">
-            <FormattedMessage {...messages.login} />
-          </HeaderLink>
+          <UnauthenticatedNavigation />
         )}
       </NavBar>
     </div>
@@ -42,4 +33,13 @@ Header.propTypes = {
   sessionToken: PropTypes.string,
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  sessionToken: makeSelectSessionToken(),
+});
+
+const withConnect = connect(mapStateToProps);
+
+export default compose(
+  withConnect,
+  memo,
+)(Header);

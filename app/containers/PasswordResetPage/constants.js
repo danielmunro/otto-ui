@@ -9,6 +9,6 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const CHANGE_EMAIL = 'app/Login/CHANGE_EMAIL';
+export const CHANGE_EMAIL = 'app/PasswordReset/CHANGE_EMAIL';
 
-export const CHANGE_PASSWORD = 'app/Login/CHANGE_PASSWORD';
+export const CHANGE_NEW_PASSWORD = 'app/PasswordReset/CHANGE_NEW_PASSWORD';

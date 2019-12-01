@@ -6,8 +6,12 @@ export default function() {
     getToken() {
       return localStorage.getItem('sessionToken');
     },
-    setToken(token) {
-      localStorage.setItem('sessionToken', token);
+    getAuthResponse() {
+      return localStorage.getItem('authResponse');
+    },
+    update({ sessionToken, authResponse }) {
+      localStorage.setItem('sessionToken', sessionToken);
+      localStorage.setItem('authResponse', authResponse);
     },
   };
 }

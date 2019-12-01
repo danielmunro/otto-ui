@@ -26,9 +26,10 @@ export const initialState = {
   userData: {
     repositories: false,
   },
-  sessionToken: null,
+  sessionToken: auth().getToken(),
   loginError: false,
   authResponse: '',
+  pwResetError: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -51,13 +52,14 @@ const appReducer = (state = initialState, action) =>
         draft.loginError = true;
         break;
 
-      case SUBMIT_LOGIN_SUCCESS:
+      case SUBMIT_LOGIN_SUCCESS: {
         draft.loading = false;
         draft.loginError = false;
         draft.sessionToken = action.sessionToken;
         draft.authResponse = action.authResponse;
-        auth().setToken(action.sessionToken);
+        auth().update(action);
         break;
+      }
 
       case LOAD_REPOS_SUCCESS:
         draft.userData.repositories = action.repos;

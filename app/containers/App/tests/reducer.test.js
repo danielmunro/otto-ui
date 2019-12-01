@@ -11,6 +11,7 @@ describe('appReducer', () => {
       authResponse: '',
       loading: false,
       loginError: false,
+      pwResetError: false,
       sessionToken: null,
       error: false,
       currentUser: false,

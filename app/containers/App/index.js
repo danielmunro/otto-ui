@@ -19,6 +19,7 @@ import NotFoundPage from '../NotFoundPage/Loadable';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import GlobalStyle from '../../global-styles';
+import PasswordResetPage from '../PasswordResetPage/Loadable';
 import ProtectedRoute from './ProtectedRoute';
 
 export default function App() {
@@ -36,6 +37,9 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <ProtectedRoute path="/features">
           <FeaturePage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/password-reset">
+          <PasswordResetPage />
         </ProtectedRoute>
         <Route path="/login" component={LoginPage} />
         <Route path="" component={NotFoundPage} />

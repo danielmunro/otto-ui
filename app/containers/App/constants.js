@@ -9,12 +9,16 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
+export const LOAD_REPOS = 'app/App/LOAD_REPOS';
+export const LOAD_REPOS_SUCCESS = 'app/App/LOAD_REPOS_SUCCESS';
+export const LOAD_REPOS_ERROR = 'app/App/LOAD_REPOS_ERROR';
 
-export const SUBMIT_LOGIN = 'boilerplate/App/SUBMIT_LOGIN';
-export const SUBMIT_LOGIN_SUCCESS = 'boilerplate/App/SUBMIT_LOGIN_SUCCESS';
-export const SUBMIT_LOGIN_ERROR = 'boilerplate/App/SUBMIT_LOGIN_ERROR';
+export const SUBMIT_LOGIN = 'app/App/SUBMIT_LOGIN';
+export const SUBMIT_LOGIN_SUCCESS = 'app/App/SUBMIT_LOGIN_SUCCESS';
+export const SUBMIT_LOGIN_ERROR = 'app/App/SUBMIT_LOGIN_ERROR';
+
+export const SUBMIT_PW_RESET = 'app/App/SUBMIT_LOGIN';
+export const SUBMIT_PW_RESET_SUCCESS = 'app/App/SUBMIT_LOGIN_SUCCESS';
+export const SUBMIT_PW_RESET_ERROR = 'app/App/SUBMIT_LOGIN_ERROR';
 
 export const AUTH_CHALLENGE_NEW_PASSWORD = 'ChallengeNewPassword';

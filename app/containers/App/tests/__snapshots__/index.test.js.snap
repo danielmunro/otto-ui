@@ -17,7 +17,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       name="description"
     />
   </HelmetWrapper>
-  <Header />
+  <UNDEFINED />
   <Switch>
     <Route
       component={[Function]}
@@ -26,6 +26,11 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
     <ProtectedRoute
       path="/features"
+    >
+      <Unknown />
+    </ProtectedRoute>
+    <ProtectedRoute
+      path="/password-reset"
     >
       <Unknown />
     </ProtectedRoute>

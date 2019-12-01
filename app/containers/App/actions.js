@@ -22,18 +22,14 @@ import {
   SUBMIT_LOGIN,
   SUBMIT_LOGIN_SUCCESS,
   SUBMIT_LOGIN_ERROR,
+  SUBMIT_PW_RESET,
+  SUBMIT_PW_RESET_SUCCESS,
+  SUBMIT_PW_RESET_ERROR,
 } from './constants';
 
 /**
- * Load the repositories, this action starts the request saga
- *
- * @return {object} An action object with a type of LOAD_REPOS
+ * Login, success, error
  */
-export function loadRepos() {
-  return {
-    type: LOAD_REPOS,
-  };
-}
 
 export function submitLogin() {
   return {
@@ -52,6 +48,41 @@ export function loginLoaded({ authResponse, token }) {
 export function loginLoadedError() {
   return {
     type: SUBMIT_LOGIN_ERROR,
+  };
+}
+
+/**
+ * PW reset, success, error
+ */
+
+export function submitPwReset() {
+  return {
+    type: SUBMIT_PW_RESET,
+  };
+}
+
+export function pwResetLoaded({ authResponse, token }) {
+  return {
+    type: SUBMIT_PW_RESET_SUCCESS,
+    sessionToken: token,
+    authResponse,
+  };
+}
+
+export function pwResetError() {
+  return {
+    type: SUBMIT_PW_RESET_ERROR,
+  };
+}
+
+/**
+ * Load the repositories, this action starts the request saga
+ *
+ * @return {object} An action object with a type of LOAD_REPOS
+ */
+export function loadRepos() {
+  return {
+    type: LOAD_REPOS,
   };
 }
 
