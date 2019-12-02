@@ -22,7 +22,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const loginReducer = (state = initialState, action) =>
+const signupReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CHANGE_EMAIL:
@@ -37,4 +37,4 @@ const loginReducer = (state = initialState, action) =>
     }
   });
 
-export default loginReducer;
+export default signupReducer;
