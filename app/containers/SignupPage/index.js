@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 import EmailTextField from '../../components/EmailTextField';
 import PasswordTextField from '../../components/PasswordTextField';
 import { submitSignup } from '../App/actions';
@@ -21,7 +20,6 @@ import {
   makeSelectError,
   makeSelectLoading,
   makeSelectLoginError,
-  makeSelectAuthResponse,
 } from '../App/selectors';
 import {
   makeSelectEmail,
@@ -29,7 +27,6 @@ import {
   makeSelectPasswordConfirm,
 } from './selectors';
 import { changeEmail, changePassword, changePasswordConfirm } from './actions';
-import { AUTH_CHALLENGE_NEW_PASSWORD } from '../App/constants';
 
 const key = 'signup';
 
@@ -67,14 +64,10 @@ function SignupPage({
   onChangePassword,
   onChangePasswordConfirm,
   signupError = false,
-  authResponse = null,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
   const classes = useStyles();
-  if (authResponse === AUTH_CHALLENGE_NEW_PASSWORD) {
-    return <Redirect to="/password-reset" />;
-  }
   return (
     <Container maxWidth="sm">
       <div className={classes.paper}>
@@ -130,7 +123,6 @@ SignupPage.propTypes = {
   onChangePassword: PropTypes.func,
   onChangePasswordConfirm: PropTypes.func,
   signupError: PropTypes.bool,
-  authResponse: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -140,7 +132,6 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   loginError: makeSelectLoginError(),
-  authResponse: makeSelectAuthResponse(),
 });
 
 export function mapDispatchToProps(dispatch) {
