@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,8 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import EmailTextField from '../../components/EmailTextField';
+import PasswordTextField from '../../components/PasswordTextField';
 import { submitSignup } from '../App/actions';
 import H2 from '../../components/H2';
 import messages from './messages';
@@ -81,34 +82,25 @@ function SignupPage({
           <FormattedMessage {...messages.signupHeader} />
         </H2>
         <form className={classes.form} onSubmit={onSubmitForm}>
-          <TextField
-            id="email"
+          <EmailTextField
             label={messages.signupEmail.defaultMessage}
-            name="email"
-            required
             error={signupError}
             onChange={onChangeEmail}
             className={classes.textField}
             value={email}
             helperText={signupError ? messages.signupError.defaultMessage : ''}
           />
-          <TextField
-            id="password"
+          <PasswordTextField
             label={messages.signupPassword.defaultMessage}
-            name="password"
-            type="password"
-            required
             error={signupError}
             onChange={onChangePassword}
             className={classes.textField}
             value={password}
           />
-          <TextField
+          <PasswordTextField
             id="password_confirm"
-            label={messages.signupPasswordConfirm.defaultMessage}
             name="password_confirm"
-            type="password"
-            required
+            label={messages.signupPasswordConfirm.defaultMessage}
             error={signupError}
             onChange={onChangePasswordConfirm}
             className={classes.textField}

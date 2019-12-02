@@ -1,14 +1,15 @@
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import EmailTextField from '../../components/EmailTextField';
 import H2 from '../../components/H2';
+import PasswordTextField from '../../components/PasswordTextField';
 import { useInjectSaga } from '../../utils/injectSaga';
 import { submitPwReset } from '../App/actions';
 import {
@@ -69,11 +70,8 @@ function PasswordResetPage({
           <FormattedMessage {...messages.pwResetHeader} />
         </H2>
         <form className={classes.form} onSubmit={onSubmitForm}>
-          <TextField
-            id="email"
+          <EmailTextField
             label={messages.pwResetEmail.defaultMessage}
-            name="email"
-            required
             error={pwResetError}
             onChange={onChangeEmail}
             className={classes.textField}
@@ -82,12 +80,9 @@ function PasswordResetPage({
               pwResetError ? messages.pwResetError.defaultMessage : ''
             }
           />
-          <TextField
-            id="new_password"
+          <PasswordTextField
             label={messages.pwResetPassword.defaultMessage}
             name="new_password"
-            type="password"
-            required
             error={pwResetError}
             onChange={onChangeNewPassword}
             className={classes.textField}

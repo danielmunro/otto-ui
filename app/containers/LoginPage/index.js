@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,8 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import EmailTextField from '../../components/EmailTextField';
+import PasswordTextField from '../../components/PasswordTextField';
 import { submitLogin } from '../App/actions';
 import H2 from '../../components/H2';
 import messages from './messages';
@@ -75,23 +76,16 @@ function LoginPage({
           <FormattedMessage {...messages.loginHeader} />
         </H2>
         <form className={classes.form} onSubmit={onSubmitForm}>
-          <TextField
-            id="email"
+          <EmailTextField
             label={messages.loginEmail.defaultMessage}
-            name="email"
-            required
             error={loginError}
             onChange={onChangeEmail}
             className={classes.textField}
             value={email}
             helperText={loginError ? messages.loginError.defaultMessage : ''}
           />
-          <TextField
-            id="password"
+          <PasswordTextField
             label={messages.loginPassword.defaultMessage}
-            name="password"
-            type="password"
-            required
             error={loginError}
             onChange={onChangePassword}
             className={classes.textField}
