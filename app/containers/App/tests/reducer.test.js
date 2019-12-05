@@ -15,6 +15,11 @@ describe('appReducer', () => {
       sessionToken: null,
       error: false,
       currentUser: false,
+      posts: [],
+      postsLoaded: false,
+      user: {
+        uuid: '',
+      },
       userData: {
         repositories: false,
       },

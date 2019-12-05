@@ -57,6 +57,12 @@ const makeSelectRepos = () =>
     globalState => globalState.userData.repositories,
   );
 
+const makeSelectSessionUserUuid = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.user.uuid,
+  );
+
 const makeSelectLocation = () =>
   createSelector(
     selectRouter,
@@ -74,4 +80,5 @@ export {
   makeSelectAuthResponse,
   makeSelectSessionToken,
   makeSelectPwResetError,
+  makeSelectSessionUserUuid,
 };

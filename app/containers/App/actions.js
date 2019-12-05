@@ -29,6 +29,12 @@ import {
   SUBMIT_SIGNUP,
   SUBMIT_SIGNUP_SUCCESS,
   SUBMIT_SIGNUP_ERROR,
+  LOAD_SESSION_USER,
+  LOAD_SESSION_USER_SUCCESS,
+  LOAD_SESSION_USER_ERROR,
+  LOAD_FOLLOWING_POSTS,
+  LOAD_FOLLOWING_POSTS_SUCCESS,
+  LOAD_FOLLOWING_POSTS_ERROR,
 } from './constants';
 
 /**
@@ -111,6 +117,52 @@ export function pwResetLoaded({ authResponse, token }) {
 export function pwResetError() {
   return {
     type: SUBMIT_PW_RESET_ERROR,
+  };
+}
+
+/**
+ * load session user, success, error
+ */
+
+export function loadSessionUser() {
+  return {
+    type: LOAD_SESSION_USER,
+  };
+}
+
+export function loadSessionUserSuccess({ user }) {
+  return {
+    type: LOAD_SESSION_USER_SUCCESS,
+    user,
+  };
+}
+
+export function loadSessionUserError() {
+  return {
+    type: LOAD_SESSION_USER_ERROR,
+  };
+}
+
+/**
+ * load following user posts
+ */
+
+export function loadFollowingUserPosts() {
+  return {
+    type: LOAD_FOLLOWING_POSTS,
+  };
+}
+
+export function loadFollowingUserPostsSuccess({ posts }) {
+  return {
+    type: LOAD_FOLLOWING_POSTS_SUCCESS,
+    posts,
+  };
+}
+
+export function loadFollowingUserPostsError() {
+  return {
+    type: LOAD_FOLLOWING_POSTS_ERROR,
   };
 }
 

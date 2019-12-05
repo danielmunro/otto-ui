@@ -16,6 +16,10 @@ import {
   SUBMIT_LOGIN_ERROR,
   SUBMIT_LOGIN_SUCCESS,
   LOGOUT,
+  LOAD_FOLLOWING_POSTS,
+  LOAD_FOLLOWING_POSTS_ERROR,
+  LOAD_FOLLOWING_POSTS_SUCCESS,
+  LOAD_SESSION_USER_SUCCESS,
 } from './constants';
 import auth from '../../utils/auth';
 
@@ -27,10 +31,15 @@ export const initialState = {
   userData: {
     repositories: false,
   },
+  user: {
+    uuid: '',
+  },
   sessionToken: auth().getToken(),
   loginError: false,
   authResponse: '',
   pwResetError: false,
+  posts: [],
+  postsLoaded: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -77,6 +86,25 @@ const appReducer = (state = initialState, action) =>
         draft.authResponse = null;
         draft.sessionToken = null;
         auth().invalidate();
+        break;
+
+      case LOAD_FOLLOWING_POSTS:
+        draft.loading = true;
+        draft.postsLoaded = false;
+        break;
+
+      case LOAD_FOLLOWING_POSTS_ERROR:
+        draft.loading = false;
+        break;
+
+      case LOAD_FOLLOWING_POSTS_SUCCESS:
+        draft.loading = false;
+        draft.posts = action.posts;
+        draft.postsLoaded = true;
+        break;
+
+      case LOAD_SESSION_USER_SUCCESS:
+        draft.user = action.user;
         break;
     }
   });

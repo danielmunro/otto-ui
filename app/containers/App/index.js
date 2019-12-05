@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import { useInjectSaga } from '../../utils/injectSaga';
 import HomePage from '../HomePage/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import LogoutPage from '../LogoutPage/Loadable';
@@ -22,9 +23,15 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import GlobalStyle from '../../global-styles';
 import PasswordResetPage from '../PasswordResetPage/Loadable';
+import ViewFriendsPostsPage from '../ViewFriendsPostsPage/Loadable';
 import ProtectedRoute from './ProtectedRoute';
+import saga from './saga';
+
+const key = 'app';
 
 export default function App() {
+  useInjectSaga({ key, saga });
+
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />
@@ -46,6 +53,7 @@ export default function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/logout" component={LogoutPage} />
         <Route path="/signup" component={SignupPage} />
+        <Route path="/following-posts" component={ViewFriendsPostsPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
