@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import H2 from '../../components/H2';
 import { loadFollowingUserPosts } from '../App/actions';
+import { makeSelectPostsLoaded } from '../App/selectors';
 import messages from './messages';
 
 // const key = 'view-friend-posts-page';
@@ -22,7 +23,7 @@ function ViewFriendsPostsPage({ postsLoaded, onLoadPosts }) {
     <Container maxWidth="sm">
       <div>
         <H2>
-          <FormattedMessage {...messages.signupHeader} />
+          <FormattedMessage {...messages.viewFriendsPostsHeader} />
         </H2>
         {postsLoaded ? <span>Loaded</span> : <span>Not loaded</span>}
       </div>
@@ -35,7 +36,9 @@ ViewFriendsPostsPage.propTypes = {
   onLoadPosts: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  postsLoaded: makeSelectPostsLoaded(),
+});
 
 export function mapDispatchToProps(dispatch) {
   return {

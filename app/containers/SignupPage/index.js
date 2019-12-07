@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
@@ -27,33 +26,11 @@ import {
   makeSelectPasswordConfirm,
 } from './selectors';
 import { changeEmail, changePassword, changePasswordConfirm } from './actions';
+import style from './style';
 
 const key = 'signup';
 
-const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  textField: {
-    margin: theme.spacing(1),
-    width: 300,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const useStyles = style;
 
 function SignupPage({
   email = '',

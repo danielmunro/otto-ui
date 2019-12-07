@@ -69,6 +69,12 @@ const makeSelectLocation = () =>
     routerState => routerState.location,
   );
 
+const makeSelectPostsLoaded = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.postsLoaded,
+  );
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -81,4 +87,5 @@ export {
   makeSelectSessionToken,
   makeSelectPwResetError,
   makeSelectSessionUserUuid,
+  makeSelectPostsLoaded,
 };

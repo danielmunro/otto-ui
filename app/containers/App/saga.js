@@ -36,11 +36,12 @@ export function* attemptLoadUser() {
  * Load following posts
  */
 export function* attemptLoadFollowingPosts() {
-  const userUuid = yield select(makeSelectSessionUserUuid());
+  let userUuid = yield select(makeSelectSessionUserUuid());
   if (!userUuid) {
     yield attemptLoadUser();
+    userUuid = yield select(makeSelectSessionUserUuid());
   }
-  const requestURL = `${API_ENDPOINT}/user/${userUuid}/following-posts`;
+  const requestURL = `${API_ENDPOINT}/post/follows/${userUuid}`;
 
   try {
     const response = yield call(request, requestURL);
