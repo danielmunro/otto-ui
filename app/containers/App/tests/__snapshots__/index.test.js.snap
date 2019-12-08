@@ -52,6 +52,10 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
     <Route
       component={[Function]}
+      path="/suggested-follows"
+    />
+    <Route
+      component={[Function]}
       path=""
     />
   </Switch>
