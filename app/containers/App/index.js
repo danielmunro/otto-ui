@@ -24,6 +24,7 @@ import Footer from '../../components/Footer';
 import GlobalStyle from '../../global-styles';
 import PasswordResetPage from '../PasswordResetPage/Loadable';
 import ViewFriendsPostsPage from '../ViewFriendsPostsPage/Loadable';
+import WhoToFollowPage from '../WhoToFollowPage/Loadable';
 import ProtectedRoute from './ProtectedRoute';
 import saga from './saga';
 
@@ -54,6 +55,7 @@ export default function App() {
         <Route path="/logout" component={LogoutPage} />
         <Route path="/signup" component={SignupPage} />
         <Route path="/following-posts" component={ViewFriendsPostsPage} />
+        <Route path="/suggested-follows" component={WhoToFollowPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />

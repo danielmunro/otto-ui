@@ -40,6 +40,8 @@ export const initialState = {
   pwResetError: false,
   posts: [],
   postsLoaded: false,
+  whoToFollowLoaded: false,
+  whoToFollow: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */

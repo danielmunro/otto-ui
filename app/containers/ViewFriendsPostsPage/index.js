@@ -18,7 +18,7 @@ function ViewFriendsPostsPage({ postsLoaded, onLoadPosts }) {
       onLoadPosts();
     }
   });
-
+  console.log('sanity', postsLoaded);
   return (
     <Container maxWidth="sm">
       <div>
