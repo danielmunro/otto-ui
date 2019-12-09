@@ -32,7 +32,6 @@ function WhoToFollowPage({
       onLoadWhoToFollow();
     }
   });
-  console.log('sanity', whoToFollowLoaded, usersToFollow);
   return (
     <Container maxWidth="sm">
       <div>
@@ -42,7 +41,7 @@ function WhoToFollowPage({
         {whoToFollowLoaded ? (
           <div>
             {usersToFollow.map(user => (
-              <UserRow user={user} key={user.uuid} />
+              <UserRow user key={user.uuid} />
             ))}
           </div>
         ) : (

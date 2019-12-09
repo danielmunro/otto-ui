@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function UserRow({ username, uuid }) {
+export function UserRow({ username, name, uuid }) {
   return (
     <div key={uuid}>
-      User: <a href={`/user/${username}`}>{username}</a>
+      User: <a href={`/user/${username}`}>{name || 'no name provided'}</a>
     </div>
   );
 }
@@ -12,4 +12,5 @@ export function UserRow({ username, uuid }) {
 UserRow.propTypes = {
   username: PropTypes.string,
   uuid: PropTypes.string,
+  name: PropTypes.string,
 };

@@ -8,6 +8,7 @@
  */
 
 import produce from 'immer';
+import history from '../../utils/history';
 import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
@@ -20,6 +21,7 @@ import {
   LOAD_FOLLOWING_POSTS_ERROR,
   LOAD_FOLLOWING_POSTS_SUCCESS,
   LOAD_SESSION_USER_SUCCESS,
+  LOAD_SESSION_USER_ERROR,
 } from './constants';
 import auth from '../../utils/auth';
 
@@ -105,6 +107,10 @@ const appReducer = (state = initialState, action) =>
 
       case LOAD_SESSION_USER_SUCCESS:
         draft.user = action.user;
+        break;
+
+      case LOAD_SESSION_USER_ERROR:
+        history.push('/login');
         break;
     }
   });
