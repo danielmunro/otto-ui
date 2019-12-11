@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
@@ -64,42 +64,38 @@ function PasswordResetPage({
   useInjectSaga({ key, saga });
   const classes = useStyles();
   return (
-    <Container maxWidth="sm">
-      <div className={classes.paper}>
-        <H2>
-          <FormattedMessage {...messages.pwResetHeader} />
-        </H2>
-        <form className={classes.form} onSubmit={onSubmitForm}>
-          <EmailTextField
-            label={messages.pwResetEmail.defaultMessage}
-            error={pwResetError}
-            onChange={onChangeEmail}
-            className={classes.textField}
-            value={email}
-            helperText={
-              pwResetError ? messages.pwResetError.defaultMessage : ''
-            }
-          />
-          <PasswordTextField
-            label={messages.pwResetPassword.defaultMessage}
-            name="new_password"
-            error={pwResetError}
-            onChange={onChangeNewPassword}
-            className={classes.textField}
-            value={newPassword}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Reset Password
-          </Button>
-        </form>
-      </div>
-    </Container>
+    <Grid item xs={6}>
+      <H2>
+        <FormattedMessage {...messages.pwResetHeader} />
+      </H2>
+      <form className={classes.form} onSubmit={onSubmitForm}>
+        <EmailTextField
+          label={messages.pwResetEmail.defaultMessage}
+          error={pwResetError}
+          onChange={onChangeEmail}
+          className={classes.textField}
+          value={email}
+          helperText={pwResetError ? messages.pwResetError.defaultMessage : ''}
+        />
+        <PasswordTextField
+          label={messages.pwResetPassword.defaultMessage}
+          name="new_password"
+          error={pwResetError}
+          onChange={onChangeNewPassword}
+          className={classes.textField}
+          value={newPassword}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Reset Password
+        </Button>
+      </form>
+    </Grid>
   );
 }
 

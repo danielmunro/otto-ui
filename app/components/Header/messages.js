@@ -12,9 +12,13 @@ export default defineMessages({
     id: `${scope}.home`,
     defaultMessage: 'Home',
   },
-  features: {
-    id: `${scope}.features`,
-    defaultMessage: 'Features',
+  followingPosts: {
+    id: `${scope}.followingPosts`,
+    defaultMessage: 'Posts',
+  },
+  suggestedFollows: {
+    id: `${scope}.suggestedFollows`,
+    defaultMessage: 'People to Follow',
   },
   login: {
     id: `${scope}.login`,

@@ -5,16 +5,22 @@ import messages from '../Header/messages';
 
 export function AuthenticatedNavigation() {
   return (
-    <span>
-      <HeaderLink to="/">
-        <FormattedMessage {...messages.home} />
-      </HeaderLink>
-      <HeaderLink to="/features">
-        <FormattedMessage {...messages.features} />
-      </HeaderLink>
-      <HeaderLink to="/logout">
-        <FormattedMessage {...messages.logout} />
-      </HeaderLink>
-    </span>
+    <div>
+      <div>
+        <HeaderLink to="/following-posts">
+          <FormattedMessage {...messages.home} />
+        </HeaderLink>
+      </div>
+      <div>
+        <HeaderLink to="/suggested-follows">
+          <FormattedMessage {...messages.suggestedFollows} />
+        </HeaderLink>
+      </div>
+      <div>
+        <HeaderLink to="/logout">
+          <FormattedMessage {...messages.logout} />
+        </HeaderLink>
+      </div>
+    </div>
   );
 }

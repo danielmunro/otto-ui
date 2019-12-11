@@ -53,7 +53,13 @@ export function HomePage({ username, onSubmitForm }) {
           <FormattedMessage {...messages.appHeader} />
         </h1>
         <P>
-          Give {APP_NAME} a try today. Simple, unobtrusive, social networking.
+          Connect with friends, professionals, and family. Cut out the noise.
+        </P>
+        <P>Schedule, coordinate, and host local events in your area.</P>
+        <P>Share pictures and video with your followers.</P>
+        <P>
+          Simple social networking is back in style. Give {APP_NAME} a try
+          today.
         </P>
       </div>
     </article>

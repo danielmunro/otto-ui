@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { memo, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -18,16 +18,13 @@ function ViewFriendsPostsPage({ postsLoaded, onLoadPosts }) {
       onLoadPosts();
     }
   });
-  console.log('sanity', postsLoaded);
   return (
-    <Container maxWidth="sm">
-      <div>
-        <H2>
-          <FormattedMessage {...messages.viewFriendsPostsHeader} />
-        </H2>
-        {postsLoaded ? <span>Loaded</span> : <span>Not loaded</span>}
-      </div>
-    </Container>
+    <Grid item xs={6}>
+      <H2>
+        <FormattedMessage {...messages.viewFriendsPostsHeader} />
+      </H2>
+      {postsLoaded ? <span>Loaded</span> : <span>Not loaded</span>}
+    </Grid>
   );
 }
 

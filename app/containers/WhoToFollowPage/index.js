@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { memo, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -33,22 +33,20 @@ function WhoToFollowPage({
     }
   });
   return (
-    <Container maxWidth="sm">
-      <div>
-        <H2>
-          <FormattedMessage {...messages.viewFriendsPostsHeader} />
-        </H2>
-        {whoToFollowLoaded ? (
-          <div>
-            {usersToFollow.map(user => (
-              <UserRow user key={user.uuid} />
-            ))}
-          </div>
-        ) : (
-          <span>Not loaded</span>
-        )}
-      </div>
-    </Container>
+    <Grid item xs={6}>
+      <H2>
+        <FormattedMessage {...messages.viewFriendsPostsHeader} />
+      </H2>
+      {whoToFollowLoaded ? (
+        <div>
+          {usersToFollow.map(user => (
+            <UserRow user key={user.uuid} />
+          ))}
+        </div>
+      ) : (
+        <span>Not loaded</span>
+      )}
+    </Grid>
   );
 }
 
