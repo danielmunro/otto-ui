@@ -51,3 +51,5 @@ export const AUTH_CHALLENGE_NEW_PASSWORD = 'ChallengeNewPassword';
  */
 
 export const API_ENDPOINT = 'http://localhost:8000';
+
+export const APP_NAME = 'TimeBox';

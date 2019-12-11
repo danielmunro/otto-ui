@@ -5,19 +5,13 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectSessionToken } from '../../containers/App/selectors';
 
-import A from './A';
-import Img from './Img';
 import NavBar from './NavBar';
-import Banner from './banner.jpg';
 import { UnauthenticatedNavigation } from '../UnauthenticatedNavigation';
 import { AuthenticatedNavigation } from '../AuthenticatedNavigation';
 
 function Header({ sessionToken }) {
   return (
     <div>
-      <A href="/">
-        <Img src={Banner} alt="react-boilerplate - Logo" />
-      </A>
       <NavBar>
         {sessionToken ? (
           <AuthenticatedNavigation />

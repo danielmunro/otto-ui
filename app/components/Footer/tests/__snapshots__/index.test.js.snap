@@ -2,7 +2,7 @@
 
 exports[`<Footer /> should render and match the snapshot 1`] = `
 <footer
-  className="Wrapper-wcfdfo-0 dPvBog"
+  className="Wrapper-wcfdfo-0 fBnbuA"
 >
   <section>
     <span>

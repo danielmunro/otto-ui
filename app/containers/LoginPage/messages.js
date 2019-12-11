@@ -12,6 +12,10 @@ export default defineMessages({
     id: `${scope}.login.header`,
     defaultMessage: 'Use the form below to login',
   },
+  loginTagLine: {
+    id: `${scope}.login.tagLine`,
+    defaultMessage: 'Log in below to access your account',
+  },
   loginEmail: {
     id: `${scope}.login.email`,
     defaultMessage: 'Email Address',

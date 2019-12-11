@@ -2,63 +2,83 @@
 
 exports[`<App /> should render and match the snapshot 1`] = `
 <ForwardRef(WithStyles)
+  className="makeStyles-body-1"
   component="main"
-  maxWidth="md"
+  maxWidth="xl"
 >
   <CssBaseline />
   <HelmetWrapper
-    defaultTitle="React.js Boilerplate"
+    defaultTitle="Community Service"
     defer={true}
     encodeSpecialCharacters={true}
-    titleTemplate="%s - React.js Boilerplate"
+    titleTemplate="%s - otto"
   >
     <meta
-      content="A React.js Boilerplate application"
+      content="A community service application"
       name="description"
     />
   </HelmetWrapper>
-  <UNDEFINED />
-  <Switch>
-    <Route
-      component={[Function]}
-      exact={true}
-      path="/"
-    />
-    <ProtectedRoute
-      path="/features"
+  <ForwardRef(WithStyles)
+    container={true}
+    spacing={3}
+  >
+    <ForwardRef(WithStyles)
+      item={true}
+      xs={2}
     >
-      <Unknown />
-    </ProtectedRoute>
-    <ProtectedRoute
-      path="/password-reset"
+      <h1>
+        TimeBox
+      </h1>
+      <UNDEFINED />
+    </ForwardRef(WithStyles)>
+    <ForwardRef(WithStyles)
+      className="makeStyles-content-2"
+      item={true}
+      xs={10}
     >
-      <Unknown />
-    </ProtectedRoute>
-    <Route
-      component={[Function]}
-      path="/login"
-    />
-    <Route
-      component={[Function]}
-      path="/logout"
-    />
-    <Route
-      component={[Function]}
-      path="/signup"
-    />
-    <Route
-      component={[Function]}
-      path="/following-posts"
-    />
-    <Route
-      component={[Function]}
-      path="/suggested-follows"
-    />
-    <Route
-      component={[Function]}
-      path=""
-    />
-  </Switch>
+      <Switch>
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/"
+        />
+        <ProtectedRoute
+          path="/features"
+        >
+          <Unknown />
+        </ProtectedRoute>
+        <ProtectedRoute
+          path="/password-reset"
+        >
+          <Unknown />
+        </ProtectedRoute>
+        <Route
+          component={[Function]}
+          path="/login"
+        />
+        <Route
+          component={[Function]}
+          path="/logout"
+        />
+        <Route
+          component={[Function]}
+          path="/signup"
+        />
+        <Route
+          component={[Function]}
+          path="/following-posts"
+        />
+        <Route
+          component={[Function]}
+          path="/suggested-follows"
+        />
+        <Route
+          component={[Function]}
+          path=""
+        />
+      </Switch>
+    </ForwardRef(WithStyles)>
+  </ForwardRef(WithStyles)>
   <Footer />
   <GlobalStyleComponent />
 </ForwardRef(WithStyles)>

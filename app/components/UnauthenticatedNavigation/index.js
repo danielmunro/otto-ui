@@ -5,16 +5,22 @@ import messages from '../Header/messages';
 
 export function UnauthenticatedNavigation() {
   return (
-    <span>
-      <HeaderLink to="/">
-        <FormattedMessage {...messages.home} />
-      </HeaderLink>
-      <HeaderLink to="/login">
-        <FormattedMessage {...messages.login} />
-      </HeaderLink>
-      <HeaderLink to="/signup">
-        <FormattedMessage {...messages.signup} />
-      </HeaderLink>
-    </span>
+    <div>
+      <div>
+        <HeaderLink to="/">
+          <FormattedMessage {...messages.home} />
+        </HeaderLink>
+      </div>
+      <div>
+        <HeaderLink to="/login">
+          <FormattedMessage {...messages.login} />
+        </HeaderLink>
+      </div>
+      <div>
+        <HeaderLink to="/signup">
+          <FormattedMessage {...messages.signup} />
+        </HeaderLink>
+      </div>
+    </div>
   );
 }

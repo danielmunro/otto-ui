@@ -2,45 +2,41 @@
 
 exports[`<Header /> should render a div 1`] = `
 <div>
-  <a
-    class="A-br8h0y-0 A-p44m4v-0 cYguYL"
-    href="/"
-  >
-    <img
-      alt="react-boilerplate - Logo"
-      class="Img-sc-9pa8on-0 eepIiv"
-      src="IMAGE_MOCK"
-    />
-  </a>
   <div
-    class="NavBar-sc-3b48xb-0 ioQxlc"
+    class="NavBar-sc-3b48xb-0 bOsPcC"
   >
-    <span>
-      <a
-        class="HeaderLink-sc-1mtyaiv-0 hMiTYG"
-        href="/"
-      >
-        <span>
-          Home
-        </span>
-      </a>
-      <a
-        class="HeaderLink-sc-1mtyaiv-0 hMiTYG"
-        href="/login"
-      >
-        <span>
-          Login
-        </span>
-      </a>
-      <a
-        class="HeaderLink-sc-1mtyaiv-0 hMiTYG"
-        href="/signup"
-      >
-        <span>
-          Signup
-        </span>
-      </a>
-    </span>
+    <div>
+      <div>
+        <a
+          class="HeaderLink-sc-1mtyaiv-0 cXWdHM"
+          href="/"
+        >
+          <span>
+            Home
+          </span>
+        </a>
+      </div>
+      <div>
+        <a
+          class="HeaderLink-sc-1mtyaiv-0 cXWdHM"
+          href="/login"
+        >
+          <span>
+            Login
+          </span>
+        </a>
+      </div>
+      <div>
+        <a
+          class="HeaderLink-sc-1mtyaiv-0 cXWdHM"
+          href="/signup"
+        >
+          <span>
+            Signup
+          </span>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 `;
