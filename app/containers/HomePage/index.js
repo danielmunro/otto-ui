@@ -12,17 +12,16 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from '../../utils/injectReducer';
+import { useInjectSaga } from '../../utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
   makeSelectError,
-} from 'containers/App/selectors';
+} from '../App/selectors';
 import P from '../../components/P';
 import { APP_NAME } from '../App/constants';
 import messages from './messages';
-import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
@@ -52,11 +51,10 @@ export function HomePage({ username, onSubmitForm }) {
         <h1>
           <FormattedMessage {...messages.appHeader} />
         </h1>
-        <P>
-          Connect with friends, professionals, and family. Cut out the noise.
-        </P>
+        <P>Connect with friends and family. Cut out the noise.</P>
         <P>Schedule, coordinate, and host local events in your area.</P>
         <P>Share pictures and video with your followers.</P>
+        <P>Find a better job and improve your life.</P>
         <P>
           Simple social networking is back in style. Give {APP_NAME} a try
           today.
@@ -85,10 +83,6 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
   };
 }
 

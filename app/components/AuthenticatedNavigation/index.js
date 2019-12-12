@@ -12,8 +12,23 @@ export function AuthenticatedNavigation() {
         </HeaderLink>
       </div>
       <div>
+        <HeaderLink to="/profile">
+          <FormattedMessage {...messages.myProfile} />
+        </HeaderLink>
+      </div>
+      <div>
         <HeaderLink to="/suggested-follows">
           <FormattedMessage {...messages.suggestedFollows} />
+        </HeaderLink>
+      </div>
+      <div>
+        <HeaderLink to="/events">
+          <FormattedMessage {...messages.events} />
+        </HeaderLink>
+      </div>
+      <div>
+        <HeaderLink to="/jobs">
+          <FormattedMessage {...messages.jobs} />
         </HeaderLink>
       </div>
       <div>

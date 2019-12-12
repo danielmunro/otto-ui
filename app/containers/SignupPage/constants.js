@@ -11,6 +11,8 @@
 
 export const CHANGE_EMAIL = 'app/Signup/CHANGE_EMAIL';
 
+export const CHANGE_USERNAME = 'app/Signup/CHANGE_USERNAME';
+
 export const CHANGE_PASSWORD = 'app/Signup/CHANGE_PASSWORD';
 
 export const CHANGE_PASSWORD_CONFIRM = 'app/Signup/CHANGE_PASSWORD_CONFIRM';

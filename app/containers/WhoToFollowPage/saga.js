@@ -16,7 +16,6 @@ export function* attemptLoadWhoToFollow() {
 
   try {
     const response = yield call(request, requestURL);
-    console.log('response', response);
     yield put(loadWhoToFollowSuccess(response));
   } catch (err) {
     yield put(loadWhoToFollowError());

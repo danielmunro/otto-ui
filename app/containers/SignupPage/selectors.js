@@ -13,6 +13,12 @@ const makeSelectEmail = () =>
     loginState => loginState.email,
   );
 
+const makeSelectUsername = () =>
+  createSelector(
+    selectSignup,
+    loginState => loginState.username,
+  );
+
 const makeSelectPassword = () =>
   createSelector(
     selectSignup,
@@ -30,4 +36,5 @@ export {
   makeSelectEmail,
   makeSelectPassword,
   makeSelectPasswordConfirm,
+  makeSelectUsername,
 };

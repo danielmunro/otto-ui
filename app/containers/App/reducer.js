@@ -10,9 +10,6 @@
 import produce from 'immer';
 import history from '../../utils/history';
 import {
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS,
-  LOAD_REPOS_ERROR,
   SUBMIT_LOGIN,
   SUBMIT_LOGIN_ERROR,
   SUBMIT_LOGIN_SUCCESS,
@@ -48,12 +45,6 @@ export const initialState = {
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOAD_REPOS:
-        draft.loading = true;
-        draft.error = false;
-        draft.userData.repositories = false;
-        break;
-
       case SUBMIT_LOGIN:
         draft.loading = true;
         draft.loginError = false;
@@ -72,17 +63,6 @@ const appReducer = (state = initialState, action) =>
         auth().update(action);
         break;
       }
-
-      case LOAD_REPOS_SUCCESS:
-        draft.userData.repositories = action.repos;
-        draft.loading = false;
-        draft.currentUser = action.username;
-        break;
-
-      case LOAD_REPOS_ERROR:
-        draft.error = action.error;
-        draft.loading = false;
-        break;
 
       case LOGOUT:
         draft.authResponse = null;

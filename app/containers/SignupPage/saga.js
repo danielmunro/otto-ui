@@ -7,18 +7,27 @@ import { API_ENDPOINT, SUBMIT_SIGNUP } from '../App/constants';
 import { signupLoaded, signupLoadedError } from '../App/actions';
 
 import request, { post } from '../../utils/request';
-import { makeSelectEmail, makeSelectPassword } from './selectors';
+import {
+  makeSelectEmail,
+  makeSelectPassword,
+  makeSelectUsername,
+} from './selectors';
 
 /**
  * Github repos request/response handler
  */
 export function* attemptSignup() {
   const email = yield select(makeSelectEmail());
+  const username = yield select(makeSelectUsername());
   const password = yield select(makeSelectPassword());
   const requestURL = `${API_ENDPOINT}/user`;
 
   try {
-    const response = yield call(request, requestURL, post({ email, password }));
+    const response = yield call(
+      request,
+      requestURL,
+      post({ email, username, password }),
+    );
     yield put(signupLoaded(response));
   } catch (err) {
     yield put(signupLoadedError());

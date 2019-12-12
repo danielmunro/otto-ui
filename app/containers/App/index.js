@@ -16,6 +16,7 @@ import { useInjectSaga } from '../../utils/injectSaga';
 import HomePage from '../HomePage/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import LogoutPage from '../LogoutPage/Loadable';
+import ProfilePage from '../ProfilePage/Loadable';
 import SignupPage from '../SignupPage/Loadable';
 import FeaturePage from '../FeaturePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
@@ -61,6 +62,7 @@ export default function App() {
             <Route path="/signup" component={SignupPage} />
             <Route path="/following-posts" component={ViewFriendsPostsPage} />
             <Route path="/suggested-follows" component={WhoToFollowPage} />
+            <Route path="/profile" component={ProfilePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </Grid>

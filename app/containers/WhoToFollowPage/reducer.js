@@ -23,7 +23,6 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign */
 const whoToFollowReducer = (state = initialState, action) =>
   produce(state, draft => {
-    console.log('whoToFollow reducer', action);
     switch (action.type) {
       case LOAD_WHO_TO_FOLLOW:
         draft.usersToFollow = [];
@@ -31,7 +30,6 @@ const whoToFollowReducer = (state = initialState, action) =>
         break;
 
       case LOAD_WHO_TO_FOLLOW_SUCCESS:
-        console.log('boo!');
         draft.usersToFollow = action.users;
         draft.whoToFollowLoaded = true;
         break;

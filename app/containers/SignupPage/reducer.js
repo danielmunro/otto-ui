@@ -10,6 +10,7 @@
 import produce from 'immer';
 import {
   CHANGE_EMAIL,
+  CHANGE_USERNAME,
   CHANGE_PASSWORD,
   CHANGE_PASSWORD_CONFIRM,
 } from './constants';
@@ -17,6 +18,7 @@ import {
 // The initial state of the App
 export const initialState = {
   email: '',
+  username: '',
   password: '',
   passwordConfirm: '',
 };
@@ -27,6 +29,9 @@ const signupReducer = (state = initialState, action) =>
     switch (action.type) {
       case CHANGE_EMAIL:
         draft.email = action.email;
+        break;
+      case CHANGE_USERNAME:
+        draft.username = action.username;
         break;
       case CHANGE_PASSWORD:
         draft.password = action.password;

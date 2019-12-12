@@ -11,7 +11,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     <p
       class="P-sc-76wrpw-0 cthJaQ"
     >
-      Connect with friends, professionals, and family. Cut out the noise.
+      Connect with friends and family. Cut out the noise.
     </p>
     <p
       class="P-sc-76wrpw-0 cthJaQ"
@@ -22,6 +22,11 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
       class="P-sc-76wrpw-0 cthJaQ"
     >
       Share pictures and video with your followers.
+    </p>
+    <p
+      class="P-sc-76wrpw-0 cthJaQ"
+    >
+      Find a better job and improve your life.
     </p>
     <p
       class="P-sc-76wrpw-0 cthJaQ"

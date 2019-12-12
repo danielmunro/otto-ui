@@ -19,12 +19,20 @@ import {
   CHANGE_EMAIL,
   CHANGE_PASSWORD,
   CHANGE_PASSWORD_CONFIRM,
+  CHANGE_USERNAME,
 } from './constants';
 
 export function changeEmail(email) {
   return {
     type: CHANGE_EMAIL,
     email,
+  };
+}
+
+export function changeUsername(username) {
+  return {
+    type: CHANGE_USERNAME,
+    username,
   };
 }
 

@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.signup.email`,
     defaultMessage: 'Email Address',
   },
+  signupUsername: {
+    id: `${scope}.signup.username`,
+    defaultMessage: 'Username',
+  },
   signupPassword: {
     id: `${scope}.signup.password`,
     defaultMessage: 'Password',

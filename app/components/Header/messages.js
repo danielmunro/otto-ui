@@ -12,6 +12,10 @@ export default defineMessages({
     id: `${scope}.home`,
     defaultMessage: 'Home',
   },
+  myProfile: {
+    id: `${scope}.myProfile`,
+    defaultMessage: 'My Profile',
+  },
   followingPosts: {
     id: `${scope}.followingPosts`,
     defaultMessage: 'Posts',
@@ -19,6 +23,14 @@ export default defineMessages({
   suggestedFollows: {
     id: `${scope}.suggestedFollows`,
     defaultMessage: 'People to Follow',
+  },
+  events: {
+    id: `${scope}.events`,
+    defaultMessage: 'Events',
+  },
+  jobs: {
+    id: `${scope}.jobs`,
+    defaultMessage: 'Job Board',
   },
   login: {
     id: `${scope}.login`,
