@@ -63,6 +63,12 @@ const makeSelectSessionUserUuid = () =>
     globalState => globalState.user.uuid,
   );
 
+const makeSelectSessionUsername = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.user.username,
+  );
+
 const makeSelectLocation = () =>
   createSelector(
     selectRouter,
@@ -88,4 +94,5 @@ export {
   makeSelectPwResetError,
   makeSelectSessionUserUuid,
   makeSelectPostsLoaded,
+  makeSelectSessionUsername,
 };

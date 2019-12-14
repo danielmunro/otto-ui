@@ -60,6 +60,7 @@ const appReducer = (state = initialState, action) =>
         draft.loginError = false;
         draft.sessionToken = action.sessionToken;
         draft.authResponse = action.authResponse;
+        draft.user = action.user;
         auth().update(action);
         break;
       }

@@ -7,7 +7,7 @@ import { makeSelectSessionToken } from '../../containers/App/selectors';
 
 import NavBar from './NavBar';
 import { UnauthenticatedNavigation } from '../UnauthenticatedNavigation';
-import { AuthenticatedNavigation } from '../AuthenticatedNavigation';
+import AuthenticatedNavigation from '../AuthenticatedNavigation';
 
 function Header({ sessionToken }) {
   return (

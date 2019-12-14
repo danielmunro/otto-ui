@@ -11,9 +11,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
-import { useInjectReducer } from '../../utils/injectReducer';
-import { useInjectSaga } from '../../utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
@@ -24,15 +21,8 @@ import { APP_NAME } from '../App/constants';
 import messages from './messages';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-
-const key = 'home';
 
 export function HomePage({ username, onSubmitForm }) {
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
-
   useEffect(() => {
     // When initial state username is not null, submit the form to load repos
     if (username && username.trim().length > 0) onSubmitForm();

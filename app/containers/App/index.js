@@ -62,7 +62,7 @@ export default function App() {
             <Route path="/signup" component={SignupPage} />
             <Route path="/following-posts" component={ViewFriendsPostsPage} />
             <Route path="/suggested-follows" component={WhoToFollowPage} />
-            <Route path="/profile" component={ProfilePage} />
+            <Route path="/profile/:username" component={ProfilePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </Grid>

@@ -1,9 +1,14 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectSessionUsername } from '../../containers/App/selectors';
 import HeaderLink from '../Header/HeaderLink';
 import messages from '../Header/messages';
 
-export function AuthenticatedNavigation() {
+function AuthenticatedNavigation({ username }) {
   return (
     <div>
       <div>
@@ -12,7 +17,7 @@ export function AuthenticatedNavigation() {
         </HeaderLink>
       </div>
       <div>
-        <HeaderLink to="/profile">
+        <HeaderLink to={`/profile/${username}`}>
           <FormattedMessage {...messages.myProfile} />
         </HeaderLink>
       </div>
@@ -39,3 +44,25 @@ export function AuthenticatedNavigation() {
     </div>
   );
 }
+
+AuthenticatedNavigation.propTypes = {
+  username: PropTypes.string,
+};
+
+const mapStateToProps = createStructuredSelector({
+  username: makeSelectSessionUsername(),
+});
+
+export function mapDispatchToProps() {
+  return {};
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(AuthenticatedNavigation);
