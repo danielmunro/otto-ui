@@ -41,7 +41,7 @@ export function* attemptLoadFollowingPosts() {
     yield attemptLoadUser();
     userUuid = yield select(makeSelectSessionUserUuid());
   }
-  const requestURL = `${API_ENDPOINT}/post/follows/${userUuid}`;
+  const requestURL = `${API_ENDPOINT}/user/${userUuid}/new-posts`;
 
   try {
     const response = yield call(request, requestURL);

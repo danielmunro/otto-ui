@@ -43,18 +43,19 @@ export default function request(url, options) {
     .then(parseJSON);
 }
 
-function jsonBody(method, data) {
+function jsonBody(method, data, sessionToken = '') {
   return {
     method,
     headers: {
       'Content-Type': 'application/json',
+      'x-session-token': sessionToken,
     },
     body: JSON.stringify(data),
   };
 }
 
-export function post(data) {
-  return jsonBody('POST', data);
+export function post(data, sessionToken = '') {
+  return jsonBody('POST', data, sessionToken);
 }
 
 export function put(data) {

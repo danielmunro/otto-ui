@@ -12,4 +12,8 @@ export default defineMessages({
     id: `${scope}.viewFriendsPosts.header`,
     defaultMessage: 'Posts from users you follow',
   },
+  createPost: {
+    id: `${scope}.viewFriendsPosts.createPost`,
+    defaultMessage: 'Share a thought',
+  },
 });
