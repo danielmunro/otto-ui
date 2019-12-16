@@ -8,10 +8,12 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import H2 from '../../components/H2';
+import Post from '../../components/Post';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import { loadFollowingUserPosts } from '../App/actions';
-import { makeSelectPostsLoaded } from '../App/selectors';
+import { makeSelectPosts, makeSelectPostsLoaded } from '../App/selectors';
+import style from './style';
 import reducer from './reducer';
 import saga from './saga';
 import { changePostMessage, submitPostMessage } from './actions';
@@ -26,6 +28,7 @@ function ViewFriendsPostsPage({
   postsLoaded,
   onLoadPosts,
   onPostMessageSubmit,
+  posts,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -34,26 +37,43 @@ function ViewFriendsPostsPage({
       onLoadPosts();
     }
   });
+  const classes = style();
   return (
-    <Grid item xs={6}>
+    <Grid item>
       <H2>
         <FormattedMessage {...messages.viewFriendsPostsHeader} />
       </H2>
-      <form onSubmit={onPostMessageSubmit}>
-        <TextField
-          id="createPost"
-          multiline
-          rows={3}
-          label={messages.createPost.defaultMessage}
-          value={postMessage}
-          fullWidth
-          onChange={onChangePostMessage}
-        />
-        <Button type="submit" fullWidth variant="contained" color="primary">
-          Submit
-        </Button>
-      </form>
-      {postsLoaded ? <span>Loaded</span> : <span>Not loaded</span>}
+      <Grid item xs={6}>
+        <form onSubmit={onPostMessageSubmit}>
+          <TextField
+            id="createPost"
+            multiline
+            rows={3}
+            label={messages.createPost.defaultMessage}
+            value={postMessage}
+            fullWidth
+            onChange={onChangePostMessage}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.postMessageButton}
+          >
+            Submit
+          </Button>
+        </form>
+      </Grid>
+      {postsLoaded ? (
+        <div className={classes.content}>
+          {posts.map(post => (
+            <Post post={post} key={post.uuid} />
+          ))}
+        </div>
+      ) : (
+        <span>Not loaded</span>
+      )}
     </Grid>
   );
 }
@@ -64,11 +84,13 @@ ViewFriendsPostsPage.propTypes = {
   onPostMessageSubmit: PropTypes.func,
   postsLoaded: PropTypes.bool,
   onLoadPosts: PropTypes.func,
+  posts: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   postsLoaded: makeSelectPostsLoaded(),
   postMessage: makeSelectPostMessage(),
+  posts: makeSelectPosts(),
 });
 
 export function mapDispatchToProps(dispatch) {

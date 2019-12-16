@@ -2,20 +2,29 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Post({ user: { username, profilePic }, message: { text } }) {
+/* eslint-disable camelcase */
+function Post({
+  post: {
+    text,
+    user: { username },
+    created_at,
+  },
+}) {
+  const profilePic = '';
   return (
-    <div>
-      <Grid xs={1}>
+    <Grid container spacing={2}>
+      <Grid item xs={3}>
         <img src={profilePic} alt={`${username}'s profile`} />
       </Grid>
-      <Grid xs={7}>{text}</Grid>
-    </div>
+      <Grid item xs={9}>
+        On {created_at} {username} wrote: {text}
+      </Grid>
+    </Grid>
   );
 }
 
 Post.propTypes = {
-  user: PropTypes.object,
-  message: PropTypes.object,
+  post: PropTypes.object,
 };
 
 export default Post;

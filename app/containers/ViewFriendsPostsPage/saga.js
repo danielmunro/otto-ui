@@ -25,7 +25,6 @@ export function* submitPost() {
   const userUuid = yield select(makeSelectSessionUserUuid());
   const sessionToken = yield select(makeSelectSessionToken());
   const requestURL = `${API_ENDPOINT}/post`;
-  console.log('foo', text, userUuid);
 
   try {
     const response = yield call(

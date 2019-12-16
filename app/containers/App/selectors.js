@@ -81,6 +81,12 @@ const makeSelectPostsLoaded = () =>
     globalState => globalState.postsLoaded,
   );
 
+const makeSelectPosts = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.posts,
+  );
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -95,4 +101,5 @@ export {
   makeSelectSessionUserUuid,
   makeSelectPostsLoaded,
   makeSelectSessionUsername,
+  makeSelectPosts,
 };

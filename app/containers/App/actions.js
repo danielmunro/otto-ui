@@ -151,7 +151,7 @@ export function loadFollowingUserPosts() {
   };
 }
 
-export function loadFollowingUserPostsSuccess({ posts }) {
+export function loadFollowingUserPostsSuccess(posts) {
   return {
     type: LOAD_FOLLOWING_POSTS_SUCCESS,
     posts,
