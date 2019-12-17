@@ -1,38 +1,37 @@
 import Grid from '@material-ui/core/Grid';
-import React, { memo, useEffect } from 'react';
+import TextField from '@material-ui/core/TextField';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { useParams, Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import H1 from '../../components/H1';
 import P from '../../components/P';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
-import reducer from './reducer';
-import saga from './saga';
+import reducer from '../ProfilePage/reducer';
+import saga from '../ProfilePage/saga';
 import { loadProfileUser } from './actions';
 import messages from './messages';
-import { makeSelectUser, makeSelectUserLoaded } from './selectors';
+import { makeSelectSessionUser } from '../App/selectors';
 
 const key = 'profile-page';
 
-function ProfilePage({ userLoaded, onLoadUser, user }) {
-  const { username } = useParams();
+function ProfilePage({ user }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
-  useEffect(() => {
-    if (!userLoaded) {
-      onLoadUser(username);
-    }
-  });
   return (
     <Grid item xs={6}>
       <H1>
-        <FormattedMessage {...messages.profileHeader} values={{ username }} />
+        <FormattedMessage
+          {...messages.editProfileHeader}
+          values={{ username: user.username ? user.username : '' }}
+        />
       </H1>
-      <Link to="/edit-profile">Edit Profile</Link>
+      <form>
+        <TextField value={user.username} readOnly />
+      </form>
       <P>Username: {user.username}</P>
       <P>Name: {user.name}</P>
       <P>Member since: {user.created_at}</P>
@@ -42,13 +41,10 @@ function ProfilePage({ userLoaded, onLoadUser, user }) {
 
 ProfilePage.propTypes = {
   user: PropTypes.object,
-  userLoaded: PropTypes.bool,
-  onLoadUser: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-  userLoaded: makeSelectUserLoaded(),
+  user: makeSelectSessionUser(),
 });
 
 export function mapDispatchToProps(dispatch) {

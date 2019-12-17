@@ -33,6 +33,7 @@ export const initialState = {
   user: {
     uuid: '',
   },
+  userLoaded: false,
   sessionToken: auth().getToken(),
   loginError: false,
   authResponse: '',
@@ -61,6 +62,7 @@ const appReducer = (state = initialState, action) =>
         draft.sessionToken = action.sessionToken;
         draft.authResponse = action.authResponse;
         draft.user = action.user;
+        draft.userLoaded = true;
         auth().update(action);
         break;
       }

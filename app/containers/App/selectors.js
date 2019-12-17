@@ -57,6 +57,18 @@ const makeSelectRepos = () =>
     globalState => globalState.userData.repositories,
   );
 
+const makeSelectSessionUser = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.user,
+  );
+
+const makeSelectSessionUserLoaded = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.userLoaded,
+  );
+
 const makeSelectSessionUserUuid = () =>
   createSelector(
     selectGlobal,
@@ -98,6 +110,8 @@ export {
   makeSelectAuthResponse,
   makeSelectSessionToken,
   makeSelectPwResetError,
+  makeSelectSessionUser,
+  makeSelectSessionUserLoaded,
   makeSelectSessionUserUuid,
   makeSelectPostsLoaded,
   makeSelectSessionUsername,

@@ -6,16 +6,21 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import { useInjectSaga } from '../../utils/injectSaga';
 import HomePage from '../HomePage/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import LogoutPage from '../LogoutPage/Loadable';
+import EditProfilePage from '../EditProfilePage/Loadable';
 import ProfilePage from '../ProfilePage/Loadable';
 import SignupPage from '../SignupPage/Loadable';
 import FeaturePage from '../FeaturePage/Loadable';
@@ -26,17 +31,23 @@ import GlobalStyle from '../../global-styles';
 import PasswordResetPage from '../PasswordResetPage/Loadable';
 import ViewFriendsPostsPage from '../ViewFriendsPostsPage/Loadable';
 import WhoToFollowPage from '../WhoToFollowPage/Loadable';
+import { loadSessionUser } from './actions';
 import { APP_NAME } from './constants';
 import ProtectedRoute from './ProtectedRoute';
 import saga from './saga';
+import { makeSelectSessionUserLoaded } from './selectors';
 import style from './style';
 
 const key = 'app';
 
-export default function App() {
+function App({ userLoaded, onLoadUser }) {
   useInjectSaga({ key, saga });
   const classes = style();
-
+  useEffect(() => {
+    if (!userLoaded) {
+      onLoadUser();
+    }
+  });
   return (
     <Container component="main" maxWidth="xl" className={classes.body}>
       <CssBaseline />
@@ -63,6 +74,7 @@ export default function App() {
             <Route path="/following-posts" component={ViewFriendsPostsPage} />
             <Route path="/suggested-follows" component={WhoToFollowPage} />
             <Route path="/profile/:username" component={ProfilePage} />
+            <Route path="/edit-profile" component={EditProfilePage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </Grid>
@@ -72,3 +84,28 @@ export default function App() {
     </Container>
   );
 }
+
+App.propTypes = {
+  userLoaded: PropTypes.bool,
+  onLoadUser: PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({
+  userLoaded: makeSelectSessionUserLoaded(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onLoadUser: () => dispatch(loadSessionUser()),
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(App);
