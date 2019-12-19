@@ -58,6 +58,6 @@ export function post(data, sessionToken = '') {
   return jsonBody('POST', data, sessionToken);
 }
 
-export function put(data) {
-  return jsonBody('PUT', data);
+export function put(data, sessionToken = '') {
+  return jsonBody('PUT', data, sessionToken);
 }

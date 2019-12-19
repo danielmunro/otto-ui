@@ -5,7 +5,7 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectProfile = state => state['profile-page'] || initialState;
+const selectProfile = state => state['edit-profile-page'] || initialState;
 
 const makeSelectUser = () =>
   createSelector(
@@ -13,10 +13,10 @@ const makeSelectUser = () =>
     profileState => profileState.user,
   );
 
-const makeSelectUserLoaded = () =>
+const makeSelectIsUserLoaded = () =>
   createSelector(
     selectProfile,
-    profileState => profileState.userLoaded,
+    profileState => profileState.isUserLoaded,
   );
 
-export { selectProfile, makeSelectUser, makeSelectUserLoaded };
+export { selectProfile, makeSelectUser, makeSelectIsUserLoaded };

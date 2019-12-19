@@ -8,7 +8,6 @@
  */
 
 import produce from 'immer';
-import history from '../../utils/history';
 import {
   SUBMIT_LOGIN,
   SUBMIT_LOGIN_ERROR,
@@ -32,6 +31,10 @@ export const initialState = {
   },
   user: {
     uuid: '',
+    username: '',
+    name: '',
+    birthday: '',
+    bioMessage: '',
   },
   userLoaded: false,
   sessionToken: auth().getToken(),
@@ -61,7 +64,7 @@ const appReducer = (state = initialState, action) =>
         draft.loginError = false;
         draft.sessionToken = action.sessionToken;
         draft.authResponse = action.authResponse;
-        draft.user = action.user;
+        draft.user = { ...draft.user, ...action.user };
         draft.userLoaded = true;
         auth().update(action);
         break;
@@ -89,11 +92,11 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case LOAD_SESSION_USER_SUCCESS:
-        draft.user = action.user;
+        draft.user = { ...draft.user, ...action.user };
         break;
 
       case LOAD_SESSION_USER_ERROR:
-        history.push('/login');
+        // history.push('/login');
         break;
     }
   });
