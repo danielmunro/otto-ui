@@ -16,7 +16,12 @@ import {
 
 // The initial state of the App
 export const initialState = {
-  user: { username: '', uuid: '', name: '' },
+  user: {
+    username: '',
+    uuid: '',
+    name: '',
+    profilePic: '',
+  },
   userLoaded: false,
 };
 

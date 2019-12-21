@@ -40,7 +40,7 @@ function WhoToFollowPage({
       {whoToFollowLoaded ? (
         <div>
           {usersToFollow.map(user => (
-            <UserRow user key={user.uuid} />
+            <UserRow user={user} key={user.uuid} />
           ))}
         </div>
       ) : (

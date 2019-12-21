@@ -55,7 +55,7 @@ const editProfileReducer = (state = initialState, action) =>
         break;
 
       case CHANGE_BIO_MESSAGE:
-        draft.user.bioMessage = action.value;
+        draft.user.bio_message = action.value;
         break;
     }
   });

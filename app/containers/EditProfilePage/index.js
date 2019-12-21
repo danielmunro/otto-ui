@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Button from '@material-ui/core/Button';
 import H1 from '../../components/H1';
+import noImage from '../../images/no-image.png';
 import history from '../../utils/history';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -49,53 +50,62 @@ function EditProfilePage({
     return <span />;
   }
   return (
-    <Grid item xs={6}>
-      <H1>
-        <FormattedMessage
-          {...messages.editProfileHeader}
-          values={{ username: user.username ? user.username : '' }}
+    <Grid container>
+      <Grid item xs={2}>
+        <img
+          src={user.profilePic || noImage}
+          alt={`${user.username}'s profile`}
+          width="100%"
         />
-      </H1>
-      <form onSubmit={evt => onSubmitForm(evt, user)}>
-        <TextField
-          value={user.username}
-          readOnly
-          className={classes.textField}
-          label={messages.username.defaultMessage}
-        />
-        <TextField
-          className={classes.textField}
-          value={user.name}
-          label={messages.name.defaultMessage}
-          onChange={onChangeName}
-        />
-        <TextField
-          className={classes.textField}
-          value={user.birthday}
-          label={messages.birthday.defaultMessage}
-          onChange={onChangeBirthday}
-        />
-        <TextField
-          className={classes.textField}
-          multiline
-          rows={5}
-          value={user.bioMessage}
-          label={messages.bioMessage.defaultMessage}
-          onChange={onChangeBioMessage}
-        />
-        <Grid container>
-          <Grid item xs={3}>
-            <Button id="cancel" onClick={() => history.goBack()}>
-              Cancel
-            </Button>
+      </Grid>
+      <Grid item xs={6}>
+        <H1>
+          <FormattedMessage
+            {...messages.editProfileHeader}
+            values={{ username: user.username ? user.username : '' }}
+          />
+        </H1>
+        <form onSubmit={evt => onSubmitForm(evt, user)}>
+          <TextField
+            value={user.username}
+            readOnly
+            className={classes.textField}
+            label={messages.username.defaultMessage}
+          />
+          <TextField
+            className={classes.textField}
+            value={user.name}
+            label={messages.name.defaultMessage}
+            onChange={onChangeName}
+          />
+          <TextField
+            className={classes.textField}
+            value={user.birthday}
+            label={messages.birthday.defaultMessage}
+            onChange={onChangeBirthday}
+          />
+          <TextField
+            className={classes.textField}
+            multiline
+            rows={5}
+            value={user.bio_message}
+            label={messages.bioMessage.defaultMessage}
+            onChange={onChangeBioMessage}
+          />
+          <Grid container>
+            <Grid item xs={3}>
+              <Button id="cancel" onClick={() => history.goBack()}>
+                Cancel
+              </Button>
+            </Grid>
+            <Grid item xs={3}>
+              <Button id="submit" type="submit">
+                Submit
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={3}>
-            <Button id="submit" type="submit">
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
+        </form>
+      </Grid>
     </Grid>
   );
 }

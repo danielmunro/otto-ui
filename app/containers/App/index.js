@@ -23,7 +23,6 @@ import LogoutPage from '../LogoutPage/Loadable';
 import EditProfilePage from '../EditProfilePage/Loadable';
 import ProfilePage from '../ProfilePage/Loadable';
 import SignupPage from '../SignupPage/Loadable';
-import FeaturePage from '../FeaturePage/Loadable';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -62,19 +61,22 @@ function App({ userLoaded, onLoadUser }) {
         <Grid item xs={10} className={classes.content}>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <ProtectedRoute path="/features">
-              <FeaturePage />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/logout" component={LogoutPage} />
+            <Route path="/signup" component={SignupPage} />
+            <Route path="/profile/:username" component={ProfilePage} />
+            <ProtectedRoute path="/following-posts">
+              <ViewFriendsPostsPage />
+            </ProtectedRoute>
+            <ProtectedRoute path="/suggested-follows">
+              <Route path="/suggested-follows" component={WhoToFollowPage} />
             </ProtectedRoute>
             <ProtectedRoute path="/password-reset">
               <PasswordResetPage />
             </ProtectedRoute>
-            <Route path="/login" component={LoginPage} />
-            <Route path="/logout" component={LogoutPage} />
-            <Route path="/signup" component={SignupPage} />
-            <Route path="/following-posts" component={ViewFriendsPostsPage} />
-            <Route path="/suggested-follows" component={WhoToFollowPage} />
-            <Route path="/profile/:username" component={ProfilePage} />
-            <Route path="/edit-profile" component={EditProfilePage} />
+            <ProtectedRoute path="/edit-profile">
+              <EditProfilePage />
+            </ProtectedRoute>
             <Route path="" component={NotFoundPage} />
           </Switch>
         </Grid>

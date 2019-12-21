@@ -96,7 +96,7 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case LOAD_SESSION_USER_ERROR:
-        // history.push('/login');
+        auth().invalidate();
         break;
     }
   });
