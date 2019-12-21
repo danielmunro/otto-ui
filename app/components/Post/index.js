@@ -1,23 +1,34 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import PropTypes from 'prop-types';
+import P from '../P';
+import TimeSince from '../TimeSince';
+import style from './style';
+import noImage from '../../images/no-image.png';
 
 /* eslint-disable camelcase */
 function Post({
   post: {
     text,
-    user: { username },
+    user: { username, profilePic },
     created_at,
   },
 }) {
-  const profilePic = '';
+  const classes = style();
   return (
     <Grid container spacing={2}>
-      <Grid item xs={3}>
-        <img src={profilePic} alt={`${username}'s profile`} />
+      <Grid item xs={1}>
+        <img
+          src={profilePic || noImage}
+          alt={`${username}'s profile`}
+          width="100%"
+        />
       </Grid>
-      <Grid item xs={9}>
-        On {created_at} {username} wrote: {text}
+      <Grid item xs={11}>
+        <P className={classes.header}>{text}</P>
+        <P>
+          {username} wrote <TimeSince date={created_at} />
+        </P>
       </Grid>
     </Grid>
   );

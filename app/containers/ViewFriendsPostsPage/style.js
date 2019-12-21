@@ -7,4 +7,7 @@ export default makeStyles(() => ({
   postMessageButton: {
     marginTop: '1em',
   },
+  hr: {
+    borderTop: '1px solid #cacaca',
+  },
 }));

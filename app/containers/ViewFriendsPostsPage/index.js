@@ -68,7 +68,10 @@ function ViewFriendsPostsPage({
       {postsLoaded ? (
         <div className={classes.content}>
           {posts.map(post => (
-            <Post post={post} key={post.uuid} />
+            <div key={post.uuid}>
+              <Post post={post} />
+              <hr className={classes.hr} />
+            </div>
           ))}
         </div>
       ) : (

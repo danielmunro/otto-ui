@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export function UserRow({ user: { username, name, uuid } }) {
   return (
     <div key={uuid}>
-      User: <a href={`/user/${username}`}>{name || 'no name provided'}</a>
+      User: <a href={`/profile/${username}`}>{name || 'no name provided'}</a>
     </div>
   );
 }
