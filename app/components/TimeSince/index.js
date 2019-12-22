@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 const SECONDS_IN_MINUTE = 60;
 const SECONDS_IN_HOUR = SECONDS_IN_MINUTE * 60;
 const SECONDS_IN_DAY = SECONDS_IN_HOUR * 24;
+const SECONDS_IN_WEEK = SECONDS_IN_DAY * 7;
+const EST_SECONDS_IN_MONTH = SECONDS_IN_DAY * 30;
 
 function getElement(number, string) {
   const rounded = Math.floor(number);
@@ -32,8 +34,16 @@ function TimeSince({ date }) {
     const hours = seconds / SECONDS_IN_HOUR;
     return getElement(hours, 'hour');
   }
-  const days = seconds / SECONDS_IN_DAY;
-  return getElement(days, 'day');
+  if (seconds < SECONDS_IN_WEEK) {
+    const days = seconds / SECONDS_IN_DAY;
+    return getElement(days, 'day');
+  }
+  if (seconds < EST_SECONDS_IN_MONTH) {
+    const weeks = seconds / SECONDS_IN_WEEK;
+    return getElement(weeks, 'week');
+  }
+  const months = seconds / EST_SECONDS_IN_MONTH;
+  return getElement(months, 'month');
 }
 
 TimeSince.propTypes = {
