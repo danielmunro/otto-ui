@@ -1,4 +1,6 @@
+import { Snackbar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import React, { memo, useEffect } from 'react';
@@ -16,9 +18,17 @@ import { makeSelectPosts, makeSelectPostsLoaded } from '../App/selectors';
 import style from './style';
 import reducer from './reducer';
 import saga from './saga';
-import { changePostMessage, submitPostMessage } from './actions';
+import {
+  changePostMessage,
+  hidePostMessageSuccess,
+  submitPostMessage,
+} from './actions';
 import messages from './messages';
-import { makeSelectPostMessage } from './selectors';
+import {
+  makeSelectPostMessage,
+  makeSelectPostMessageReadOnly,
+  makeSelectPostMessageSuccess,
+} from './selectors';
 
 const key = 'viewFriendsPostsPage';
 
@@ -29,6 +39,9 @@ function ViewFriendsPostsPage({
   onLoadPosts,
   onPostMessageSubmit,
   posts,
+  showPostSuccessMessage,
+  handleClosePostSuccess,
+  postMessageReadOnly,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -53,6 +66,7 @@ function ViewFriendsPostsPage({
             value={postMessage}
             fullWidth
             onChange={onChangePostMessage}
+            className={postMessageReadOnly ? classes.postMessageReadOnly : ''}
           />
           <Button
             type="submit"
@@ -80,6 +94,13 @@ function ViewFriendsPostsPage({
           <span>Not loaded</span>
         )}
       </Grid>
+      <Snackbar
+        open={showPostSuccessMessage}
+        autoHideDuration={6000}
+        onClose={handleClosePostSuccess}
+      >
+        <SnackbarContent message={messages.postMessageSuccess.defaultMessage} />
+      </Snackbar>
     </Grid>
   );
 }
@@ -91,11 +112,16 @@ ViewFriendsPostsPage.propTypes = {
   postsLoaded: PropTypes.bool,
   onLoadPosts: PropTypes.func,
   posts: PropTypes.array,
+  showPostSuccessMessage: PropTypes.bool,
+  handleClosePostSuccess: PropTypes.func,
+  postMessageReadOnly: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   postsLoaded: makeSelectPostsLoaded(),
   postMessage: makeSelectPostMessage(),
+  showPostSuccessMessage: makeSelectPostMessageSuccess(),
+  postMessageReadOnly: makeSelectPostMessageReadOnly(),
   posts: makeSelectPosts(),
 });
 
@@ -114,6 +140,9 @@ export function mapDispatchToProps(dispatch) {
     onPostMessageSubmit: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(submitPostMessage());
+    },
+    handleClosePostSuccess: () => {
+      dispatch(hidePostMessageSuccess());
     },
   };
 }

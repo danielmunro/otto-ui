@@ -11,4 +11,7 @@ export default makeStyles(() => ({
   hr: {
     borderTop: '1px solid #cacaca',
   },
+  postMessageReadOnly: {
+    backgroundColor: 'gray',
+  },
 }));

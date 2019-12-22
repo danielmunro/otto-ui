@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.viewFriendsPosts.createPost`,
     defaultMessage: 'Share a thought',
   },
+  postMessageSuccess: {
+    id: `${scope}.viewFriendsPosts.postMessageSuccess`,
+    defaultMessage: 'Post was successful!',
+  },
 });

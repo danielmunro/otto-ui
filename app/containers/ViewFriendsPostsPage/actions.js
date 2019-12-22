@@ -1,5 +1,6 @@
 import {
   CHANGE_POST_MESSAGE,
+  HIDE_POST_MESSAGE_SUCCESS,
   SUBMIT_POST_MESSAGE,
   SUBMIT_POST_MESSAGE_ERROR,
   SUBMIT_POST_MESSAGE_SUCCESS,
@@ -27,5 +28,11 @@ export function postMessageSubmittedSuccess() {
 export function postMessageSubmittedError() {
   return {
     type: SUBMIT_POST_MESSAGE_ERROR,
+  };
+}
+
+export function hidePostMessageSuccess() {
+  return {
+    type: HIDE_POST_MESSAGE_SUCCESS,
   };
 }

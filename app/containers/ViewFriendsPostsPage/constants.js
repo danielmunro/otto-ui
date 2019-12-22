@@ -7,3 +7,6 @@ export const SUBMIT_POST_MESSAGE_SUCCESS =
 
 export const SUBMIT_POST_MESSAGE_ERROR =
   'app/ViewFriendsPosts/SUBMIT_POST_MESSAGE_ERROR';
+
+export const HIDE_POST_MESSAGE_SUCCESS =
+  'app/ViewFriendsPosts/HidePostMessageSuccess';

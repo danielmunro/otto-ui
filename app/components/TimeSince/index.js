@@ -18,6 +18,9 @@ function getElement(number, string) {
 function TimeSince({ date }) {
   const elapsed = Date.now() - new Date(date);
   const seconds = Math.floor(elapsed / 1000);
+  if (seconds === 0) {
+    return <span>just now</span>;
+  }
   if (seconds < SECONDS_IN_MINUTE) {
     return getElement(seconds, 'second');
   }

@@ -3,6 +3,7 @@
  */
 
 import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { loadFollowingUserPosts } from '../App/actions';
 import { API_ENDPOINT } from '../App/constants';
 
 import request, { post } from '../../utils/request';
@@ -33,6 +34,7 @@ export function* submitPost() {
       post({ text, user: { uuid: userUuid } }, sessionToken),
     );
     yield put(postMessageSubmittedSuccess(response));
+    yield put(loadFollowingUserPosts());
   } catch (err) {
     yield put(postMessageSubmittedError());
   }

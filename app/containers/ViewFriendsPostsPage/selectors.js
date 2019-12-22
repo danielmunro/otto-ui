@@ -9,4 +9,20 @@ const makeSelectPostMessage = () =>
     viewPostsState => viewPostsState.postMessage,
   );
 
-export { makeSelectPostMessage };
+const makeSelectPostMessageSuccess = () =>
+  createSelector(
+    selectViewPosts,
+    viewPostsState => viewPostsState.showPostSuccessMessage,
+  );
+
+const makeSelectPostMessageReadOnly = () =>
+  createSelector(
+    selectViewPosts,
+    viewPostsState => viewPostsState.postMessageReadOnly,
+  );
+
+export {
+  makeSelectPostMessage,
+  makeSelectPostMessageSuccess,
+  makeSelectPostMessageReadOnly,
+};
