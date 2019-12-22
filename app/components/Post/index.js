@@ -1,6 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from '../Link';
 import P from '../P';
 import TimeSince from '../TimeSince';
 import style from './style';
@@ -26,8 +27,9 @@ function Post({
       </Grid>
       <Grid item xs={11}>
         <P className={classes.header}>{text}</P>
-        <P>
-          {username} wrote <TimeSince date={created_at} />
+        <P className={classes.signature}>
+          <Link to={`/profile/${username}`}>{username}</Link> ·{' '}
+          <TimeSince date={created_at} />
         </P>
       </Grid>
     </Grid>

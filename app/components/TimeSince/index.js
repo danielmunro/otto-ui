@@ -12,7 +12,7 @@ function getElement(number, string) {
   return (
     <span>
       {rounded} {string}
-      {rounded === 1 ? '' : 's'} ago
+      {rounded === 1 ? '' : 's'}
     </span>
   );
 }
