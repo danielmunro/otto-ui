@@ -5,11 +5,6 @@ exports[`<Footer /> should render and match the snapshot 1`] = `
   className="Wrapper-wcfdfo-0 fBnbuA"
 >
   <section>
-    <span>
-      This project is licensed under the MIT license.
-    </span>
-  </section>
-  <section>
     <div
       className="Wrapper-xnjoq9-0 dNmQIR"
     >
@@ -33,16 +28,7 @@ exports[`<Footer /> should render and match the snapshot 1`] = `
   </section>
   <section>
     <span>
-      
-      Made with love by 
-      <a
-        className="A-br8h0y-0 dwVNvo"
-        href="https://twitter.com/danielmunro"
-      >
-        Dan Munro
-      </a>
-      .
-    
+      Made with love by The Time Box Team
     </span>
   </section>
 </footer>

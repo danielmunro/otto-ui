@@ -39,11 +39,11 @@ function ViewFriendsPostsPage({
   });
   const classes = style();
   return (
-    <Grid item>
-      <H2>
-        <FormattedMessage {...messages.viewFriendsPostsHeader} />
-      </H2>
+    <Grid container>
       <Grid item xs={6}>
+        <H2>
+          <FormattedMessage {...messages.viewFriendsPostsHeader} />
+        </H2>
         <form onSubmit={onPostMessageSubmit}>
           <TextField
             id="createPost"
@@ -65,18 +65,21 @@ function ViewFriendsPostsPage({
           </Button>
         </form>
       </Grid>
-      {postsLoaded ? (
-        <div className={classes.content}>
-          {posts.map(post => (
-            <div key={post.uuid}>
-              <Post post={post} />
-              <hr className={classes.hr} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <span>Not loaded</span>
-      )}
+      <Grid item xs={12}>
+        <hr />
+        {postsLoaded ? (
+          <div className={classes.content}>
+            {posts.map(post => (
+              <div key={post.uuid}>
+                <Post post={post} />
+                <hr className={classes.hr} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <span>Not loaded</span>
+        )}
+      </Grid>
     </Grid>
   );
 }
@@ -99,7 +102,15 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadPosts: () => dispatch(loadFollowingUserPosts()),
-    onChangePostMessage: evt => dispatch(changePostMessage(evt.target.value)),
+    onChangePostMessage: evt => {
+      const lastKey = evt.target.value.substring(evt.target.value.length - 1);
+      if (lastKey === '\n') {
+        dispatch(submitPostMessage());
+        evt.preventDefault();
+        return;
+      }
+      dispatch(changePostMessage(evt.target.value));
+    },
     onPostMessageSubmit: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(submitPostMessage());
