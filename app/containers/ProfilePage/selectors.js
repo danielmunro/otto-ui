@@ -19,4 +19,22 @@ const makeSelectUserLoaded = () =>
     profileState => profileState.userLoaded,
   );
 
-export { selectProfile, makeSelectUser, makeSelectUserLoaded };
+const makeSelectProfileImage = () =>
+  createSelector(
+    selectProfile,
+    profileState => profileState.profileImage,
+  );
+
+const makeSelectFilename = () =>
+  createSelector(
+    selectProfile,
+    profileState => profileState.filename,
+  );
+
+export {
+  selectProfile,
+  makeSelectUser,
+  makeSelectUserLoaded,
+  makeSelectProfileImage,
+  makeSelectFilename,
+};

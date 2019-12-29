@@ -1,7 +1,9 @@
 import {
+  CHANGE_PROFILE_PICTURE,
   LOAD_PROFILE_USER,
   LOAD_PROFILE_USER_ERROR,
   LOAD_PROFILE_USER_SUCCESS,
+  UPLOAD_PROFILE_PICTURE,
 } from './constants';
 
 /**
@@ -25,5 +27,20 @@ export function loadProfileUserSuccess(user) {
 export function loadProfileUserError() {
   return {
     type: LOAD_PROFILE_USER_ERROR,
+  };
+}
+
+export function changeProfilePicture(filename, image) {
+  return {
+    type: CHANGE_PROFILE_PICTURE,
+    filename,
+    image,
+  };
+}
+
+export function uploadProfilePicture(image) {
+  return {
+    type: UPLOAD_PROFILE_PICTURE,
+    image,
   };
 }

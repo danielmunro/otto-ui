@@ -9,6 +9,7 @@
 
 import produce from 'immer';
 import {
+  CHANGE_PROFILE_PICTURE,
   LOAD_PROFILE_USER,
   LOAD_PROFILE_USER_ERROR,
   LOAD_PROFILE_USER_SUCCESS,
@@ -23,6 +24,8 @@ export const initialState = {
     profilePic: '',
   },
   userLoaded: false,
+  profileImage: {},
+  filename: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -40,6 +43,11 @@ const whoToFollowReducer = (state = initialState, action) =>
 
       case LOAD_PROFILE_USER_ERROR:
         draft.userLoaded = true;
+        break;
+
+      case CHANGE_PROFILE_PICTURE:
+        draft.profileImage = action.image;
+        draft.filename = action.filename;
         break;
     }
   });

@@ -20,6 +20,7 @@ export const initialState = {
   postMessage: '',
   showPostSuccessMessage: false,
   postMessageReadOnly: false,
+  profileImage: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */

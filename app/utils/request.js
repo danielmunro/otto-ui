@@ -61,3 +61,15 @@ export function post(data, sessionToken = '') {
 export function put(data, sessionToken = '') {
   return jsonBody('PUT', data, sessionToken);
 }
+
+export function postFile(data, sessionToken) {
+  const formData = new FormData();
+  formData.append('image', data);
+  return {
+    method: 'POST',
+    headers: {
+      'x-session-token': sessionToken,
+    },
+    body: formData,
+  };
+}
