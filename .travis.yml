@@ -9,7 +9,7 @@ node_js:
 
 script:
   - node ./internals/scripts/generate-templates-for-linting
-  - npm generate:config
+  - npm run generate:config
   - npm test -- --maxWorkers=4
   - npm run build
 
