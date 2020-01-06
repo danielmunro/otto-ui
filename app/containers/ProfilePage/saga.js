@@ -1,7 +1,6 @@
 import { select } from '@redux-saga/core/effects';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request, { postFile } from '../../utils/request';
-import { API_ENDPOINT } from '../App/constants';
 import {
   makeSelectSessionToken,
   makeSelectSessionUserUuid,
@@ -9,9 +8,10 @@ import {
 import { loadProfileUserError, loadProfileUserSuccess } from './actions';
 import { LOAD_PROFILE_USER, UPLOAD_PROFILE_PICTURE } from './constants';
 import { makeSelectProfileImage } from './selectors';
+import config from '../../config';
 
 export function* attemptLoadUserProfile({ username }) {
-  const requestURL = `${API_ENDPOINT}/user/${username}`;
+  const requestURL = `${config.API_ENDPOINT}/user/${username}`;
 
   try {
     const response = yield call(request, requestURL);
@@ -25,7 +25,7 @@ export function* uploadProfilePicture() {
   const userUuid = yield select(makeSelectSessionUserUuid());
   const sessionToken = yield select(makeSelectSessionToken());
   const image = yield select(makeSelectProfileImage());
-  const requestURL = `${API_ENDPOINT}/user/${userUuid}/image`;
+  const requestURL = `${config.API_ENDPOINT}/user/${userUuid}/image`;
 
   try {
     const response = yield call(

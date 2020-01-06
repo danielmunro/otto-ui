@@ -3,11 +3,7 @@
  */
 
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import {
-  API_ENDPOINT,
-  LOAD_FOLLOWING_POSTS,
-  LOAD_SESSION_USER,
-} from './constants';
+import { LOAD_FOLLOWING_POSTS, LOAD_SESSION_USER } from './constants';
 import {
   loadFollowingUserPostsError,
   loadFollowingUserPostsSuccess,
@@ -16,13 +12,14 @@ import {
 } from './actions';
 import request from '../../utils/request';
 import { makeSelectSessionToken, makeSelectSessionUserUuid } from './selectors';
+import config from '../../config';
 
 /**
  * Load user
  */
 export function* attemptLoadUser() {
   const sessionToken = yield select(makeSelectSessionToken());
-  const requestURL = `${API_ENDPOINT}/session?token=${sessionToken}`;
+  const requestURL = `${config.API_ENDPOINT}/session?token=${sessionToken}`;
 
   try {
     const response = yield call(request, requestURL);
@@ -41,7 +38,7 @@ export function* attemptLoadFollowingPosts() {
     yield attemptLoadUser();
     userUuid = yield select(makeSelectSessionUserUuid());
   }
-  const requestURL = `${API_ENDPOINT}/user/${userUuid}/new-posts`;
+  const requestURL = `${config.API_ENDPOINT}/user/${userUuid}/new-posts`;
 
   try {
     const response = yield call(request, requestURL);

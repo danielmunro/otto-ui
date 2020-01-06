@@ -1,13 +1,14 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import request, { put as putJson } from '../../utils/request';
 import { pwResetError, pwResetLoaded } from '../App/actions';
-import { API_ENDPOINT, SUBMIT_PW_RESET } from '../App/constants';
+import { SUBMIT_PW_RESET } from '../App/constants';
 import { makeSelectEmail, makeSelectNewPassword } from './selectors';
+import config from '../../config';
 
 export function* attemptPwReset() {
   const email = yield select(makeSelectEmail());
   const password = yield select(makeSelectNewPassword());
-  const requestURL = `${API_ENDPOINT}/session`;
+  const requestURL = `${config.API_ENDPOINT}/session`;
 
   try {
     const response = yield call(

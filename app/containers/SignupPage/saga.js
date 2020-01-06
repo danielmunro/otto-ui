@@ -3,9 +3,9 @@
  */
 
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import { API_ENDPOINT, SUBMIT_SIGNUP } from '../App/constants';
+import { SUBMIT_SIGNUP } from '../App/constants';
 import { signupLoaded, signupLoadedError } from '../App/actions';
-
+import config from '../../config';
 import request, { post } from '../../utils/request';
 import {
   makeSelectEmail,
@@ -20,7 +20,7 @@ export function* attemptSignup() {
   const email = yield select(makeSelectEmail());
   const username = yield select(makeSelectUsername());
   const password = yield select(makeSelectPassword());
-  const requestURL = `${API_ENDPOINT}/user`;
+  const requestURL = `${config.API_ENDPOINT}/user`;
 
   try {
     const response = yield call(

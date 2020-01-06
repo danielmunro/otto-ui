@@ -4,7 +4,7 @@
 
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { loadFollowingUserPosts } from '../App/actions';
-import { API_ENDPOINT } from '../App/constants';
+import config from '../../config';
 
 import request, { post } from '../../utils/request';
 import {
@@ -25,7 +25,7 @@ export function* submitPost() {
   const text = yield select(makeSelectPostMessage());
   const userUuid = yield select(makeSelectSessionUserUuid());
   const sessionToken = yield select(makeSelectSessionToken());
-  const requestURL = `${API_ENDPOINT}/post`;
+  const requestURL = `${config.API_ENDPOINT}/post`;
 
   try {
     const response = yield call(
