@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: podinfo
+  name: ui
 spec:
   minReadySeconds: 3
   revisionHistoryLimit: 5
@@ -12,28 +12,19 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: podinfo
+      app: ui
   template:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9797"
       labels:
-        app: podinfo
+        app: ui
     spec:
       containers:
       - name: otto-ui
         image: quay.io/danielmunro/otto-ui:latest
         imagePullPolicy: IfNotPresent
-        command:
-        - ./podinfo
-        - --port=9898
-        - --port-metrics=9797
-        - --grpc-port=9999
-        - --grpc-service-name=podinfo
-        - --level=info
-        - --random-delay=false
-        - --random-error=false
         ports:
           - containerPort: 3000
             name: ui
