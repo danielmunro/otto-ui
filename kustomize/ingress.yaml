@@ -12,6 +12,6 @@ spec:
             path: /
             backend:
               service:
-                name: api-gw
+                name: webhook-receiver
                 port:
-                  number: 8000
+                  number: 80
