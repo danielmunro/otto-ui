@@ -57,11 +57,3 @@ spec:
           requests:
             cpu: 100m
             memory: 64Mi
-      rules:
-        - host: localhost
-          http:
-            paths:
-              - path: /
-                backend:
-                  serviceName: ui
-                  servicePort: 3000
