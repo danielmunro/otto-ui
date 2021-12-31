@@ -24,7 +24,7 @@ spec:
       containers:
       - name: otto-ui
         image: quay.io/danielmunro/otto-ui:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
           - containerPort: 3000
             name: http
