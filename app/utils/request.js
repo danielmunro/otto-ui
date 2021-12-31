@@ -38,10 +38,7 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(
-    `/api/v1/namespaces/default/services/api-gw:8000/proxy/${url}`,
-    options,
-  )
+  return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);
 }
