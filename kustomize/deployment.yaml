@@ -32,24 +32,6 @@ spec:
         env:
           - name: API_ENDPOINT
             value: localhost
-#        livenessProbe:
-#          exec:
-#            command:
-#            - podcli
-#            - check
-#            - http
-#            - localhost:3000/healthz
-#          initialDelaySeconds: 5
-#          timeoutSeconds: 5
-#        readinessProbe:
-#          exec:
-#            command:
-#            - podcli
-#            - check
-#            - http
-#            - localhost:3000/readyz
-#          initialDelaySeconds: 5
-#          timeoutSeconds: 5
         resources:
           limits:
             cpu: 2000m
