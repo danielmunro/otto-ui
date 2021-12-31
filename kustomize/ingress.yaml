@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   rules:
-    - host: otto.dev
+    - host: otto.localhost
       http:
         paths:
           - pathType: Prefix
