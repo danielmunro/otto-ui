@@ -1,8 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: webhook-receiver
-  namespace: flux-system
+  name: web-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
     - host: otto.localhost
@@ -12,6 +13,6 @@ spec:
             path: /
             backend:
               service:
-                name: webhook-receiver
+                name: api-gw
                 port:
-                  number: 80
+                  number: 8000
