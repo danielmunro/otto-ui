@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webhook-receiver
+  namespace: flux-system
+spec:
+  rules:
+    - host: otto.dev
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: api-gw
+                port:
+                  number: 3000
