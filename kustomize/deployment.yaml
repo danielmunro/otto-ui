@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: otto-ui
-        image: quay.io/danielmunro/otto-ui:latest
+        image: ghcr.io/danielmunro/otto-ui:latest
         imagePullPolicy: Always
         ports:
           - containerPort: 3000
