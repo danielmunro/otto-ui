@@ -16,7 +16,7 @@ jobs:
       - name: Build source
         run: npm run build
   publish-image:
-    needs: build
+    needs: build-image
     runs-on: ubuntu-latest
     permissions:
       packages: write
