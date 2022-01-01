@@ -4,13 +4,13 @@
   "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git://github.com/danielmunro/otto-ui.git"
   },
   "engines": {
     "npm": ">=8",
     "node": ">=16"
   },
-  "author": "Max Stoiber",
+  "author": "Dan Munro",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
