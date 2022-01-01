@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        run: ./bin/setup.sh
+      - name: Run tests
+        run: npm test
+      - name: Build source
+        run: npm run build
+      - name: Build image
+        run: docker build -t quay.io/danielmunro/otto-ui:latest .
+      - name: Push image
+        run: ./bin/docker_push.sh
