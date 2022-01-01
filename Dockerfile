@@ -1,4 +1,4 @@
 FROM node
 WORKDIR /src
 COPY . .
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["yarn", "start:prod"]
