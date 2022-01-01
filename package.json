@@ -64,6 +64,9 @@
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
   },
+  "publishConfig": {
+    "danielmunro:registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "@babel/polyfill": "7.4.3",
     "@material-ui/core": "^4.7.0",
