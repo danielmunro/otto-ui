@@ -39,3 +39,5 @@ spec:
           requests:
             cpu: 100m
             memory: 64Mi
+      imagePullSecrets:
+      - name: dockerconfigjson-github-com
