@@ -31,7 +31,7 @@ spec:
             protocol: TCP
         env:
           - name: API_ENDPOINT
-            value: http://localhost/
+            value: http://localhost
         resources:
           limits:
             cpu: 250m
