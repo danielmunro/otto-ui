@@ -1,8 +1,8 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Link, TextField } from '@mui/material';
 import { postJSON } from '@tkrotoff/fetch';
 import { useState } from 'react';
 import Container from '../components/Container';
-import Input from '../components/Input';
+import TextInput from '../components/TextInput';
 import { baseUrl } from '../config';
 
 export default function Signup() {
@@ -10,27 +10,54 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const trySignup = async () => {
+  const trySignup = async (event) => {
+    event.preventDefault();
     console.log("signup", {email, password});
     const result = await postJSON(`${baseUrl}/user`, { email, password });
     console.log(result);
+    return false;
   };
 
   return (
     <Container>
       <h1>Signup</h1>
-      <div>
-        <TextField label="Email/username" variant="standard" onChange={(event) => setEmail(event.target.value)} value={email} />
-      </div>
-      <div>
-        <TextField label="Password" variant="standard" onChange={(event) => setPassword(event.target.value)} value={password} />
-      </div>
-      <div>
-        <TextField label="Password (again)" variant="standard" onChange={(event) => setPasswordConfirm(event.target.value)} value={passwordConfirm} />
-      </div>
-      <div className="row">
-        <Button variant="contained" onClick={trySignup}>Signup</Button>
-      </div>
+      <form onSubmit={trySignup}>
+        <div>
+          <TextInput
+            label="Email/username"
+            variant="standard"
+            onChangeValue={setEmail}
+            value={email}
+          />
+        </div>
+        <div>
+          <TextInput
+            label="Password"
+            variant="standard"
+            onChangeValue={setPassword}
+            value={password}
+            type="password"
+          />
+        </div>
+        <div>
+          <TextInput
+            label="Password (again)"
+            variant="standard"
+            onChangeValue={setPasswordConfirm}
+            value={passwordConfirm}
+            type="password"
+          />
+        </div>
+        <div className="row">
+          <Button
+            variant="contained"
+            onClick={trySignup}
+            type="submit"
+          >
+            Signup
+          </Button> or <Link href="/login">Login</Link>
+        </div>
+      </form>
     </Container>
   )
 }

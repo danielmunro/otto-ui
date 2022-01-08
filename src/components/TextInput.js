@@ -10,7 +10,9 @@ const CssTextField = styled(TextField)({
   },
 });
 
-export default function Input({...props}) {
-  console.log(props)
-  return <CssTextField {...props} />
+export default function TextInput({onChangeValue, ...props}) {
+  return <CssTextField
+    {...props}
+    onChange={(event) => onChangeValue(event.target.value)}
+  />
 }
