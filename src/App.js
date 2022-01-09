@@ -1,6 +1,8 @@
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
+import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
+import { baseUrl } from './config';
 import Home from './containers/Home';
 import './App.css';
 import Login from './containers/Login';
@@ -49,9 +51,36 @@ function App() {
     userEmail,
     setUserEmail,
   };
+
+  const refreshUser = async () => {
+    const response = await get(`${baseUrl}/session?token=${sessionToken}`);
+    const data = await response.json();
+    setLoggedInUser(data.user);
+  };
+
   useEffect(() => {
-    setSessionToken(localStorage.getItem("token"));
-    setLoggedInUser(localStorage.getItem("user"));
+    (async () => {
+      console.log("initialize user session");
+      const token = localStorage.getItem("token");
+      setSessionToken(token);
+      if (!token) {
+        console.log("no session found");
+        setLoggedInUser(null);
+        return;
+      }
+      try {
+        await refreshUser();
+      } catch (e) {
+        try {
+          const refreshResponse = await patchJSON(`${baseUrl}/session`, {token: sessionToken});
+          const refreshData = await refreshResponse.json();
+          setSessionToken(refreshData.token);
+          localStorage.setItem("token", refreshData.token);
+          await refreshUser();
+        } catch (e) {
+        }
+      }
+    })();
   }, []);
 
   return (

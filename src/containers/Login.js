@@ -19,16 +19,16 @@ export default function Login() {
     const response = await postJSON(`${baseUrl}/session`, { email, password });
     if (response.status === 201) {
       const data = await response.json();
+      console.log("logged in", data.Token);
       setLoggedInUser(data.User);
       if (data.AuthResponse === 1) {
         setUserEmail(email);
         navigate('/password-reset');
         return false;
       }
-      console.log("login success", data, data.Token, data.User);
       setSessionToken(data.Token);
       localStorage.setItem("token", data.Token);
-      localStorage.setItem("user", data.User);
+      navigate("/");
     }
 
     return false;
