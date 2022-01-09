@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../actions/session';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
-import { baseUrl } from '../config';
-import Context from '../Context';
+import { baseUrl } from '../utils/config';
+import Context from '../utils/Context';
 
 export default function Login() {
   const [email, setEmail] = useState('');

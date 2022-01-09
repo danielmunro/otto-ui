@@ -3,8 +3,8 @@ import { putJSON } from '@tkrotoff/fetch';
 import { useContext, useState } from 'react';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
-import { baseUrl } from '../config';
-import Context from '../Context';
+import { baseUrl } from '../utils/config';
+import Context from '../utils/Context';
 
 export default function PasswordReset() {
   const [password1, setPassword1] = useState('');

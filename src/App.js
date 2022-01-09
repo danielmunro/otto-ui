@@ -2,14 +2,14 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
-import { baseUrl } from './config';
+import { baseUrl } from './utils/config';
 import Home from './containers/Home';
 import './App.css';
 import Login from './containers/Login';
 import PasswordReset from './containers/PasswordReset';
 import Profile from './containers/Profile';
 import Signup from './containers/Signup';
-import Context from './Context';
+import Context from './utils/Context';
 import {
   BrowserRouter as Router,
   Routes,

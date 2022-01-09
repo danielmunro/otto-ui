@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { createPost } from '../actions/post';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
-import Context from '../Context';
+import Context from '../utils/Context';
 import HomeSignupPromo from './HomeSignupPromo';
 
 export default function Home() {

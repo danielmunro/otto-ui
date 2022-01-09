@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
-import Context from '../Context';
+import Context from '../utils/Context';
 
 export default function Profile() {
   const { loggedInUser } = useContext(Context);
