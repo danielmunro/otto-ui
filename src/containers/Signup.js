@@ -1,6 +1,7 @@
 import { Button, Link } from '@mui/material';
 import { postJSON } from '@tkrotoff/fetch';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
 import { baseUrl } from '../config';
@@ -9,13 +10,14 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const navigate = useNavigate();
 
   const trySignup = async (event) => {
     event.preventDefault();
-    console.log("signup", {email, password});
-    const result = await postJSON(`${baseUrl}/user`, { email, password });
-    console.log(result);
-    return false;
+    const response = await postJSON(`${baseUrl}/user`, { email, password });
+    if (response.status === 201) {
+      navigate("/login");
+    }
   };
 
   return (
