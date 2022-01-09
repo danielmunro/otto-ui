@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import { postJSON } from '@tkrotoff/fetch';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../actions/session';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
 import { baseUrl } from '../config';
@@ -16,7 +17,7 @@ export default function Login() {
 
   const tryLogin = async (event) => {
     event.preventDefault();
-    const response = await postJSON(`${baseUrl}/session`, { email, password });
+    const response = await login(email, password);
     if (response.status === 201) {
       const data = await response.json();
       setLoggedInUser(data.User);

@@ -1,9 +1,8 @@
 import { Button } from '@mui/material';
-import { postJSON } from '@tkrotoff/fetch';
 import React, { useContext, useState } from 'react';
+import { createPost } from '../actions/post';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
-import { baseUrl } from '../config';
 import Context from '../Context';
 import HomeSignupPromo from './HomeSignupPromo';
 
@@ -17,15 +16,7 @@ export default function Home() {
 
   const trySubmitNewPost = async (event) => {
     event.preventDefault();
-    console.log("u", loggedInUser);
-    const response = await postJSON(`${baseUrl}/post`, {
-      user: {uuid: loggedInUser.uuid},
-      text:  newPost,
-    }, {
-      headers: {
-        'x-session-token': sessionToken,
-      }
-    });
+    const response = await createPost(sessionToken, loggedInUser.uuid, newPost);
     if (response.status === 201) {
       setNewPost('');
     }
