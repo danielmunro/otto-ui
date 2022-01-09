@@ -42,6 +42,7 @@ function App() {
   const [sessionToken, setSessionToken] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [isAppLoaded, setIsAppLoaded] = useState(false);
 
   const appContext = {
     sessionToken,
@@ -50,12 +51,14 @@ function App() {
     setLoggedInUser,
     userEmail,
     setUserEmail,
+    isAppLoaded,
   };
 
-  const refreshUser = async () => {
-    const response = await get(`${baseUrl}/session?token=${sessionToken}`);
+  const refreshUser = async (token) => {
+    const response = await get(`${baseUrl}/session?token=${token}`);
     const data = await response.json();
     setLoggedInUser(data.user);
+    setIsAppLoaded(true);
   };
 
   useEffect(() => {
@@ -66,17 +69,18 @@ function App() {
       if (!token) {
         console.log("no session found");
         setLoggedInUser(null);
+        setIsAppLoaded(true);
         return;
       }
       try {
-        await refreshUser();
+        await refreshUser(token);
       } catch (e) {
         try {
           const refreshResponse = await patchJSON(`${baseUrl}/session`, {token: sessionToken});
           const refreshData = await refreshResponse.json();
           setSessionToken(refreshData.token);
           localStorage.setItem("token", refreshData.token);
-          await refreshUser();
+          await refreshUser(refreshData.token);
         } catch (e) {
         }
       }

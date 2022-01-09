@@ -7,10 +7,10 @@ import Context from '../utils/Context';
 import HomeSignupPromo from './HomeSignupPromo';
 
 export default function Home() {
-  const { sessionToken, loggedInUser } = useContext(Context);
+  const { sessionToken, loggedInUser, isAppLoaded } = useContext(Context);
   const [newPost, setNewPost] = useState('');
 
-  if (!sessionToken) {
+  if (!isAppLoaded) {
     return <HomeSignupPromo />;
   }
 
