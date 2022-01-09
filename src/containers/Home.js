@@ -10,7 +10,7 @@ export default function Home() {
   const { sessionToken, loggedInUser, isAppLoaded } = useContext(Context);
   const [newPost, setNewPost] = useState('');
 
-  if (!isAppLoaded) {
+  if (!isAppLoaded || !loggedInUser) {
     return <HomeSignupPromo />;
   }
 
@@ -31,6 +31,7 @@ export default function Home() {
             variant="standard"
             onChangeValue={setNewPost}
             value={newPost}
+            multiline={true}
           />
         </div>
         <div>

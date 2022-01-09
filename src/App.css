@@ -23,11 +23,18 @@ body {
 }
 
 .App-header {
-  min-height: 100vh;
+  height: 15vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.App-header h1 {
+  padding: 20px;
+  margin: 0px;
+}
+
+div.navigation {
+  align-self: center;
 }
 
 .App-link {
