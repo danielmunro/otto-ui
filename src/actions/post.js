@@ -1,4 +1,4 @@
-import { postJSON } from '@tkrotoff/fetch';
+import { postJSON, get } from '@tkrotoff/fetch';
 import { baseUrl } from '../utils/config';
 
 export function createPost(sessionToken, userUuid, newPostText) {
@@ -10,4 +10,12 @@ export function createPost(sessionToken, userUuid, newPostText) {
       'x-session-token': sessionToken,
     }
   })
+}
+
+export function getPostsForUser(sessionToken, userUuid) {
+  return get(`${baseUrl}/user/${userUuid}/posts`);
+}
+
+export function getFollowPostsForUser(sessionToken, userUuid) {
+  return get(`${baseUrl}/post/follows/${userUuid}`);
 }

@@ -2,6 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
+import { getFollowPostsForUser } from './actions/post';
 import { baseUrl } from './utils/config';
 import Home from './containers/Home';
 import './App.css';
@@ -43,6 +44,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   const appContext = {
     sessionToken,
@@ -52,14 +54,34 @@ function App() {
     userEmail,
     setUserEmail,
     isAppLoaded,
+    posts,
   };
 
-  const refreshUser = async (token) => {
+  const getPosts = async (token, user) => {
+    const response = await getFollowPostsForUser(token, user.uuid);
+    const data = await response.json();
+    setPosts(data);
+  };
+
+  const getUser = async (token) => {
     const response = await get(`${baseUrl}/session?token=${token}`);
     const data = await response.json();
     setLoggedInUser(data.user);
+    await getPosts(token, data.user);
     setIsAppLoaded(true);
   };
+
+  const refreshSession = async (token) => {
+    const response = await patchJSON(
+      `${baseUrl}/session`,
+      {
+        token,
+      });
+    const data = await response.json();
+    setSessionToken(data.token);
+    localStorage.setItem("token", data.token);
+    return data.token
+  }
 
   useEffect(() => {
     (async () => {
@@ -73,14 +95,11 @@ function App() {
         return;
       }
       try {
-        await refreshUser(token);
+        await getUser(token);
       } catch (e) {
         try {
-          const refreshResponse = await patchJSON(`${baseUrl}/session`, {token: sessionToken});
-          const refreshData = await refreshResponse.json();
-          setSessionToken(refreshData.token);
-          localStorage.setItem("token", refreshData.token);
-          await refreshUser(refreshData.token);
+          const refreshToken = await refreshSession(token);
+          await getUser(refreshToken);
         } catch (e) {
         }
       }
