@@ -2,7 +2,9 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
-import { getFollowPostsForUser } from './actions/post';
+import Post from './containers/Post';
+import UpdateProfile from './containers/UpdateProfile';
+import User from './containers/User';
 import { baseUrl } from './utils/config';
 import Home from './containers/Home';
 import './App.css';
@@ -105,9 +107,12 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
+            <Route path="/user/:uuid" element={<User />} />
+            <Route path="/post/:uuid" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/" element={<Home />} />
           </Routes>

@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { createPost, getPosts as requestGetPosts } from '../actions/post';
 import Container from '../components/Container';
+import Post from '../components/Post';
 import TextInput from '../components/TextInput';
 import Context from '../utils/Context';
 import HomeSignupPromo from './HomeSignupPromo';
@@ -34,34 +35,33 @@ export default function Home() {
     const response = await createPost(sessionToken, loggedInUser.uuid, newPost);
     if (response.status === 201) {
       setNewPost('');
+      await getPosts(sessionToken);
     }
   };
 
   return (
     <Container>
       <form onSubmit={trySubmitNewPost}>
-        <div>
-          <TextInput
-            label="Share something"
-            variant="standard"
-            onChangeValue={setNewPost}
-            value={newPost}
-            multiline={true}
-          />
-        </div>
-        <div>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
-        </div>
+        <TextInput
+          label="Share something"
+          variant="standard"
+          onChangeValue={setNewPost}
+          value={newPost}
+          multiline={true}
+          style={{width: 500}}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={{margin: 10}}
+        >
+          Submit
+        </Button>
       </form>
-      {posts.map((post) => <div>
-        Yolo
-      </div>)}
+      {posts.map((post) => (
+        <Post user={loggedInUser} post={post} />
+      ))}
     </Container>
   );
 }
