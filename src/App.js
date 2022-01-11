@@ -20,10 +20,10 @@ import {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0052cc',
+      main: '#e71d36',
     },
     secondary: {
-      main: '#edf2ff',
+      main: '#95d5b2',
     },
     action: {
       active: '#0052cc',
@@ -55,19 +55,13 @@ function App() {
     setUserEmail,
     isAppLoaded,
     posts,
-  };
-
-  const getPosts = async (token, user) => {
-    const response = await getFollowPostsForUser(token, user.uuid);
-    const data = await response.json();
-    setPosts(data);
+    setPosts,
   };
 
   const getUser = async (token) => {
     const response = await get(`${baseUrl}/session?token=${token}`);
     const data = await response.json();
     setLoggedInUser(data.user);
-    await getPosts(token, data.user);
     setIsAppLoaded(true);
   };
 

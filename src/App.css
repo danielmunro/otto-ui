@@ -1,13 +1,11 @@
 body {
-  background-color: #282c34;
-  color: white;
+  background-color: #FDFFFC;
+  color: #011627;
   font-size: calc(10px + 2vmin);
 }
 
 .App {
   text-align: center;
-  width: 80%;
-  left: 10%;
   position: relative;
 }
 
@@ -23,18 +21,21 @@ body {
 }
 
 .App-header {
-  height: 15vh;
+  height: 80px;
   display: flex;
   justify-content: space-between;
+  background-color: #011627;
+  color: #ffffff;
 }
 
 .App-header h1 {
   padding: 20px;
-  margin: 0px;
+  margin: 0;
 }
 
 div.navigation {
-  align-self: center;
+  align-self: end;
+  padding: 20px;
 }
 
 .App-link {

@@ -19,3 +19,11 @@ export function getPostsForUser(sessionToken, userUuid) {
 export function getFollowPostsForUser(sessionToken, userUuid) {
   return get(`${baseUrl}/post/follows/${userUuid}`);
 }
+
+export function getPosts(sessionToken) {
+  return get(`${baseUrl}/post`, {
+    headers: {
+      'x-session-token': sessionToken,
+    },
+  });
+}

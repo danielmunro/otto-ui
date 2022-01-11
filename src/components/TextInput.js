@@ -3,10 +3,10 @@ import { styled } from '@mui/material/styles';
 
 const CssTextField = styled(TextField)({
   '& label': {
-    color: 'white',
+    color: '#011627',
   },
   '& .MuiInput-underline:before': {
-    borderBottomColor: 'white',
+    borderBottomColor: '#011627',
   },
 });
 
