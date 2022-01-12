@@ -8,11 +8,17 @@ import { default as PostComponent } from '../components/Post';
 import Context from '../utils/Context';
 
 export default function Post() {
-  const { loggedInUser } = useContext(Context);
+  const { loggedInUser, posts } = useContext(Context);
   const [post, setPost] = useState(null);
   const params = useParams();
 
   useEffect(() => {
+    for (const p of posts) {
+      if (p.uuid === params.uuid) {
+        setPost(p);
+        return;
+      }
+    }
     (async function() {
       const response = await get(`${baseUrl}/post/${params.uuid}`);
       const data = await response.json();

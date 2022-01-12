@@ -1,6 +1,5 @@
-import Link from '@mui/material/Link';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import Context from '../utils/Context';
@@ -20,10 +19,10 @@ export default function Profile() {
   return (
     <Container>
       <p>
-        <Link href="#" onClick={tryLogout}>Logout</Link>
+        <Link to="#" onClick={tryLogout}>Logout</Link>
       </p>
       <p>
-        <Link href="/update-profile">Update profile</Link>
+        <Link to="/update-profile">Update profile</Link>
       </p>
       { loggedInUser ? (
         <div>

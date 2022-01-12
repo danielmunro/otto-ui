@@ -1,12 +1,10 @@
 import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
-import { postJSON } from '@tkrotoff/fetch';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../actions/session';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
-import { baseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Login() {

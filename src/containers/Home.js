@@ -54,13 +54,13 @@ export default function Home() {
           variant="contained"
           color="primary"
           type="submit"
-          style={{margin: 10}}
+          style={{marginLeft: 10, marginTop: 10}}
         >
           Submit
         </Button>
       </form>
       {posts.map((post) => (
-        <Post user={loggedInUser} post={post} />
+        <Post user={loggedInUser} post={post} key={post.uuid} />
       ))}
     </Container>
   );
