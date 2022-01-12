@@ -1,6 +1,7 @@
 import { AccountBox } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+import { appName } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Header() {
@@ -8,7 +9,7 @@ export default function Header() {
 
   return (
     <div className="App-header">
-      <h1>Hello World</h1>
+      <h1>{appName}</h1>
       <div className="navigation">
         { loggedInUser ? (
           <Link to="/profile">

@@ -28,18 +28,13 @@ body {
 }
 
 .App-header h1 {
-  padding: 20px;
+  padding: 10px;
   margin: 0;
 }
 
 div.navigation {
   align-self: end;
   padding: 20px;
-}
-
-div.navigation a span {
-  position: relative;
-  top: -4px;
 }
 
 .App-link {
@@ -64,5 +59,11 @@ div.row {
 }
 
 a {
+  font-size: 18pt;
   text-decoration: none !important;
+}
+
+.MuiSvgIcon-root {
+  position: relative;
+  top: 3px;
 }

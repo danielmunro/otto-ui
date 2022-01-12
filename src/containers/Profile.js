@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import Context from '../utils/Context';
+import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 export default function Profile() {
   const { loggedInUser, setLoggedInUser, setSessionToken } = useContext(Context);
@@ -19,10 +22,19 @@ export default function Profile() {
   return (
     <Container>
       <p>
-        <Link to="#" onClick={tryLogout}>Logout</Link>
+        <Link to="/">
+          <HomeIcon /> Home
+        </Link>
       </p>
       <p>
-        <Link to="/update-profile">Update profile</Link>
+        <Link to="#" onClick={tryLogout}>
+          <LogoutIcon />  Logout
+        </Link>
+      </p>
+      <p>
+        <Link to="/update-profile">
+          <ManageAccountsIcon /> Update profile
+        </Link>
       </p>
       { loggedInUser ? (
         <div>

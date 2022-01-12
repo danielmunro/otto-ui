@@ -1,6 +1,7 @@
+import HomeIcon from '@mui/icons-material/Home';
 import { get } from '@tkrotoff/fetch';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Container from '../components/Container';
 import logo from '../logo.svg';
 import { baseUrl } from '../utils/config';
@@ -32,6 +33,9 @@ export default function Post() {
 
   return (
     <Container>
+      <Link to="/">
+        <HomeIcon /> Home
+      </Link>
       <PostComponent post={post} user={loggedInUser} />
     </Container>
   )
