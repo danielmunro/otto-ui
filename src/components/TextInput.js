@@ -8,6 +8,10 @@ const CssTextField = styled(TextField)({
   '& .MuiInput-underline:before': {
     borderBottomColor: '#011627',
   },
+  '& .MuiOutlinedInput-root': {
+    marginTop: 8,
+    marginBottom: 8,
+  }
 });
 
 export default function TextInput({onChangeValue, ...props}) {

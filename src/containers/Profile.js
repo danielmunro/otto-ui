@@ -19,11 +19,17 @@ export default function Profile() {
 
   return (
     <Container>
-      <Link href="#" onClick={tryLogout}>Logout</Link>
-      <h2>Profile</h2>
-      <Link href="/update-profile">update</Link>
+      <p>
+        <Link href="#" onClick={tryLogout}>Logout</Link>
+      </p>
+      <p>
+        <Link href="/update-profile">Update profile</Link>
+      </p>
       { loggedInUser ? (
-        <p>Name: {loggedInUser.name}</p>
+        <div>
+          <h2>{loggedInUser.name}</h2>
+          <p>{loggedInUser.bio_message}</p>
+        </div>
       ) : (
         <CircularIndeterminate />
       )}

@@ -17,6 +17,7 @@ export default function Header() {
         { loggedInUser ? (
           <Link href="/profile">
             <AccountBox />
+            <span>My Profile</span>
           </Link>
         ) : (
           <Link href="/login">Login</Link>

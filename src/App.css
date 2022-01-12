@@ -37,6 +37,11 @@ div.navigation {
   padding: 20px;
 }
 
+div.navigation a span {
+  position: relative;
+  top: -4px;
+}
+
 .App-link {
   color: #61dafb;
 }
