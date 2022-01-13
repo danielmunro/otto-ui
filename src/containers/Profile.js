@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
+import HomeLink from '../components/HomeLink';
 import Context from '../utils/Context';
-import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
@@ -22,9 +22,7 @@ export default function Profile() {
   return (
     <Container>
       <p>
-        <Link to="/">
-          <HomeIcon /> Home
-        </Link>
+        <HomeLink />
       </p>
       <p>
         <Link to="#" onClick={tryLogout}>

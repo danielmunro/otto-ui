@@ -1,7 +1,7 @@
 body {
   background-color: #FDFFFC;
   color: #011627;
-  font-size: calc(10px + 2vmin);
+  font-size: 18pt;
 }
 
 .App {
@@ -9,7 +9,6 @@ body {
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
@@ -20,7 +19,7 @@ body {
 }
 
 .App-header {
-  height: 80px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   background-color: #011627;
@@ -66,4 +65,8 @@ a {
 .MuiSvgIcon-root {
   position: relative;
   top: 3px;
+}
+
+h2 {
+  margin: 10px 0 20px;
 }
