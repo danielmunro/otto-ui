@@ -1,5 +1,9 @@
 import { Button } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 import { createPost, getPosts as requestGetPosts } from '../actions/post';
 import Container from '../components/Container';
 import Post from '../components/Post';
@@ -10,6 +14,7 @@ import HomeSignupPromo from './HomeSignupPromo';
 export default function Home() {
   const { sessionToken, loggedInUser, isAppLoaded, posts, setPosts } = useContext(Context);
   const [newPost, setNewPost] = useState('');
+  const [inputFocused, setInputFocused] = useState(false);
 
   const getPosts = async (token) => {
     console.log("requesting posts")
@@ -47,8 +52,11 @@ export default function Home() {
           variant="standard"
           onChangeValue={setNewPost}
           value={newPost}
-          multiline={true}
+          multiline
+          minRows={inputFocused ? 3 : 1}
           style={{width: 500}}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
         />
         <Button
           variant="contained"
