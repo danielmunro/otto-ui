@@ -63,6 +63,12 @@ export default function Menu() {
           </ListItemIcon>
           <ListItemText>Profile</ListItemText>
         </MenuItem>
+        <MenuItem onClick={() => navigate("/update-profile")}>
+          <ListItemIcon>
+            <ManageAccountsIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Update Profile</ListItemText>
+        </MenuItem>
         <Divider />
         <MenuItem onClick={tryLogout}>
           <ListItemIcon>
