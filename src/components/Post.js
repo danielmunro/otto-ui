@@ -3,15 +3,21 @@ import {
   Card,
   CardActions,
   CardContent,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Typography
 } from '@mui/material';
 import nl2br from 'react-nl2br';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { deletePost } from '../actions/post';
 import Context from '../utils/Context';
 
 export default function Post({post: {uuid, text, created_at, user: author}, user, onDelete}) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { sessionToken } = useContext(Context);
   const navigate = useNavigate();
   const created = new Date(created_at);
@@ -19,6 +25,11 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
   const tryDelete = async () => {
     await deletePost(sessionToken, uuid);
     onDelete();
+    handleClose();
+  };
+
+  const handleClose = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -41,11 +52,32 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
           Link
         </Button>
         { author.uuid === user.uuid && (
-          <Button onClick={tryDelete}>
+          <Button onClick={() => setIsDialogOpen(true)}>
             Delete
           </Button>
         )}
       </CardActions>
+      <Dialog
+        open={isDialogOpen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Delete this post?
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure? This cannot be undone!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={tryDelete} autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 }
