@@ -1,6 +1,6 @@
 import { get } from '@tkrotoff/fetch';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Container from '../components/Container';
 import logo from '../logo.svg';
 import { baseUrl } from '../utils/config';
@@ -11,6 +11,7 @@ export default function Post() {
   const { loggedInUser, posts } = useContext(Context);
   const [post, setPost] = useState(null);
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     for (const p of posts) {
@@ -32,7 +33,7 @@ export default function Post() {
 
   return (
     <Container>
-      <PostComponent post={post} user={loggedInUser} />
+      <PostComponent post={post} user={loggedInUser} onDelete={() => navigate("/")} />
     </Container>
   )
 }

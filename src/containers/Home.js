@@ -44,6 +44,10 @@ export default function Home() {
     }
   };
 
+  const removePost = (post) => {
+    setPosts(posts.filter((p) => p !== post));
+  };
+
   return (
     <Container>
       <form onSubmit={trySubmitNewPost}>
@@ -68,7 +72,7 @@ export default function Home() {
         </Button>
       </form>
       {posts.map((post) => (
-        <Post user={loggedInUser} post={post} key={post.uuid} />
+        <Post user={loggedInUser} post={post} key={post.uuid} onDelete={() => removePost(post)} />
       ))}
     </Container>
   );

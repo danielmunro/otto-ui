@@ -27,8 +27,9 @@ body {
 }
 
 .App-header h1 {
-  padding: 10px;
+  padding: 0 20px;
   margin: 0;
+  align-self: center;
 }
 
 div.navigation {
