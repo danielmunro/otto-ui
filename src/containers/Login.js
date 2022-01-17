@@ -40,6 +40,7 @@ export default function Login() {
             variant="standard"
             onChangeValue={setEmail}
             value={email}
+            style={{width: 400}}
           />
         </div>
         <div>
@@ -49,6 +50,7 @@ export default function Login() {
             onChangeValue={setPassword}
             value={password}
             type="password"
+            style={{width: 400}}
           />
         </div>
         <div className="row">

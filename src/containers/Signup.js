@@ -29,6 +29,7 @@ export default function Signup() {
             variant="standard"
             onChangeValue={setEmail}
             value={email}
+            style={{width: 400}}
           />
         </div>
         <div>
@@ -38,6 +39,7 @@ export default function Signup() {
             onChangeValue={setPassword}
             value={password}
             type="password"
+            style={{width: 400}}
           />
         </div>
         <div>
@@ -47,6 +49,7 @@ export default function Signup() {
             onChangeValue={setPasswordConfirm}
             value={passwordConfirm}
             type="password"
+            style={{width: 400}}
           />
         </div>
         <div className="row">
