@@ -8,6 +8,6 @@ spec:
     app: ui
   ports:
     - name: http
-      port: 3000
+      port: 80
       protocol: TCP
-      targetPort: http
+      targetPort: 3000
