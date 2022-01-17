@@ -51,8 +51,8 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
     <Card variant="outlined" sx={{minWidth: 300, maxWidth: 680, marginBottom: "10px", marginTop: "10px" }}>
       <CardContent>
         <Typography gutterBottom variant="h5">
-          <Link to={`/user/${user.uuid}`}>
-            {user.name ? user.name : "(no name)"}
+          <Link to={`/user/${author.uuid}`}>
+            {author.name ? author.name : "(no name)"}
           </Link>
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
