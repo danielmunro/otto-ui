@@ -10,12 +10,11 @@ import {
   DialogTitle,
   Typography
 } from '@mui/material';
-import { del, postJSON } from '@tkrotoff/fetch';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { createFollow, deleteFollow } from '../actions/follow';
 import { deletePost } from '../actions/post';
-import { baseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Post({post: {uuid, text, created_at, user: author}, user, onDelete}) {
@@ -38,25 +37,13 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
   const follow = follows.find((f) => f.following.uuid === author.uuid);
 
   const followAuthor = async () => {
-    const response = await postJSON(`${baseUrl}/user/${user.uuid}/follows`, {
-      following: {
-        uuid: author.uuid,
-      },
-    }, {
-      headers: {
-        'x-session-token': sessionToken,
-      },
-    });
+    const response = await createFollow(sessionToken, user.uuid, author.uuid);
     const data = await response.json();
     setFollows([...follows, data]);
   };
 
   const unfollowAuthor = async (followUuid) => {
-    await del(`${baseUrl}/follow/${followUuid}`, {
-      headers: {
-        'x-session-token': sessionToken,
-      },
-    });
+    await deleteFollow(sessionToken, followUuid);
     setFollows(follows.filter((f) => f.uuid !== followUuid));
   };
 
