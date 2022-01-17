@@ -10,15 +10,17 @@ import {
   DialogTitle,
   Typography
 } from '@mui/material';
+import { del, postJSON } from '@tkrotoff/fetch';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { deletePost } from '../actions/post';
+import { baseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Post({post: {uuid, text, created_at, user: author}, user, onDelete}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { sessionToken } = useContext(Context);
+  const { sessionToken, follows, setFollows } = useContext(Context);
   const navigate = useNavigate();
   const created = new Date(created_at);
 
@@ -30,6 +32,28 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
 
   const handleClose = () => {
     setIsDialogOpen(false);
+  };
+
+  const follow = follows.find((f) => f.following.uuid === author.uuid);
+
+  const followAuthor = async () => {
+    await postJSON(`${baseUrl}/user/${user.uuid}/follows`, {
+      following: {
+        uuid: author.uuid,
+      },
+    }, {
+      headers: {
+        'x-session-token': sessionToken,
+      },
+    });
+  };
+
+  const unfollowAuthor = async (followUuid) => {
+    await del(`${baseUrl}/follow/${followUuid}`, {
+      headers: {
+        'x-session-token': sessionToken,
+      },
+    });
   };
 
   return (
@@ -56,6 +80,17 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
             Delete
           </Button>
         )}
+        { author.uuid !== user.uuid && (
+          follow ? (
+            <Button onClick={() => unfollowAuthor(follow.uuid) }>
+              Unfollow
+            </Button>
+          ) : (
+            <Button onClick={followAuthor}>
+              Follow
+            </Button>
+          )
+        ) }
       </CardActions>
       <Dialog
         open={isDialogOpen}

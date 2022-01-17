@@ -47,6 +47,7 @@ function App() {
   const [userEmail, setUserEmail] = useState(null);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [follows, setFollows] = useState([]);
 
   const appContext = {
     sessionToken,
@@ -58,6 +59,8 @@ function App() {
     isAppLoaded,
     posts,
     setPosts,
+    follows,
+    setFollows,
   };
 
   const getUser = async (token) => {
@@ -101,6 +104,16 @@ function App() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (loggedInUser) {
+      (async function () {
+        const response = await get(`${baseUrl}/user/${loggedInUser.uuid}/follows`);
+        const data = await response.json();
+        setFollows(data);
+      })();
+    }
+  }, [loggedInUser]);
 
   return (
     <Context.Provider value={appContext}>
