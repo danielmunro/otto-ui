@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Post from './containers/Post';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
-import { baseUrl } from './utils/config';
+import { baseUrl, primaryColor, secondaryColor } from './utils/config';
 import Home from './containers/Home';
 import './App.css';
 import Login from './containers/Login';
@@ -22,10 +22,10 @@ import {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#e71d36',
+      main: primaryColor,
     },
     secondary: {
-      main: '#95d5b2',
+      main: secondaryColor,
     },
     action: {
       active: '#0052cc',
