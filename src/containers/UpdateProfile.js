@@ -13,7 +13,7 @@ export default function UpdateProfile() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [bio, setBio] = useState('');
-  const { loggedInUser } = useContext(Context);
+  const { loggedInUser, setLoggedInUser } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +37,12 @@ export default function UpdateProfile() {
       bio_message: bio,
       uuid: loggedInUser.uuid,
     });
+    const update = {...loggedInUser};
+    update.name = name;
+    update.birthday = birthday;
+    update.bio_message = bio;
+    setLoggedInUser(update);
+    navigate("/profile");
   };
 
   if (!isLoaded) {
