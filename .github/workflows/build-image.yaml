@@ -14,7 +14,6 @@ jobs:
         with:
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
-      - run: ./bin/setup.sh
       - run: |
           echo $CR_PAT | docker login ghcr.io -u danielmunro --password-stdin
         env:
