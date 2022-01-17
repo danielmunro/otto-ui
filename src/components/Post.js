@@ -34,10 +34,11 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
     setIsDialogOpen(false);
   };
 
+  // todo -- remove loop here
   const follow = follows.find((f) => f.following.uuid === author.uuid);
 
   const followAuthor = async () => {
-    await postJSON(`${baseUrl}/user/${user.uuid}/follows`, {
+    const response = await postJSON(`${baseUrl}/user/${user.uuid}/follows`, {
       following: {
         uuid: author.uuid,
       },
@@ -46,6 +47,8 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
         'x-session-token': sessionToken,
       },
     });
+    const data = await response.json();
+    setFollows([...follows, data]);
   };
 
   const unfollowAuthor = async (followUuid) => {
@@ -54,6 +57,7 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
         'x-session-token': sessionToken,
       },
     });
+    setFollows(follows.filter((f) => f.uuid !== followUuid));
   };
 
   return (
