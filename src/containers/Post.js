@@ -8,7 +8,7 @@ import { default as PostComponent } from '../components/Post';
 import Context from '../utils/Context';
 
 export default function Post() {
-  const { loggedInUser, posts } = useContext(Context);
+  const { posts } = useContext(Context);
   const [post, setPost] = useState(null);
   const params = useParams();
   const navigate = useNavigate();
@@ -27,13 +27,13 @@ export default function Post() {
     })()
   }, []);
 
-  if (!post || !loggedInUser) {
+  if (!post) {
     return <img src={logo} className="App-logo" alt="logo" />;
   }
 
   return (
     <Container>
-      <PostComponent post={post} user={loggedInUser} onDelete={() => navigate("/")} />
+      <PostComponent post={post} onDelete={() => navigate("/")} />
     </Container>
   )
 }

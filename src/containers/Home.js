@@ -25,15 +25,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log("useEffect", isAppLoaded, loggedInUser)
-    if (isAppLoaded && loggedInUser) {
+    if (isAppLoaded) {
       getPosts(sessionToken);
     }
-  }, [isAppLoaded, loggedInUser]);
-
-  if (!isAppLoaded || !loggedInUser) {
-    return <HomeSignupPromo />;
-  }
+  }, [isAppLoaded]);
 
   const trySubmitNewPost = async (event) => {
     event.preventDefault();
@@ -50,29 +45,31 @@ export default function Home() {
 
   return (
     <Container>
-      <form onSubmit={trySubmitNewPost}>
-        <TextInput
-          label="Share something"
-          variant="standard"
-          onChangeValue={setNewPost}
-          value={newPost}
-          multiline
-          minRows={inputFocused ? 3 : 1}
-          style={{width: 500}}
-          onFocus={() => setInputFocused(true)}
-          onBlur={() => setInputFocused(false)}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          style={{marginLeft: 10, marginTop: 10}}
-        >
-          Submit
-        </Button>
-      </form>
+      { loggedInUser && (
+        <form onSubmit={trySubmitNewPost}>
+          <TextInput
+            label="Share something"
+            variant="standard"
+            onChangeValue={setNewPost}
+            value={newPost}
+            multiline
+            minRows={inputFocused ? 3 : 1}
+            style={{width: 500}}
+            onFocus={() => setInputFocused(true)}
+            onBlur={() => setInputFocused(false)}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{marginLeft: 10, marginTop: 10}}
+          >
+            Submit
+          </Button>
+        </form>
+      )}
       {posts.map((post) => (
-        <Post user={loggedInUser} post={post} key={post.uuid} onDelete={() => removePost(post)} />
+        <Post post={post} key={post.uuid} onDelete={() => removePost(post)} />
       ))}
     </Container>
   );

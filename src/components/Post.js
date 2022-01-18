@@ -17,9 +17,9 @@ import { createFollow, deleteFollow } from '../actions/follow';
 import { deletePost } from '../actions/post';
 import Context from '../utils/Context';
 
-export default function Post({post: {uuid, text, created_at, user: author}, user, onDelete}) {
+export default function Post({post: {uuid, text, created_at, user: author}, onDelete}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { sessionToken, follows, setFollows } = useContext(Context);
+  const { sessionToken, follows, setFollows, loggedInUser } = useContext(Context);
   const navigate = useNavigate();
   const created = new Date(created_at);
 
@@ -37,7 +37,7 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
   const follow = follows.find((f) => f.following.uuid === author.uuid);
 
   const followAuthor = async () => {
-    const response = await createFollow(sessionToken, user.uuid, author.uuid);
+    const response = await createFollow(sessionToken, loggedInUser.uuid, author.uuid);
     const data = await response.json();
     setFollows([...follows, data]);
   };
@@ -66,22 +66,25 @@ export default function Post({post: {uuid, text, created_at, user: author}, user
         <Button onClick={() => navigate(`/post/${uuid}`)}>
           Link
         </Button>
-        { author.uuid === user.uuid && (
-          <Button onClick={() => setIsDialogOpen(true)}>
-            Delete
-          </Button>
-        )}
-        { author.uuid !== user.uuid && (
-          follow ? (
-            <Button onClick={() => unfollowAuthor(follow.uuid) }>
+        { loggedInUser && (
+          <div>
+            { author.uuid === loggedInUser.uuid && (
+                <Button onClick={() => setIsDialogOpen(true)}>
+                  Delete
+                </Button>
+              )}
+            { author.uuid !== loggedInUser.uuid && (
+              follow ? (
+              <Button onClick={() => unfollowAuthor(follow.uuid) }>
               Unfollow
-            </Button>
-          ) : (
-            <Button onClick={followAuthor}>
+              </Button>
+              ) : (
+              <Button onClick={followAuthor}>
               Follow
-            </Button>
-          )
-        ) }
+              </Button>
+            ))}
+          </div>
+        )}
       </CardActions>
       <Dialog
         open={isDialogOpen}

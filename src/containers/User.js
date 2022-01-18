@@ -63,7 +63,7 @@ export default function User() {
           )
       )}
       {posts.map((post) => (
-        <Post post={post} user={user} key={post.uuid} />
+        <Post post={post} key={post.uuid} />
       ))}
     </Container>
   )
