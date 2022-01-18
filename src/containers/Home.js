@@ -9,7 +9,6 @@ import Container from '../components/Container';
 import Post from '../components/Post';
 import TextInput from '../components/TextInput';
 import Context from '../utils/Context';
-import HomeSignupPromo from './HomeSignupPromo';
 
 export default function Home() {
   const { sessionToken, loggedInUser, isAppLoaded, posts, setPosts } = useContext(Context);
