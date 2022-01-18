@@ -1,19 +1,17 @@
+import HomeIcon from '@mui/icons-material/Home';
 import {
   Button,
   MenuItem,
   Menu as MUIMenu,
   ListItemIcon,
-  ListItemText, Divider
+  ListItemText,
 } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import { useContext, useState } from 'react';
+import LoginIcon from '@mui/icons-material/Login';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import LogoutIcon from '@mui/icons-material/Logout';
-import Context from '../utils/Context';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-export default function Menu() {
-  const { setLoggedInUser, setSessionToken } = useContext(Context);
+export default function UnauthenticatedMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
@@ -22,13 +20,6 @@ export default function Menu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-  const tryLogout = (event) => {
-    event.preventDefault();
-    setSessionToken(null);
-    setLoggedInUser(null);
-    localStorage.clear();
-    navigate("/");
   };
 
   return (
@@ -57,24 +48,17 @@ export default function Menu() {
           </ListItemIcon>
           <ListItemText>Home</ListItemText>
         </MenuItem>
-        <MenuItem onClick={() => navigate("/profile")}>
+        <MenuItem onClick={() => navigate("/login")}>
           <ListItemIcon>
-            <ManageAccountsIcon fontSize="small" />
+            <LoginIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Profile</ListItemText>
+          <ListItemText>Login</ListItemText>
         </MenuItem>
-        <MenuItem onClick={() => navigate("/update-profile")}>
+        <MenuItem onClick={() => navigate("/signup")}>
           <ListItemIcon>
-            <ManageAccountsIcon fontSize="small" />
+            <PersonAddIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Update Profile</ListItemText>
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={tryLogout}>
-          <ListItemIcon>
-            <LogoutIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Logout</ListItemText>
+          <ListItemText>Signup</ListItemText>
         </MenuItem>
       </MUIMenu>
     </div>

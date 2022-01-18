@@ -1,9 +1,9 @@
-import { AccountBox } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { appName, primaryColor } from '../utils/config';
+import { appName } from '../utils/config';
 import Context from '../utils/Context';
-import Menu from './Menu';
+import AuthenticatedMenu from './menu/AuthenticatedMenu';
+import UnauthenticatedMenu from './menu/UnauthenticatedMenu';
 
 export default function Header() {
   const { loggedInUser } = useContext(Context);
@@ -13,13 +13,9 @@ export default function Header() {
       <h1>{appName}</h1>
       <div className="navigation">
         { loggedInUser ? (
-          <Menu />
+          <AuthenticatedMenu />
         ) : (
-          <div>
-            <Link to="/login" style={{color: primaryColor}}>Login</Link>
-            &nbsp;/&nbsp;
-            <Link to="/signup" style={{color: primaryColor}}>Sign up</Link>
-          </div>
+          <UnauthenticatedMenu />
         )}
       </div>
     </div>
