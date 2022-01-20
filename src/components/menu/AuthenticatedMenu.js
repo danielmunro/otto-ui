@@ -13,7 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Context from '../../utils/Context';
 
 export default function AuthenticatedMenu() {
-  const { setLoggedInUser, setSessionToken } = useContext(Context);
+  const { setLoggedInUser, setSessionToken, setIsLoggedIn } = useContext(Context);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
@@ -27,6 +27,7 @@ export default function AuthenticatedMenu() {
     event.preventDefault();
     setSessionToken(null);
     setLoggedInUser(null);
+    setIsLoggedIn(false);
     localStorage.clear();
     navigate("/");
   };

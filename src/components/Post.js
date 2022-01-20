@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Card,
   CardActions,
@@ -47,12 +48,19 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
     setFollows(follows.filter((f) => f.uuid !== followUuid));
   };
 
+  const authorDisplayName = author.name ? author.name : "(no name)"
+
   return (
     <Card variant="outlined" sx={{minWidth: 300, maxWidth: 680, marginBottom: "10px", marginTop: "10px" }}>
       <CardContent>
         <Typography gutterBottom variant="h5">
+          <Avatar
+            alt={authorDisplayName}
+            src={author.profile_pic}
+            style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
+          />
           <Link to={`/user/${author.uuid}`}>
-            {author.name ? author.name : "(no name)"}
+            {authorDisplayName}
           </Link>
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">

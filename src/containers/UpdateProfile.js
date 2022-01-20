@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
-import { get, putJSON } from '@tkrotoff/fetch';
+import { Avatar, Button } from '@mui/material';
+import { get, post, putJSON } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -13,7 +13,8 @@ export default function UpdateProfile() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [bio, setBio] = useState('');
-  const { loggedInUser, setLoggedInUser } = useContext(Context);
+  const [imageToUpload, setImageToUpload] = useState('');
+  const { loggedInUser, setLoggedInUser, sessionToken } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,6 +46,26 @@ export default function UpdateProfile() {
     navigate("/profile");
   };
 
+  const tryUploadNewPic = (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append("filename", imageToUpload);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        "x-session-token": sessionToken,
+      },
+    };
+    post(`${baseUrl}/user/${loggedInUser.uuid}/image`, formData, config);
+    // post(url, formData, config)
+    //   .then(function(response) {
+    //     console.log("FILE UPLOADED SUCCESSFULLY");
+    //   })
+    //   .catch(function(error) {
+    //     console.log("ERROR WHILE UPLOADING FILE");
+    //   });
+  };
+
   if (!isLoaded) {
     return (
       <Container>
@@ -55,13 +76,26 @@ export default function UpdateProfile() {
 
   return (
     <Container>
+      <Avatar
+        alt={loggedInUser.name}
+        src={loggedInUser.profile_pic}
+        style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
+      />
       <h2>Update Profile</h2>
+      <form onSubmit={tryUploadNewPic}>
+        <input
+          type="file"
+          onChange={(event) => setImageToUpload(event.target.value)}
+        />
+        <Button type="submit">Upload New Profile Pic</Button>
+      </form>
       <form onSubmit={tryUpdateProfile}>
         <div>
           <TextInput
             label="Name"
             value={name}
             onChangeValue={setName}
+            style={{width: 400}}
           />
         </div>
         <div>
@@ -69,6 +103,7 @@ export default function UpdateProfile() {
             label="Birthday"
             value={birthday}
             onChangeValue={setBirthday}
+            style={{width: 400}}
           />
         </div>
         <div>
@@ -77,6 +112,7 @@ export default function UpdateProfile() {
             value={bio}
             onChangeValue={setBio}
             multiline
+            style={{width: 400}}
           />
         </div>
         <div>

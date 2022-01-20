@@ -44,6 +44,7 @@ const theme = createTheme({
 function App() {
   const [sessionToken, setSessionToken] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -61,12 +62,15 @@ function App() {
     setPosts,
     follows,
     setFollows,
+    isLoggedIn,
+    setIsLoggedIn,
   };
 
   const getUser = async (token) => {
     const response = await get(`${baseUrl}/session?token=${token}`);
     const data = await response.json();
     setLoggedInUser(data.user);
+    setIsLoggedIn(true);
     setIsAppLoaded(true);
   };
 
@@ -90,6 +94,7 @@ function App() {
       if (!token) {
         console.log("no session found");
         setLoggedInUser(null);
+        setIsLoggedIn(false);
         setIsAppLoaded(true);
         return;
       }

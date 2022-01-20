@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { createFollow, deleteFollow } from '../actions/follow';
 import Container from '../components/Container';
 import Post from '../components/Post';
@@ -11,7 +11,7 @@ import Context from '../utils/Context';
 export default function User() {
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
-  const { follows, loggedInUser, sessionToken, setFollows } = useContext(Context);
+  const { follows, loggedInUser, sessionToken, setFollows, isLoggedIn } = useContext(Context);
   const params = useParams();
 
   const reloadUser = async () => {
@@ -47,11 +47,18 @@ export default function User() {
     setFollows(follows.filter((f) => f.uuid !== follow.uuid));
   };
 
+  console.log("is logged in", isLoggedIn);
+
   return (
     <Container>
+      <Avatar
+        alt={user.name}
+        src={user.profile_pic}
+        style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
+      />
       <h2>{user.name}</h2>
       <p>{user.bio_message}</p>
-      { sessionToken && !isSelf && (
+      { isLoggedIn && !isSelf && (
         follow ? (
             <Button onClick={unfollowUser}>
               Unfollow

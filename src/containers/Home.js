@@ -16,11 +16,9 @@ export default function Home() {
   const [inputFocused, setInputFocused] = useState(false);
 
   const getPosts = async (token) => {
-    console.log("requesting posts")
     const response = await requestGetPosts(token);
     const data = await response.json();
     setPosts(data);
-    console.log("posts found", data);
   };
 
   useEffect(() => {
