@@ -20,7 +20,7 @@ import Context from '../utils/Context';
 
 export default function Post({post: {uuid, text, created_at, user: author}, onDelete}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { sessionToken, follows, setFollows, loggedInUser } = useContext(Context);
+  const { isLoggedIn, sessionToken, follows, setFollows, loggedInUser } = useContext(Context);
   const navigate = useNavigate();
   const created = new Date(created_at);
 
@@ -74,7 +74,7 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
         <Button onClick={() => navigate(`/post/${uuid}`)}>
           Link
         </Button>
-        { loggedInUser && (
+        { isLoggedIn && (
           <div>
             { author.uuid === loggedInUser.uuid && (
                 <Button onClick={() => setIsDialogOpen(true)}>

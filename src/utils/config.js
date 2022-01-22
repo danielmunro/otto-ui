@@ -1,11 +1,13 @@
 const baseUrl = 'http://localhost';
-const appName = 'Bumpvine';
+const appName = 'Home';
 const primaryColor = '#e71d36';
 const secondaryColor = '#95d5b2';
+const imageBaseUrl = 'https://otto-image-uploads.s3.us-west-2.amazonaws.com';
 
 export {
   baseUrl,
   appName,
   primaryColor,
   secondaryColor,
+  imageBaseUrl,
 };

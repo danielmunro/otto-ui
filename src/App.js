@@ -118,7 +118,7 @@ function App() {
         setFollows(data);
       })();
     }
-  }, [loggedInUser]);
+  }, []);
 
   return (
     <Context.Provider value={appContext}>

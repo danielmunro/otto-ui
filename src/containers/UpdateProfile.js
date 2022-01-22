@@ -1,11 +1,11 @@
 import { Avatar, Button } from '@mui/material';
 import { get, post, putJSON } from '@tkrotoff/fetch';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
-import { baseUrl } from '../utils/config';
+import { baseUrl, imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function UpdateProfile() {
@@ -13,9 +13,10 @@ export default function UpdateProfile() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [bio, setBio] = useState('');
-  const [imageToUpload, setImageToUpload] = useState('');
+  const [imageToUpload, setImageToUpload] = useState(null);
   const { loggedInUser, setLoggedInUser, sessionToken } = useContext(Context);
   const navigate = useNavigate();
+  const ref = useRef();
 
   useEffect(() => {
     if (loggedInUser) {
@@ -46,24 +47,21 @@ export default function UpdateProfile() {
     navigate("/profile");
   };
 
-  const tryUploadNewPic = (event) => {
+  const tryUploadNewPic = async (event) => {
     event.preventDefault();
     let formData = new FormData();
-    formData.append("filename", imageToUpload);
+    formData.append("image", imageToUpload);
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
         "x-session-token": sessionToken,
       },
     };
-    post(`${baseUrl}/user/${loggedInUser.uuid}/image`, formData, config);
-    // post(url, formData, config)
-    //   .then(function(response) {
-    //     console.log("FILE UPLOADED SUCCESSFULLY");
-    //   })
-    //   .catch(function(error) {
-    //     console.log("ERROR WHILE UPLOADING FILE");
-    //   });
+    const response = await post(`${baseUrl}/user/${loggedInUser.uuid}/image`, formData, config);
+    const data = await response.json();
+    const newUser = {...loggedInUser};
+    newUser.profile_pic = data.s3_key;
+    setLoggedInUser(newUser);
+    ref.current.value = "";
   };
 
   if (!isLoaded) {
@@ -74,18 +72,22 @@ export default function UpdateProfile() {
     );
   }
 
+  const profilePic = loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
+  console.log("heyo", profilePic);
+
   return (
     <Container>
       <Avatar
         alt={loggedInUser.name}
-        src={loggedInUser.profile_pic}
+        src={profilePic}
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
       <h2>Update Profile</h2>
       <form onSubmit={tryUploadNewPic}>
         <input
           type="file"
-          onChange={(event) => setImageToUpload(event.target.value)}
+          ref={ref}
+          onChange={(event) => setImageToUpload(event.target.files[0])}
         />
         <Button type="submit">Upload New Profile Pic</Button>
       </form>

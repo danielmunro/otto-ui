@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { createFollow, deleteFollow } from '../actions/follow';
 import Container from '../components/Container';
 import Post from '../components/Post';
-import { baseUrl } from '../utils/config';
+import { baseUrl, imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function User() {
@@ -47,13 +47,15 @@ export default function User() {
     setFollows(follows.filter((f) => f.uuid !== follow.uuid));
   };
 
-  console.log("is logged in", isLoggedIn);
+  console.log("is logged in", isLoggedIn, user);
+
+  const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
   return (
     <Container>
       <Avatar
         alt={user.name}
-        src={user.profile_pic}
+        src={profilePic}
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
       <h2>{user.name}</h2>
