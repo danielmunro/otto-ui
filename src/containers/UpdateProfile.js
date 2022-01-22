@@ -1,7 +1,7 @@
 import { Avatar, Button } from '@mui/material';
 import { get, post, putJSON } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -14,6 +14,7 @@ export default function UpdateProfile() {
   const [birthday, setBirthday] = useState('');
   const [bio, setBio] = useState('');
   const [imageToUpload, setImageToUpload] = useState(null);
+  const [showUpload, setShowUpload] = useState(false);
   const { loggedInUser, setLoggedInUser, sessionToken } = useContext(Context);
   const navigate = useNavigate();
   const ref = useRef();
@@ -62,6 +63,15 @@ export default function UpdateProfile() {
     newUser.profile_pic = data.s3_key;
     setLoggedInUser(newUser);
     ref.current.value = "";
+    setShowUpload(false);
+  };
+
+  const displayUploadForm = () => {
+    setShowUpload(true);
+  };
+
+  const hideUploadForm = () => {
+    setShowUpload(false);
   };
 
   if (!isLoaded) {
@@ -73,7 +83,6 @@ export default function UpdateProfile() {
   }
 
   const profilePic = loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
-  console.log("heyo", profilePic);
 
   return (
     <Container>
@@ -83,14 +92,21 @@ export default function UpdateProfile() {
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
       <h2>Update Profile</h2>
-      <form onSubmit={tryUploadNewPic}>
-        <input
-          type="file"
-          ref={ref}
-          onChange={(event) => setImageToUpload(event.target.files[0])}
-        />
-        <Button type="submit">Upload New Profile Pic</Button>
-      </form>
+      {showUpload ? (
+        <form onSubmit={tryUploadNewPic}>
+          <input
+            type="file"
+            ref={ref}
+            onChange={(event) => setImageToUpload(event.target.files[0])}
+          />
+          <Button type="submit">Upload New Profile Pic</Button>
+          <Button onClick={hideUploadForm} color="secondary">Cancel</Button>
+        </form>
+      ) : (
+        <Button onClick={displayUploadForm} variant="outlined">
+          Upload New Profile Picture
+        </Button>
+      )}
       <form onSubmit={tryUpdateProfile}>
         <div>
           <TextInput
