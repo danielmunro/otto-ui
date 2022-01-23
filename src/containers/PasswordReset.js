@@ -24,19 +24,21 @@ export default function PasswordReset() {
         <div>
           <TextInput
             label="New Password"
-            variant="standard"
+            variant="outlined"
             type="password"
             value={password1}
             onChangeValue={setPassword1}
+            style={{width: 400}}
           />
         </div>
         <div>
           <TextInput
             label="Confirm New Password"
-            variant="standard"
+            variant="outlined"
             type="password"
             value={password2}
             onChangeValue={setPassword2}
+            style={{width: 400}}
           />
         </div>
         <div>

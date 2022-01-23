@@ -37,7 +37,7 @@ export default function Login() {
         <div>
           <TextInput
             label="Email/username"
-            variant="standard"
+            variant="outlined"
             onChangeValue={setEmail}
             value={email}
             style={{width: 400}}
@@ -46,7 +46,7 @@ export default function Login() {
         <div>
           <TextInput
             label="Password"
-            variant="standard"
+            variant="outlined"
             onChangeValue={setPassword}
             value={password}
             type="password"
