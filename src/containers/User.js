@@ -2,8 +2,14 @@ import { Avatar, Button } from '@mui/material';
 import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { createFollow, deleteFollow } from '../actions/follow';
+import {
+  createFollow,
+  deleteFollow,
+  getFollowers,
+  getFollowing
+} from '../actions/follow';
 import Container from '../components/Container';
+import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
 import { baseUrl, imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
@@ -11,7 +17,9 @@ import Context from '../utils/Context';
 export default function User() {
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
-  const { follows, loggedInUser, sessionToken, setFollows, isLoggedIn } = useContext(Context);
+  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState([]);
+  const { follows, setFollows, loggedInUser, sessionToken, isLoggedIn } = useContext(Context);
   const params = useParams();
 
   const reloadUser = async () => {
@@ -26,10 +34,20 @@ export default function User() {
     setPosts(data);
   };
 
+  const reloadUserFollows = async () => {
+    const followingResponse = await getFollowing(user.uuid);
+    const followingData = await followingResponse.json();
+    setFollowing(followingData);
+    const followersResponse = await getFollowers(user.uuid);
+    const followersData = await followersResponse.json();
+    setFollowers(followersData);
+  };
+
   useEffect(() => {
     (async function () {
       await reloadUser();
       await reloadPosts();
+      await reloadUserFollows();
     })();
   }, []);
 
@@ -59,6 +77,7 @@ export default function User() {
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
       <h2>{user.name}</h2>
+      <FollowDetails followers={followers} follows={following} />
       <p>{user.bio_message}</p>
       { isLoggedIn && !isSelf && (
         follow ? (

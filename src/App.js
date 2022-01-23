@@ -2,6 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
+import { getFollowers, getFollowing } from './actions/follow';
 import Post from './containers/Post';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
@@ -49,6 +50,7 @@ function App() {
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const [posts, setPosts] = useState([]);
   const [follows, setFollows] = useState([]);
+  const [followers, setFollowers] = useState([]);
 
   const appContext = {
     sessionToken,
@@ -62,6 +64,8 @@ function App() {
     setPosts,
     follows,
     setFollows,
+    followers,
+    setFollowers,
     isLoggedIn,
     setIsLoggedIn,
   };
@@ -84,7 +88,19 @@ function App() {
     setSessionToken(data.token);
     localStorage.setItem("token", data.token);
     return data.token
-  }
+  };
+
+  const reloadFollowing = async () => {
+    const response = await getFollowing(loggedInUser.uuid);
+    const data = await response.json();
+    setFollows(data);
+  };
+
+  const reloadFollowers = async () => {
+    const response = await getFollowers(loggedInUser.uuid);
+    const data = await response.json();
+    setFollowers(data);
+  };
 
   useEffect(() => {
     (async () => {
@@ -113,12 +129,11 @@ function App() {
   useEffect(() => {
     if (loggedInUser) {
       (async function () {
-        const response = await get(`${baseUrl}/user/${loggedInUser.uuid}/follows`);
-        const data = await response.json();
-        setFollows(data);
+        await reloadFollowing();
+        await reloadFollowers();
       })();
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <Context.Provider value={appContext}>

@@ -107,7 +107,7 @@ export default function UpdateProfile() {
           Upload New Profile Picture
         </Button>
       )}
-      <form onSubmit={tryUpdateProfile}>
+      <form style={{paddingTop: 10}} onSubmit={tryUpdateProfile}>
         <div>
           <TextInput
             label="Name"

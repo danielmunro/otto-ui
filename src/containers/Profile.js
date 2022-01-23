@@ -3,10 +3,14 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
+import FollowDetails from '../components/FollowDetails';
+import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Profile() {
-  const { loggedInUser } = useContext(Context);
+  const { loggedInUser, follows, followers } = useContext(Context);
+
+  const profilePic = loggedInUser && loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
 
   return (
     <Container>
@@ -14,10 +18,11 @@ export default function Profile() {
         <div>
           <Avatar
             alt={loggedInUser.name}
-            src={loggedInUser.profile_pic}
+            src={profilePic}
             style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
           />
           <h2>{loggedInUser.name}</h2>
+          <FollowDetails follows={follows} followers={followers} />
           <p>{loggedInUser.bio_message}</p>
           <p>
             <Link to={`/user/${loggedInUser.uuid}`}>

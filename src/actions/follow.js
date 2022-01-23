@@ -1,4 +1,4 @@
-import { del, postJSON } from '@tkrotoff/fetch';
+import { del, get, postJSON } from '@tkrotoff/fetch';
 import { baseUrl } from '../utils/config';
 
 export function createFollow(sessionToken, userUuid, followingUuid) {
@@ -19,4 +19,12 @@ export function deleteFollow(sessionToken, followUuid) {
       'x-session-token': sessionToken,
     },
   });
+}
+
+export function getFollowing(userUuid) {
+  return get(`${baseUrl}/user/${userUuid}/follows`);
+}
+
+export function getFollowers(userUuid) {
+  return get(`${baseUrl}/user/${userUuid}/followers`);
 }
