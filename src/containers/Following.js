@@ -38,7 +38,7 @@ export default function Following() {
 
   return (
     <Container>
-      <h2>Users {user.name} Follows</h2>
+      <h2>Users @{user.username} Follows</h2>
       {following.map((f) => (
         <p key={f.uuid}>
           <Link to={`/user/${f.following.uuid}`}>@{f.following.username || "nousername"}</Link>

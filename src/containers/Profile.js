@@ -21,7 +21,7 @@ export default function Profile() {
             src={profilePic}
             style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
           />
-          <h2>{loggedInUser.name}</h2>
+          <h2>{loggedInUser.name || "No name provided"}</h2>
           <FollowDetails userUuid={loggedInUser.uuid} follows={follows} followers={followers} />
           <p>{loggedInUser.bio_message}</p>
           <p>

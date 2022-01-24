@@ -38,10 +38,10 @@ export default function Followers() {
 
   return (
     <Container>
-      <h2>Users Following {user.name}</h2>
+      <h2>Users Following @{user.username}</h2>
       {followers.map((f) => (
         <p key={f.uuid}>
-          <Link to={`/user/${f.user.uuid}`}>@{f.user.name || "nousername"}</Link>
+          <Link to={`/user/${f.user.uuid}`}>@{f.user.username || "nousername"}</Link>
         </p>
       ))}
     </Container>

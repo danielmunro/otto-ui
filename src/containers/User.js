@@ -1,7 +1,7 @@
 import { Avatar, Button } from '@mui/material';
 import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   createFollow,
   deleteFollow,
@@ -66,18 +66,16 @@ export default function User() {
     setFollows(follows.filter((f) => f.uuid !== follow.uuid));
   };
 
-  console.log("is logged in", isLoggedIn, user);
-
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
   return (
     <Container>
       <Avatar
-        alt={user.name}
+        alt={user.username}
         src={profilePic}
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
-      <h2>{user.name}</h2>
+      <h2>{user.username}</h2>
       <FollowDetails userUuid={user.uuid} followers={followers} follows={following} />
       <p>{user.bio_message}</p>
       { isLoggedIn && !isSelf && (

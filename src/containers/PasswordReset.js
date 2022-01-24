@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import { putJSON } from '@tkrotoff/fetch';
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
 import { baseUrl } from '../utils/config';
@@ -10,11 +11,12 @@ export default function PasswordReset() {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const { userEmail } = useContext(Context);
+  const navigate = useNavigate();
 
   const tryResetPassword = (event) => {
     event.preventDefault();
     putJSON(`${baseUrl}/session`, { email: userEmail, password: password1 })
-    return false;
+    navigate("/login");
   };
 
   return (

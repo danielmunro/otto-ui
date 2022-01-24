@@ -46,7 +46,7 @@ export default function Signup() {
       setErrors(newErrors);
       return;
     }
-    const response = await signUp(email, password);
+    const response = await signUp(username, email, password);
     if (response.status === 201) {
       navigate("/login");
     }
