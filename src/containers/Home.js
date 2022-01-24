@@ -18,7 +18,7 @@ export default function Home() {
   const getPosts = async (token) => {
     const response = await requestGetPosts(token);
     const data = await response.json();
-    setPosts(data);
+    setPosts(data ?? []);
   };
 
   useEffect(() => {

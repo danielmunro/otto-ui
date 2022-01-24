@@ -8,6 +8,7 @@ import {
   getFollowers,
   getFollowing
 } from '../actions/follow';
+import { getUser } from '../actions/user';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
@@ -23,7 +24,7 @@ export default function User() {
   const params = useParams();
 
   const reloadUser = async () => {
-    const response = await get(`${baseUrl}/user/${params.uuid}`);
+    const response = await getUser(params.uuid);
     const data = await response.json();
     setUser(data);
   };
@@ -35,10 +36,10 @@ export default function User() {
   };
 
   const reloadUserFollows = async () => {
-    const followingResponse = await getFollowing(user.uuid);
+    const followingResponse = await getFollowing(params.uuid);
     const followingData = await followingResponse.json();
     setFollowing(followingData);
-    const followersResponse = await getFollowers(user.uuid);
+    const followersResponse = await getFollowers(params.uuid);
     const followersData = await followersResponse.json();
     setFollowers(followersData);
   };
@@ -77,7 +78,7 @@ export default function User() {
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
       <h2>{user.name}</h2>
-      <FollowDetails followers={followers} follows={following} />
+      <FollowDetails userUuid={user.uuid} followers={followers} follows={following} />
       <p>{user.bio_message}</p>
       { isLoggedIn && !isSelf && (
         follow ? (

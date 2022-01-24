@@ -22,7 +22,7 @@ export default function Profile() {
             style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
           />
           <h2>{loggedInUser.name}</h2>
-          <FollowDetails follows={follows} followers={followers} />
+          <FollowDetails userUuid={loggedInUser.uuid} follows={follows} followers={followers} />
           <p>{loggedInUser.bio_message}</p>
           <p>
             <Link to={`/user/${loggedInUser.uuid}`}>
