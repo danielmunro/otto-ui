@@ -16,6 +16,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createFollow, deleteFollow } from '../actions/follow';
 import { deletePost } from '../actions/post';
+import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Post({post: {uuid, text, created_at, user: author}, onDelete}) {
@@ -49,6 +50,7 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
   };
 
   const authorDisplayName = author.name ? author.name : "(no name)"
+  const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
     <Card variant="outlined" sx={{minWidth: 300, maxWidth: 680, marginBottom: "10px", marginTop: "10px" }}>
@@ -56,7 +58,7 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
         <Typography gutterBottom variant="h5">
           <Avatar
             alt={authorDisplayName}
-            src={author.profile_pic}
+            src={profilePic}
             style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
           />
           <Link to={`/user/${author.uuid}`}>
