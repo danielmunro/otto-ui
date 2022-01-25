@@ -8,7 +8,7 @@ import {
   getFollowers,
   getFollowing
 } from '../actions/follow';
-import { getUser } from '../actions/user';
+import { getUserByUsername } from '../actions/user';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
@@ -24,22 +24,22 @@ export default function User() {
   const params = useParams();
 
   const reloadUser = async () => {
-    const response = await getUser(params.uuid);
+    const response = await getUserByUsername(params.username);
     const data = await response.json();
     setUser(data);
   };
 
   const reloadPosts = async () => {
-    const response = await get(`${baseUrl}/user/${params.uuid}/posts`);
+    const response = await get(`${baseUrl}/user/${params.username}/posts`);
     const data = await response.json();
     setPosts(data);
   };
 
   const reloadUserFollows = async () => {
-    const followingResponse = await getFollowing(params.uuid);
+    const followingResponse = await getFollowing(params.username);
     const followingData = await followingResponse.json();
     setFollowing(followingData);
-    const followersResponse = await getFollowers(params.uuid);
+    const followersResponse = await getFollowers(params.username);
     const followersData = await followersResponse.json();
     setFollowers(followersData);
   };
@@ -76,7 +76,7 @@ export default function User() {
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
       <h2>{user.username}</h2>
-      <FollowDetails userUuid={user.uuid} followers={followers} follows={following} />
+      <FollowDetails username={user.username} followers={followers} follows={following} />
       <p>{user.bio_message}</p>
       { isLoggedIn && !isSelf && (
         follow ? (

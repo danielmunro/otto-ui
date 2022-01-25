@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getFollowers } from '../actions/follow';
-import { getUser } from '../actions/user';
+import { getUserByUsername } from '../actions/user';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 
@@ -12,7 +12,7 @@ export default function Followers() {
 
   useEffect(() => {
     (async function() {
-      const response = await getUser(params.uuid);
+      const response = await getUserByUsername(params.username);
       const data = await response.json();
       setUser(data);
     })();
@@ -21,7 +21,7 @@ export default function Followers() {
   useEffect(() => {
     if (user) {
       (async function() {
-        const response = await getFollowers(user.uuid);
+        const response = await getFollowers(user.username);
         const data = await response.json();
         setFollowers(data);
       })();
@@ -41,7 +41,7 @@ export default function Followers() {
       <h2>Users Following @{user.username}</h2>
       {followers.map((f) => (
         <p key={f.uuid}>
-          <Link to={`/user/${f.user.uuid}`}>@{f.user.username || "nousername"}</Link>
+          <Link to={`/u/${f.user.username}`}>@{f.user.username || "nousername"}</Link>
         </p>
       ))}
     </Container>

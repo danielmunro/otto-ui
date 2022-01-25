@@ -21,11 +21,12 @@ export default function Profile() {
             src={profilePic}
             style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
           />
-          <h2>{loggedInUser.name || "No name provided"}</h2>
-          <FollowDetails userUuid={loggedInUser.uuid} follows={follows} followers={followers} />
+          <h2>{loggedInUser.username}</h2>
+          <FollowDetails username={loggedInUser.username} follows={follows} followers={followers} />
+          <p>{loggedInUser.name}</p>
           <p>{loggedInUser.bio_message}</p>
           <p>
-            <Link to={`/user/${loggedInUser.uuid}`}>
+            <Link to={`/u/${loggedInUser.username}`}>
               Public Link
             </Link>
           </p>

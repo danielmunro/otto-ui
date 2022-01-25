@@ -93,13 +93,13 @@ function App() {
   };
 
   const reloadFollowing = async () => {
-    const response = await getFollowing(loggedInUser.uuid);
+    const response = await getFollowing(loggedInUser.username);
     const data = await response.json();
     setFollows(data);
   };
 
   const reloadFollowers = async () => {
-    const response = await getFollowers(loggedInUser.uuid);
+    const response = await getFollowers(loggedInUser.username);
     const data = await response.json();
     setFollowers(data);
   };
@@ -142,9 +142,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route path="/user/:uuid" element={<User />} />
-            <Route path="/user/:uuid/following" element={<Following />} />
-            <Route path="/user/:uuid/followers" element={<Followers />} />
+            <Route path="/u/:username" element={<User />} />
+            <Route path="/u/:username/following" element={<Following />} />
+            <Route path="/u/:username/followers" element={<Followers />} />
             <Route path="/post/:uuid" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

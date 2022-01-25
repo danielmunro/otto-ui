@@ -5,6 +5,6 @@ export function signUp(username, email, password) {
   return postJSON(`${baseUrl}/user`, { username, email, password });
 }
 
-export function getUser(userUuid) {
-  return get(`${baseUrl}/user/${userUuid}`);
+export function getUserByUsername(username) {
+  return get(`${baseUrl}/user/${username}`)
 }

@@ -61,8 +61,8 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
             src={profilePic}
             style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
           />
-          <Link to={`/user/${author.uuid}`}>
-            {authorDisplayName}
+          <Link to={`/u/${author.username}`}>
+            {author.username}
           </Link>
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
