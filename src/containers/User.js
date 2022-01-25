@@ -21,6 +21,7 @@ export default function User() {
   const [posts, setPosts] = useState([]);
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const { follows, setFollows, loggedInUser, sessionToken, isLoggedIn } = useContext(Context);
   const params = useParams();
 
@@ -50,6 +51,7 @@ export default function User() {
       await reloadUser();
       await reloadPosts();
       await reloadUserFollows();
+      setIsLoaded(true);
     })();
   }, []);
 
@@ -69,7 +71,7 @@ export default function User() {
 
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
-  if (!user) {
+  if (!isLoaded) {
     return (
       <Container>
         <CircularIndeterminate />
