@@ -9,6 +9,7 @@ import {
   getFollowing
 } from '../actions/follow';
 import { getUserByUsername } from '../actions/user';
+import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
@@ -52,8 +53,8 @@ export default function User() {
     })();
   }, []);
 
-  const isSelf = loggedInUser && params.uuid === loggedInUser.uuid;
-  const follow = follows.find((f) => f.following.uuid === params.uuid);
+  const isSelf = loggedInUser && params.username === loggedInUser.username;
+  const follow = follows.find((f) => f.following.username === params.username);
 
   const followUser = async () => {
     const response = await createFollow(sessionToken, loggedInUser.uuid, user.uuid);
@@ -68,6 +69,14 @@ export default function User() {
 
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
+  if (!user) {
+    return (
+      <Container>
+        <CircularIndeterminate />
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Avatar
@@ -75,8 +84,9 @@ export default function User() {
         src={profilePic}
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
-      <h2>{user.username}</h2>
-      <FollowDetails username={user.username} followers={followers} follows={following} />
+      <h2>{user.name}</h2>
+      <p>@{user.username}</p>
+      <FollowDetails username={user.username} follows={following} followers={followers} />
       <p>{user.bio_message}</p>
       { isLoggedIn && !isSelf && (
         follow ? (
