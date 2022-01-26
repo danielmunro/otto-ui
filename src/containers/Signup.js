@@ -1,4 +1,4 @@
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../actions/user';
@@ -77,8 +77,7 @@ export default function Signup() {
   };
 
   return (
-    <Container>
-      <h1>Signup</h1>
+    <Container title={"Signup"}>
       <form onSubmit={trySignup}>
         <div>
           <TextInput
@@ -132,7 +131,7 @@ export default function Signup() {
             type="submit"
           >
             Signup
-          </Button> or <Link href="/login">Login</Link>
+          </Button>
         </div>
       </form>
     </Container>

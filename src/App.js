@@ -13,7 +13,6 @@ import Home from './containers/Home';
 import './App.css';
 import Login from './containers/Login';
 import PasswordReset from './containers/PasswordReset';
-import Profile from './containers/Profile';
 import Signup from './containers/Signup';
 import Context from './utils/Context';
 import {
@@ -148,7 +147,6 @@ function App() {
             <Route path="/post/:uuid" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/" element={<Home />} />

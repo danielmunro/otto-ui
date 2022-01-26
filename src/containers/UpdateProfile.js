@@ -1,7 +1,8 @@
-import { Avatar, Button } from '@mui/material';
-import { get, post, putJSON } from '@tkrotoff/fetch';
+import { Avatar, Button, Divider } from '@mui/material';
+import { post, putJSON } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getUserByUsername } from '../actions/user';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -22,7 +23,7 @@ export default function UpdateProfile() {
   useEffect(() => {
     if (loggedInUser) {
       (async function () {
-        const response = await get(`${baseUrl}/user/${loggedInUser.uuid}`);
+        const response = await getUserByUsername(loggedInUser.username);
         const data = await response.json();
         setName(data.name);
         setBirthday(data.birthday);
@@ -45,7 +46,7 @@ export default function UpdateProfile() {
     update.birthday = birthday;
     update.bio_message = bio;
     setLoggedInUser(update);
-    navigate("/profile");
+    navigate(`/u/${loggedInUser.username}`);
   };
 
   const tryUploadNewPic = async (event) => {
@@ -85,28 +86,30 @@ export default function UpdateProfile() {
   const profilePic = loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
 
   return (
-    <Container>
+    <Container title={"Update Profile"}>
       <Avatar
         alt={loggedInUser.name}
         src={profilePic}
         style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
       />
-      <h2>Update Profile</h2>
-      {showUpload ? (
-        <form onSubmit={tryUploadNewPic}>
-          <input
-            type="file"
-            ref={ref}
-            onChange={(event) => setImageToUpload(event.target.files[0])}
-          />
-          <Button type="submit">Upload New Profile Pic</Button>
-          <Button onClick={hideUploadForm} color="secondary">Cancel</Button>
-        </form>
-      ) : (
-        <Button onClick={displayUploadForm} variant="outlined">
-          Upload New Profile Picture
-        </Button>
-      )}
+      <div style={{padding: 10}}>
+        {showUpload ? (
+          <form onSubmit={tryUploadNewPic}>
+            <input
+              type="file"
+              ref={ref}
+              onChange={(event) => setImageToUpload(event.target.files[0])}
+            />
+            <Button type="submit">Upload New Profile Pic</Button>
+            <Button onClick={hideUploadForm} color="secondary">Cancel</Button>
+          </form>
+        ) : (
+          <Button onClick={displayUploadForm} variant="outlined">
+            Upload New Profile Picture
+          </Button>
+        )}
+      </div>
+      <Divider />
       <form style={{paddingTop: 10}} onSubmit={tryUpdateProfile}>
         <div>
           <TextInput
@@ -140,18 +143,6 @@ export default function UpdateProfile() {
             type="submit"
           >
             Submit Update
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              navigate("/profile");
-            }}
-            style={{
-              marginLeft: 10,
-            }}
-          >
-            Cancel
           </Button>
         </div>
       </form>

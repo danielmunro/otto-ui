@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   return (
-    <Container>
+    <Container title={"Home"}>
       { loggedInUser && (
         <form onSubmit={trySubmitNewPost}>
           <TextInput

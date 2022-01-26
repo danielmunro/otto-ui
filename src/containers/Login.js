@@ -1,4 +1,3 @@
-import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,7 @@ import Context from '../utils/Context';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setSessionToken, setLoggedInUser, setUserEmail } = useContext(Context);
+  const { setSessionToken, setLoggedInUser, setIsLoggedIn, setUserEmail } = useContext(Context);
   const navigate = useNavigate();
 
   const tryLogin = async (event) => {
@@ -18,12 +17,17 @@ export default function Login() {
     const response = await login(email, password);
     if (response.status === 201) {
       const data = await response.json();
-      setLoggedInUser(data.User);
       if (data.AuthResponse === 1) {
         setUserEmail(email);
         navigate('/password-reset');
         return;
       }
+      if (data.AuthResponse === 3) {
+        // failed
+        return;
+      }
+      setLoggedInUser(data.User);
+      setIsLoggedIn(true);
       setSessionToken(data.Token);
       localStorage.setItem("token", data.Token);
       navigate("/");
@@ -31,8 +35,7 @@ export default function Login() {
   };
 
   return (
-    <Container>
-      <h1>Login</h1>
+    <Container title={"Login"}>
       <form onSubmit={tryLogin}>
         <div>
           <TextInput
@@ -60,7 +63,7 @@ export default function Login() {
             color="primary"
           >
             Login
-          </Button> or <Link href="/signup">Signup</Link>
+          </Button>
         </div>
       </form>
     </Container>

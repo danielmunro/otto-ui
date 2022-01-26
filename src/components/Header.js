@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { appName } from '../utils/config';
 import Context from '../utils/Context';
