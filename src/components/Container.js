@@ -113,7 +113,7 @@ export default function Container({ children, title }) {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        sx={{ bgcolor: 'background.default', p: 3, width: 800 }}
       >
         <Toolbar />
         {children}

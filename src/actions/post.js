@@ -35,3 +35,11 @@ export function getPosts(sessionToken) {
     },
   });
 }
+
+export function getPost(sessionToken, postUuid) {
+  return get(`${baseUrl}/post/${postUuid}`, {
+    headers: {
+      'x-session-token': sessionToken,
+    },
+  });
+}

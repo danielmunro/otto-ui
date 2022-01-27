@@ -19,10 +19,9 @@ import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
-export default function Post({post: {uuid, text, created_at, user: author}, onDelete}) {
+export default function Post({post: {uuid, text, created_at, user: author}, onDelete, showDelete, showPermalink}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isLoggedIn, sessionToken, follows, setFollows, loggedInUser } = useContext(Context);
-  const navigate = useNavigate();
   const created = new Date(created_at);
 
   const tryDelete = async () => {
@@ -49,11 +48,11 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
     setFollows(follows.filter((f) => f.uuid !== followUuid));
   };
 
-  const authorDisplayName = author.name ? author.name : "(no name)"
+  const authorDisplayName = author.name ? author.name : "(no name)";
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Card variant="outlined" sx={{minWidth: 300, maxWidth: 680, marginBottom: "10px", marginTop: "10px" }}>
+    <Card variant="outlined" sx={{marginBottom: "10px", marginTop: "10px" }}>
       <CardContent>
         <Typography gutterBottom variant="h5">
           <Avatar
@@ -73,16 +72,16 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={() => navigate(`/post/${uuid}`)}>
-          Link
-        </Button>
+        { showPermalink && (
+          <Link to={`/post/${uuid}`}>Permalink</Link>
+        )}
         { isLoggedIn && (
           <div>
-            { author.uuid === loggedInUser.uuid && (
-                <Button onClick={() => setIsDialogOpen(true)}>
-                  Delete
-                </Button>
-              )}
+            { author.uuid === loggedInUser.uuid && (showDelete || showDelete === undefined) && (
+              <Button onClick={() => setIsDialogOpen(true)}>
+                Delete
+              </Button>
+            )}
             { author.uuid !== loggedInUser.uuid && (
               follow ? (
               <Button onClick={() => unfollowAuthor(follow.uuid) }>

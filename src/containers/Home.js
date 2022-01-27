@@ -66,7 +66,13 @@ export default function Home() {
         </form>
       )}
       {posts.map((post) => (
-        <Post post={post} key={post.uuid} onDelete={() => removePost(post)} />
+        <Post
+          post={post}
+          key={post.uuid}
+          onDelete={() => removePost(post)}
+          showPermalink={true}
+          showDelete={false}
+        />
       ))}
     </Container>
   );

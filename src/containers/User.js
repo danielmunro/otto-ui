@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider } from '@mui/material';
+import { Avatar, Button, Divider, Typography } from '@mui/material';
 import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -79,16 +79,20 @@ export default function User() {
     );
   }
 
+  console.log("user", user);
+
   return (
     <Container title={`${user.name}'s Profile`}>
-      <Avatar
-        alt={user.username}
-        src={profilePic}
-        style={{ float: "left", marginRight: 10 }}
-      />
-      <h2>{user.name}</h2>
-      <p>@{user.username}</p>
-      <p>{user.bio_message}</p>
+      <div style={{paddingBottom: 10}}>
+        <Avatar
+          alt={user.username}
+          src={profilePic}
+          style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
+        />
+        <Typography variant="h5">{user.name}</Typography>
+        <Typography style={{ fontSize: 12 }}>@{user.username}</Typography>
+      </div>
+      <Typography>{user.bio_message}</Typography>
       <FollowDetails username={user.username} follows={following} followers={followers} />
       { isLoggedIn && !isSelf && (
         follow ? (
@@ -101,8 +105,8 @@ export default function User() {
             </Button>
           )
       )}
-      <Divider />
-      <h3>Posts</h3>
+      <Divider style={{marginTop: 10, marginBottom: 10}} />
+      <Typography variant="h5">Posts</Typography>
       {posts.map((post) => (
         <Post post={post} key={post.uuid} />
       ))}
