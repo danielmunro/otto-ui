@@ -73,7 +73,9 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
       </CardContent>
       <CardActions>
         { showPermalink && (
-          <Link to={`/post/${uuid}`}>Permalink</Link>
+          <Button component={Link} to={`/post/${uuid}`}>
+            Permalink
+          </Button>
         )}
         { isLoggedIn && (
           <div>
@@ -82,16 +84,6 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
                 Delete
               </Button>
             )}
-            { author.uuid !== loggedInUser.uuid && (
-              follow ? (
-              <Button onClick={() => unfollowAuthor(follow.uuid) }>
-              Unfollow
-              </Button>
-              ) : (
-              <Button onClick={followAuthor}>
-              Follow
-              </Button>
-            ))}
           </div>
         )}
       </CardActions>
