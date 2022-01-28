@@ -19,7 +19,7 @@ import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
-export default function Post({post: {uuid, text, created_at, user: author}, onDelete, showDelete, showPermalink}) {
+export default function Post({post: {uuid, text, created_at, user: author, images}, onDelete, showDelete, showPermalink}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { isLoggedIn, sessionToken, follows, setFollows, loggedInUser } = useContext(Context);
   const created = new Date(created_at);
@@ -32,20 +32,6 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
 
   const handleClose = () => {
     setIsDialogOpen(false);
-  };
-
-  // todo -- remove loop here
-  const follow = follows.find((f) => f.following.uuid === author.uuid);
-
-  const followAuthor = async () => {
-    const response = await createFollow(sessionToken, loggedInUser.uuid, author.uuid);
-    const data = await response.json();
-    setFollows([...follows, data]);
-  };
-
-  const unfollowAuthor = async (followUuid) => {
-    await deleteFollow(sessionToken, followUuid);
-    setFollows(follows.filter((f) => f.uuid !== followUuid));
   };
 
   const authorDisplayName = author.name ? author.name : "(no name)";
@@ -70,6 +56,11 @@ export default function Post({post: {uuid, text, created_at, user: author}, onDe
         <Typography>
           {nl2br(text)}
         </Typography>
+        <div>
+          {images && images.map((i) => (
+            <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" />
+          ))}
+        </div>
       </CardContent>
       <CardActions>
         { showPermalink && (

@@ -1,19 +1,24 @@
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+import { post } from '@tkrotoff/fetch';
 import React, {
   useContext,
-  useEffect,
+  useEffect, useRef,
   useState
 } from 'react';
 import { createPost, getPosts as requestGetPosts } from '../actions/post';
 import Container from '../components/Container';
 import Post from '../components/Post';
 import TextInput from '../components/TextInput';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { baseUrl, imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Home() {
   const { sessionToken, loggedInUser, isAppLoaded, posts, setPosts } = useContext(Context);
   const [newPost, setNewPost] = useState('');
+  const [imagesToPost, setImagesToPost] = useState([]);
   const [inputFocused, setInputFocused] = useState(false);
+  const ref = useRef();
 
   const getPosts = async (token) => {
     const response = await requestGetPosts(token);
@@ -29,9 +34,10 @@ export default function Home() {
 
   const trySubmitNewPost = async (event) => {
     event.preventDefault();
-    const response = await createPost(sessionToken, loggedInUser.uuid, newPost);
+    const response = await createPost(sessionToken, loggedInUser.uuid, newPost, imagesToPost);
     if (response.status === 201) {
       setNewPost('');
+      setImagesToPost([]);
       await getPosts(sessionToken);
     }
   };
@@ -40,10 +46,38 @@ export default function Home() {
     setPosts(posts.filter((p) => p !== post));
   };
 
+  const tryUploadNewPic = async (pic) => {
+    let formData = new FormData();
+    formData.append("image", pic);
+    const config = {
+      headers: {
+        "x-session-token": sessionToken,
+      },
+    };
+    const response = await post(`${baseUrl}/user/${loggedInUser.uuid}/image`, formData, config);
+    const data = await response.json();
+    const currentImages = [...imagesToPost];
+    currentImages.push(data);
+    setImagesToPost(currentImages);
+    ref.current.value = "";
+  };
+
+  const showFileSelector = (event) => {
+    event.preventDefault();
+    ref.current.click();
+  };
+
+  console.log("imagesToPost", imagesToPost);
+
   return (
     <Container title={"Home"}>
       { loggedInUser && (
         <form onSubmit={trySubmitNewPost}>
+          <div>
+            {imagesToPost.map((img) => (
+              <img src={`${imageBaseUrl}/${img.s3_key}`} alt="image to upload" style={{width: 300}} />
+            ))}
+          </div>
           <TextInput
             label="Share something"
             variant="standard"
@@ -55,6 +89,12 @@ export default function Home() {
             onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)}
           />
+          <input
+            type="file"
+            ref={ref}
+            onChange={(event) => tryUploadNewPic(event.target.files[0])}
+            style={{display: "none"}}
+          />
           <Button
             variant="contained"
             color="primary"
@@ -63,6 +103,11 @@ export default function Home() {
           >
             Submit
           </Button>
+          <p>
+          <IconButton aria-label="upload an image" onClick={showFileSelector}>
+            <AddPhotoAlternateIcon />
+          </IconButton>
+          </p>
         </form>
       )}
       {posts.map((post) => (
