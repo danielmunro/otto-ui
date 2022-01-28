@@ -58,7 +58,9 @@ export default function Post({post: {uuid, text, created_at, user: author, image
         </Typography>
         <div>
           {images && images.map((i) => (
-            <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" />
+            <Link to={`/i/${i.uuid}`} key={i.uuid}>
+              <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" alt="" />
+            </Link>
           ))}
         </div>
       </CardContent>

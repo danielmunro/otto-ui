@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
 import Followers from './containers/Followers';
 import Following from './containers/Following';
+import Image from './containers/Image';
 import Post from './containers/Post';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
@@ -144,6 +145,7 @@ function App() {
             <Route path="/u/:username" element={<User />} />
             <Route path="/u/:username/following" element={<Following />} />
             <Route path="/u/:username/followers" element={<Followers />} />
+            <Route path="/i/:uuid" element={<Image />} />
             <Route path="/post/:uuid" element={<Post />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

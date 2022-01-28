@@ -72,7 +72,11 @@ export default function Home() {
   return (
     <Container title={"Home"}>
       { loggedInUser && (
-        <form onSubmit={trySubmitNewPost}>
+        <form
+          onSubmit={trySubmitNewPost}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
+        >
           <div>
             {imagesToPost.map((img) => (
               <img src={`${imageBaseUrl}/${img.s3_key}`} alt="image to upload" style={{width: 300}} />
@@ -86,8 +90,6 @@ export default function Home() {
             multiline
             minRows={inputFocused ? 3 : 1}
             style={{width: 500}}
-            onFocus={() => setInputFocused(true)}
-            onBlur={() => setInputFocused(false)}
           />
           <input
             type="file"
