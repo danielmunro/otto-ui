@@ -31,7 +31,9 @@
     ],
     "overrides": [
       {
-        "files": ["**/*.js"],
+        "files": [
+          "**/*.js"
+        ],
         "rules": {
           "react-hooks/exhaustive-deps": "off"
         }
@@ -49,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prop-types": "^15.8.1"
   }
 }

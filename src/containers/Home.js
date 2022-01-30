@@ -54,7 +54,7 @@ export default function Home() {
         "x-session-token": sessionToken,
       },
     };
-    const response = await post(`${baseUrl}/user/${loggedInUser.uuid}/image`, formData, config);
+    const response = await post(`${baseUrl}/album/livestream`, formData, config);
     const data = await response.json();
     const currentImages = [...imagesToPost];
     currentImages.push(data);

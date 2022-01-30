@@ -25,8 +25,10 @@ export default function Image() {
     );
   }
 
+  const createdAt = new Date(image.created_at)
+
   return (
-    <Container>
+    <Container title={createdAt.toLocaleString()}>
       <img src={`${imageBaseUrl}/${image.s3_key}`} alt="" />
     </Container>
   );

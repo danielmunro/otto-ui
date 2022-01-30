@@ -66,7 +66,7 @@ export default function Post({post: {uuid, text, created_at, user: author, image
       </CardContent>
       <CardActions>
         { showPermalink && (
-          <Button component={Link} to={`/post/${uuid}`}>
+          <Button component={Link} to={`/p/${uuid}`}>
             Permalink
           </Button>
         )}

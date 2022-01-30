@@ -3,6 +3,7 @@ import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
+import Album from './containers/Album';
 import Followers from './containers/Followers';
 import Following from './containers/Following';
 import Image from './containers/Image';
@@ -146,7 +147,8 @@ function App() {
             <Route path="/u/:username/following" element={<Following />} />
             <Route path="/u/:username/followers" element={<Followers />} />
             <Route path="/i/:uuid" element={<Image />} />
-            <Route path="/post/:uuid" element={<Post />} />
+            <Route path="/p/:uuid" element={<Post />} />
+            <Route path="/a/:uuid" element={<Album />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/update-profile" element={<UpdateProfile />} />

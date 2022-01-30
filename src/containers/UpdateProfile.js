@@ -58,7 +58,7 @@ export default function UpdateProfile() {
         "x-session-token": sessionToken,
       },
     };
-    const response = await post(`${baseUrl}/user/${loggedInUser.uuid}/image`, formData, config);
+    const response = await post(`${baseUrl}/album/profile`, formData, config);
     const data = await response.json();
     const newUser = {...loggedInUser};
     newUser.profile_pic = data.s3_key;

@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -37,7 +38,7 @@ function a11yProps(index) {
   };
 }
 
-export default function UserTabs() {
+export default function UserTabs({posts, pictures}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -48,16 +49,15 @@ export default function UserTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Posts" {...a11yProps(0)} />
+          <Tab label="Pictures" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Posts
+        {posts}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Pictures
+        {pictures}
       </TabPanel>
     </Box>
   );

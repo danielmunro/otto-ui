@@ -9,16 +9,19 @@ import {
   getFollowing
 } from '../actions/follow';
 import { getUserByUsername } from '../actions/user';
+import Album from '../components/Album';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
+import UserTabs from '../components/UserTabs';
 import { baseUrl, imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function User() {
   const [user, setUser] = useState({});
   const [posts, setPosts] = useState([]);
+  const [albums, setAlbums] = useState([]);
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -46,11 +49,18 @@ export default function User() {
     setFollowers(followersData);
   };
 
+  const reloadAlbums = async () => {
+    const response = await get(`${baseUrl}/user/${params.username}/album`);
+    const data = await response.json();
+    setAlbums(data);
+  };
+
   useEffect(() => {
     (async function () {
       await reloadUser();
       await reloadPosts();
       await reloadUserFollows();
+      await reloadAlbums();
       setIsLoaded(true);
     })();
   }, []);
@@ -79,7 +89,7 @@ export default function User() {
     );
   }
 
-  console.log("user", user);
+  console.log("albums", albums);
 
   return (
     <Container title={`${user.name}'s Profile`}>
@@ -106,10 +116,18 @@ export default function User() {
           )
       )}
       <Divider style={{marginTop: 10, marginBottom: 10}} />
-      <Typography variant="h5">Posts</Typography>
-      {posts.map((post) => (
-        <Post post={post} key={post.uuid} />
-      ))}
+      <UserTabs
+        posts={(<div>
+          {posts.map((post) => (
+            <Post post={post} key={post.uuid} />
+          ))}
+        </div>)}
+        pictures={(<div>
+          {albums.map((album) => (
+            <Album album={album} key={album.uuid} />
+          ))}
+        </div>)}
+      />
     </Container>
   )
 }
