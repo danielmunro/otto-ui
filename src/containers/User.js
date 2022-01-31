@@ -115,7 +115,7 @@ export default function User() {
             </Button>
           )
       )}
-      <Divider style={{marginTop: 10, marginBottom: 10}} />
+      <Divider sx={{mt: 1, mb: 1}} />
       <UserTabs
         posts={(<div>
           {posts.map((post) => (

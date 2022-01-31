@@ -113,7 +113,7 @@ export default function Container({ children, title }) {
       </Drawer>
       <Box
         component="main"
-        sx={{ bgcolor: 'background.default', p: 3, width: 800 }}
+        sx={{ p: 1, width: 680 }}
       >
         <Toolbar />
         {children}

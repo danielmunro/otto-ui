@@ -58,7 +58,7 @@ export default function Post() {
   };
 
   return (
-    <Container title={`Read ${post.user.name}'s Post`}>
+    <Container title={`Read ${post.user.name || '@'+post.user.username}'s Post`}>
       <PostComponent post={post} onDelete={() => navigate("/")} />
       <h3>Replies</h3>
       { isLoggedIn && (

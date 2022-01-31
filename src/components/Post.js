@@ -13,15 +13,14 @@ import {
 } from '@mui/material';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { createFollow, deleteFollow } from '../actions/follow';
+import { Link } from 'react-router-dom';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Post({post: {uuid, text, created_at, user: author, images}, onDelete, showDelete, showPermalink}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { isLoggedIn, sessionToken, follows, setFollows, loggedInUser } = useContext(Context);
+  const { isLoggedIn, sessionToken, loggedInUser } = useContext(Context);
   const created = new Date(created_at);
 
   const tryDelete = async () => {
@@ -38,19 +37,19 @@ export default function Post({post: {uuid, text, created_at, user: author, image
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Card variant="outlined" sx={{marginBottom: "10px", marginTop: "10px" }}>
+    <Card variant="outlined" sx={{mb: 1}}>
       <CardContent>
-        <Typography gutterBottom variant="h5">
+        <Typography>
           <Avatar
             alt={authorDisplayName}
             src={profilePic}
-            style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
+            style={{ float: "left", marginRight: 10 }}
           />
           <Link to={`/u/${author.username}`}>
-            {author.username}
+            @{author.username}
           </Link>
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography color="text.secondary">
           {created.toLocaleString()}
         </Typography>
         <Typography>
