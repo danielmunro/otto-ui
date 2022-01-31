@@ -1,14 +1,11 @@
 import {
   Avatar,
   Button,
-  Card,
-  CardActions,
-  CardContent,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
+  DialogTitle, Paper,
   Typography
 } from '@mui/material';
 import nl2br from 'react-nl2br';
@@ -17,10 +14,11 @@ import { Link } from 'react-router-dom';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
+import PostMenu from './PostMenu';
 
-export default function Post({post: {uuid, text, created_at, user: author, images}, onDelete, showDelete, showPermalink}) {
+export default function Post({post: {uuid, text, created_at, user: author, images}, onDelete, showReply}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { isLoggedIn, sessionToken, loggedInUser } = useContext(Context);
+  const { isLoggedIn, sessionToken } = useContext(Context);
   const created = new Date(created_at);
 
   const tryDelete = async () => {
@@ -37,48 +35,46 @@ export default function Post({post: {uuid, text, created_at, user: author, image
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Card variant="outlined" sx={{mb: 1}}>
-      <CardContent>
-        <Typography>
-          <Avatar
-            alt={authorDisplayName}
-            src={profilePic}
-            style={{ float: "left", marginRight: 10 }}
-          />
-          <Link to={`/u/${author.username}`}>
-            @{author.username}
+    <Paper sx={{p: 1}}>
+      <Typography>
+        <Avatar
+          alt={authorDisplayName}
+          src={profilePic}
+          style={{ float: "left", marginRight: 10 }}
+        />
+        <Link to={`/u/${author.username}`}>
+          @{author.username}
+        </Link>
+        <PostMenu handleDelete={() => setIsDialogOpen(true)} />
+      </Typography>
+      <Typography color="text.secondary">
+        {created.toLocaleString()}
+      </Typography>
+      <Typography>
+        {nl2br(text)}
+      </Typography>
+      <div>
+        {images && images.map((i) => (
+          <Link to={`/i/${i.uuid}`} key={i.uuid}>
+            <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" alt="" />
           </Link>
-        </Typography>
-        <Typography color="text.secondary">
-          {created.toLocaleString()}
-        </Typography>
-        <Typography>
-          {nl2br(text)}
-        </Typography>
-        <div>
-          {images && images.map((i) => (
-            <Link to={`/i/${i.uuid}`} key={i.uuid}>
-              <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" alt="" />
-            </Link>
-          ))}
-        </div>
-      </CardContent>
-      <CardActions>
-        { showPermalink && (
-          <Button component={Link} to={`/p/${uuid}`}>
-            Permalink
-          </Button>
-        )}
-        { isLoggedIn && (
-          <div>
-            { author.uuid === loggedInUser.uuid && (showDelete || showDelete === undefined) && (
-              <Button onClick={() => setIsDialogOpen(true)}>
-                Delete
-              </Button>
-            )}
-          </div>
-        )}
-      </CardActions>
+        ))}
+      </div>
+      { showReply && (
+        <Button component={Link} to={`/p/${uuid}`}>
+          Reply
+        </Button>
+      )}
+      { isLoggedIn && (
+        <Button>
+          Like
+        </Button>
+      )}
+      { isLoggedIn && (
+        <Button>
+          Share
+        </Button>
+      )}
       <Dialog
         open={isDialogOpen}
         onClose={handleClose}
@@ -100,6 +96,6 @@ export default function Post({post: {uuid, text, created_at, user: author, image
           </Button>
         </DialogActions>
       </Dialog>
-    </Card>
+    </Paper>
   );
 }

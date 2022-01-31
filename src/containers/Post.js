@@ -59,7 +59,7 @@ export default function Post() {
 
   return (
     <Container title={`Read ${post.user.name || '@'+post.user.username}'s Post`}>
-      <PostComponent post={post} onDelete={() => navigate("/")} />
+      <PostComponent post={post} onDelete={() => navigate("/")} showReply={false} />
       <h3>Replies</h3>
       { isLoggedIn && (
         <form onSubmit={trySubmit} style={{paddingBottom: 20}}>

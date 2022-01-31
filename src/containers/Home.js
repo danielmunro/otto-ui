@@ -117,8 +117,7 @@ export default function Home() {
           post={post}
           key={post.uuid}
           onDelete={() => removePost(post)}
-          showPermalink={true}
-          showDelete={false}
+          showReply
         />
       ))}
     </Container>
