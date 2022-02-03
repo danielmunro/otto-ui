@@ -11,13 +11,15 @@ import {
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createPostLike, deletePostLike } from '../actions/like';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 import PostMenu from './PostMenu';
 
-export default function Post({post: {uuid, text, created_at, user: author, images}, onDelete, showReply}) {
+export default function Post({post: {uuid, text, created_at, user: author, images, selfLiked}, onDelete, showReply}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSelfLiked, setIsSelfLiked] = useState(selfLiked);
   const { isLoggedIn, sessionToken } = useContext(Context);
   const created = new Date(created_at);
 
@@ -31,22 +33,30 @@ export default function Post({post: {uuid, text, created_at, user: author, image
     setIsDialogOpen(false);
   };
 
+  const tryLikePost = async () => {
+    await createPostLike(sessionToken, uuid);
+    setIsSelfLiked(true);
+  };
+
+  const tryUnlikePost = async () => {
+    await deletePostLike(sessionToken, uuid);
+    setIsSelfLiked(false);
+  };
+
   const authorDisplayName = author.name ? author.name : "(no name)";
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Paper sx={{p: 1}}>
-      <Typography>
-        <Avatar
-          alt={authorDisplayName}
-          src={profilePic}
-          style={{ float: "left", marginRight: 10 }}
-        />
-        <Link to={`/u/${author.username}`}>
-          @{author.username}
-        </Link>
-        <PostMenu handleDelete={() => setIsDialogOpen(true)} />
-      </Typography>
+    <Paper sx={{p: 1, mb: 1}}>
+      <Avatar
+        alt={authorDisplayName}
+        src={profilePic}
+        style={{ float: "left", marginRight: 10 }}
+      />
+      <Link to={`/u/${author.username}`}>
+        @{author.username}
+      </Link>
+      <PostMenu handleDelete={() => setIsDialogOpen(true)} />
       <Typography color="text.secondary">
         {created.toLocaleString()}
       </Typography>
@@ -65,9 +75,14 @@ export default function Post({post: {uuid, text, created_at, user: author, image
           Reply
         </Button>
       )}
-      { isLoggedIn && (
-        <Button>
+      { isLoggedIn && !isSelfLiked && (
+        <Button onClick={tryLikePost}>
           Like
+        </Button>
+      )}
+      { isLoggedIn && isSelfLiked && (
+        <Button onClick={tryUnlikePost}>
+          Unlike
         </Button>
       )}
       { isLoggedIn && (

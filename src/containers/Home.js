@@ -67,8 +67,6 @@ export default function Home() {
     ref.current.click();
   };
 
-  console.log("imagesToPost", imagesToPost);
-
   return (
     <Container title={"Home"}>
       { loggedInUser && (
