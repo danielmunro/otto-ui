@@ -2,6 +2,7 @@ import { Avatar, Button, Divider, Typography } from '@mui/material';
 import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { createAlbum } from '../actions/album';
 import {
   createFollow,
   deleteFollow,
@@ -87,6 +88,12 @@ export default function User() {
     setNewAlbumName("");
   }
 
+  const tryCreateAlbum = async () => {
+    await createAlbum(sessionToken, newAlbumName);
+    setNewAlbumName("");
+    await reloadAlbums();
+  };
+
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
   if (!isLoaded) {
@@ -150,7 +157,7 @@ export default function User() {
                 value={newAlbumName}
                 style={{width: 400}}
               />
-              <Button style={{margin: 16}}>
+              <Button style={{margin: 16}} onClick={tryCreateAlbum}>
                 Create New Album
               </Button>
             </div>

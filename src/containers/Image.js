@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import getImage from '../actions/image';
+import { getImage } from '../actions/image';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import { imageBaseUrl } from '../utils/config';
