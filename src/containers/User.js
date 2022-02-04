@@ -14,6 +14,7 @@ import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
+import TextInput from '../components/TextInput';
 import UserTabs from '../components/UserTabs';
 import { baseUrl, imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
@@ -25,6 +26,8 @@ export default function User() {
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showNewAlbum, setShowNewAlbum] = useState(false);
+  const [newAlbumName, setNewAlbumName] = useState("");
   const { follows, setFollows, loggedInUser, sessionToken, isLoggedIn } = useContext(Context);
   const params = useParams();
 
@@ -79,6 +82,11 @@ export default function User() {
     setFollows(follows.filter((f) => f.uuid !== follow.uuid));
   };
 
+  const cancelAddAlbum = () => {
+    setShowNewAlbum(false);
+    setNewAlbumName("");
+  }
+
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
   if (!isLoaded) {
@@ -89,10 +97,10 @@ export default function User() {
     );
   }
 
-  console.log("albums", albums);
+  const displayName = user.name || '@' + user.username;
 
   return (
-    <Container title={`${user.name}'s Profile`}>
+    <Container title={`${displayName}'s Profile`}>
       <div style={{paddingBottom: 10}}>
         <Avatar
           alt={user.username}
@@ -123,6 +131,30 @@ export default function User() {
           ))}
         </div>)}
         pictures={(<div>
+          { !showNewAlbum && (
+            <Button variant="outlined" onClick={() => setShowNewAlbum(true)}>
+              Add Album
+            </Button>
+          )}
+          { showNewAlbum && (
+            <Button variant="outlined" onClick={cancelAddAlbum}>
+              Cancel
+            </Button>
+          )}
+          { showNewAlbum && (
+            <div style={{marginTop: 10}}>
+              <TextInput
+                label="Album name"
+                variant="outlined"
+                onChangeValue={setNewAlbumName}
+                value={newAlbumName}
+                style={{width: 400}}
+              />
+              <Button style={{margin: 16}}>
+                Create New Album
+              </Button>
+            </div>
+          )}
           {albums.map((album) => (
             <Album album={album} key={album.uuid} />
           ))}
