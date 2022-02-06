@@ -2,7 +2,7 @@ import { Avatar, Button, Divider } from '@mui/material';
 import { post, putJSON } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserByUsername } from '../actions/user';
+import { getUserByUsername, updateUser } from '../actions/user';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -35,12 +35,7 @@ export default function UpdateProfile() {
 
   const tryUpdateProfile = async (event) => {
     event.preventDefault();
-    await putJSON(`${baseUrl}/user`, {
-      name,
-      birthday,
-      bio_message: bio,
-      uuid: loggedInUser.uuid,
-    });
+    await updateUser(sessionToken, loggedInUser.uuid, name, birthday, bio);
     const update = {...loggedInUser};
     update.name = name;
     update.birthday = birthday;
