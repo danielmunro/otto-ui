@@ -2,7 +2,7 @@ import { Avatar, Button, Divider, Typography } from '@mui/material';
 import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { createAlbum } from '../actions/album';
+import { createAlbum, getAlbums } from '../actions/album';
 import {
   createFollow,
   deleteFollow,
@@ -55,7 +55,7 @@ export default function User() {
   };
 
   const reloadAlbums = async () => {
-    const response = await get(`${baseUrl}/user/${params.username}/album`);
+    const response = await getAlbums(params.username);
     const data = await response.json();
     setAlbums(data);
   };
