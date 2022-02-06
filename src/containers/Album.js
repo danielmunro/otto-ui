@@ -3,10 +3,10 @@ import { post } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getAlbum } from '../actions/album';
-import { getImagesForAlbum } from '../actions/image';
+import { createImage, getImagesForAlbum } from '../actions/image';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
-import { baseUrl, imageBaseUrl } from '../utils/config';
+import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Album() {
@@ -32,14 +32,7 @@ export default function Album() {
 
   const tryUploadNewPic = async (event) => {
     event.preventDefault();
-    let formData = new FormData();
-    formData.append("image", imageToUpload);
-    const config = {
-      headers: {
-        "x-session-token": sessionToken,
-      },
-    };
-    const response = await post(`${baseUrl}/album/${params.uuid}/image`, formData, config);
+    const response = createImage(sessionToken, params.uuid, imageToUpload);
     const data = await response.json();
     const allImages = [...images, data];
     setImages(allImages);
