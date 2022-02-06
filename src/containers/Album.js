@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import { post } from '@tkrotoff/fetch';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getAlbum } from '../actions/album';
 import { getImagesForAlbum } from '../actions/image';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
-import { imageBaseUrl } from '../utils/config';
+import { baseUrl, imageBaseUrl } from '../utils/config';
+import Context from '../utils/Context';
 
 export default function Album() {
   const [album, setAlbum] = useState(null);
   const [images, setImages] = useState([]);
+  const [imageToUpload, setImageToUpload] = useState("");
+  const {sessionToken} = useContext(Context);
   const params = useParams();
+  const ref = useRef();
 
   const reloadAlbum = async () => {
     const response = await getAlbum(params.uuid);
@@ -22,6 +28,22 @@ export default function Album() {
     const response = await getImagesForAlbum(albumUuid);
     const data = await response.json();
     setImages(data);
+  };
+
+  const tryUploadNewPic = async (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append("image", imageToUpload);
+    const config = {
+      headers: {
+        "x-session-token": sessionToken,
+      },
+    };
+    const response = await post(`${baseUrl}/album/${params.uuid}/image`, formData, config);
+    const data = await response.json();
+    const allImages = [...images, data];
+    setImages(allImages);
+    ref.current.value = "";
   };
 
   useEffect(() => {
@@ -41,6 +63,14 @@ export default function Album() {
 
   return (
     <Container title={album.name}>
+      <form onSubmit={tryUploadNewPic}>
+        <input
+          type="file"
+          ref={ref}
+          onChange={(event) => setImageToUpload(event.target.files[0])}
+        />
+        <Button type="submit">Add To Album</Button>
+      </form>
       {images.map((image) => (
         <Link to={`/i/${image.uuid}`} key={image.uuid}>
           <img

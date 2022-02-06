@@ -21,8 +21,12 @@ export function deletePost(sessionToken, postUuid) {
   });
 }
 
-export function getPostsForUser(sessionToken, userUuid) {
-  return get(`${baseUrl}/user/${userUuid}/posts`);
+export function getPostsForUser(sessionToken, username) {
+  return get(`${baseUrl}/user/${username}/posts`, {
+    headers: {
+      'x-session-token': sessionToken,
+    },
+  });
 }
 
 export function getFollowPostsForUser(sessionToken, userUuid) {

@@ -20,15 +20,15 @@ export default function Home() {
   const [inputFocused, setInputFocused] = useState(false);
   const ref = useRef();
 
-  const getPosts = async (token) => {
-    const response = await requestGetPosts(token);
+  const getPosts = async () => {
+    const response = await requestGetPosts(sessionToken);
     const data = await response.json();
     setPosts(data ?? []);
   };
 
   useEffect(() => {
     if (isAppLoaded) {
-      getPosts(sessionToken);
+      getPosts();
     }
   }, [isAppLoaded]);
 
@@ -38,7 +38,7 @@ export default function Home() {
     if (response.status === 201) {
       setNewPost('');
       setImagesToPost([]);
-      await getPosts(sessionToken);
+      await getPosts();
     }
   };
 

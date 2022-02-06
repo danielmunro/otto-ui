@@ -9,6 +9,7 @@ import {
   getFollowers,
   getFollowing
 } from '../actions/follow';
+import { getPostsForUser } from '../actions/post';
 import { getUserByUsername } from '../actions/user';
 import Album from '../components/Album';
 import CircularIndeterminate from '../components/CircularIndeterminate';
@@ -29,7 +30,7 @@ export default function User() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showNewAlbum, setShowNewAlbum] = useState(false);
   const [newAlbumName, setNewAlbumName] = useState("");
-  const { follows, setFollows, loggedInUser, sessionToken, isLoggedIn } = useContext(Context);
+  const { follows, setFollows, loggedInUser, sessionToken, isLoggedIn, isAppLoaded } = useContext(Context);
   const params = useParams();
 
   const reloadUser = async () => {
@@ -39,7 +40,7 @@ export default function User() {
   };
 
   const reloadPosts = async () => {
-    const response = await get(`${baseUrl}/user/${params.username}/posts`);
+    const response = await getPostsForUser(sessionToken, params.username);
     const data = await response.json();
     setPosts(data);
   };
@@ -60,14 +61,16 @@ export default function User() {
   };
 
   useEffect(() => {
-    (async function () {
-      await reloadUser();
-      await reloadPosts();
-      await reloadUserFollows();
-      await reloadAlbums();
-      setIsLoaded(true);
-    })();
-  }, []);
+    if (isAppLoaded) {
+      (async function () {
+        await reloadUser();
+        await reloadPosts();
+        await reloadUserFollows();
+        await reloadAlbums();
+        setIsLoaded(true);
+      })();
+    }
+  }, [isAppLoaded]);
 
   const isSelf = loggedInUser && params.username === loggedInUser.username;
   const follow = follows.find((f) => f.following.username === params.username);
