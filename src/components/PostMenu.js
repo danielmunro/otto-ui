@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const ITEM_HEIGHT = 48;
 
-export default function PostMenu({handleDelete}) {
+export default function PostMenu({ handleDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
