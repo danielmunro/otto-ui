@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Album from '../components/Album';
 
 export default {
-  title: 'Components/Album',
+  title: 'Navigation/Album',
   component: Album,
 };
 

@@ -1,15 +1,17 @@
 import React from 'react';
-import CircularIndeterminate from '../components/CircularIndeterminate';
+import UserTabs from '../components/UserTabs';
 
 export default {
-  title: 'UI/CircularIndeterminate',
-  component: CircularIndeterminate,
+  title: 'Navigation/UserTabs',
+  component: UserTabs,
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <CircularIndeterminate {...args} />;
+const Template = (args) => <UserTabs {...args} />;
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
+  posts: <div />,
+  pictures: <div />,
 };

@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import FollowDetails from '../components/FollowDetails';
 
 export default {
-  title: 'Components/FollowDetails',
+  title: 'Navigation/FollowDetails',
   component: FollowDetails,
 };
 

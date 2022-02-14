@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Post from '../components/Post';
 
 export default {
-  title: 'Components/Post',
+  title: 'UI/Post',
   component: Post,
 };
 

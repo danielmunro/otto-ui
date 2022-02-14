@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Reply from '../components/Reply';
 
 export default {
-  title: 'Components/Reply',
+  title: 'UI/Reply',
   component: Reply,
 };
 

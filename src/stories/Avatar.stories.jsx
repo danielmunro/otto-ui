@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Avatar from '../components/Avatar';
 
 export default {
-  title: 'Components/Avatar',
+  title: 'UI/Avatar',
   component: Avatar,
 };
 
