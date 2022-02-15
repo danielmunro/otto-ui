@@ -1,4 +1,4 @@
-import { Button, Divider } from '@mui/material';
+import { Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPost } from '../actions/post';

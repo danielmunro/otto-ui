@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider } from '@mui/material';
-import { post, putJSON } from '@tkrotoff/fetch';
+import { post } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUserByUsername, updateUser } from '../actions/user';

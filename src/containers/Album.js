@@ -1,5 +1,4 @@
 import { Button } from '@mui/material';
-import { post } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getAlbum } from '../actions/album';

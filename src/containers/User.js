@@ -1,5 +1,4 @@
 import { Avatar, Button, Divider, Typography } from '@mui/material';
-import { get } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { createAlbum, getAlbums } from '../actions/album';
@@ -18,7 +17,7 @@ import FollowDetails from '../components/FollowDetails';
 import Post from '../components/Post';
 import TextInput from '../components/TextInput';
 import UserTabs from '../components/UserTabs';
-import { baseUrl, imageBaseUrl } from '../utils/config';
+import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function User() {
