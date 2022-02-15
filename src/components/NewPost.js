@@ -46,7 +46,7 @@ export default function NewPost({ onPostCreated }) {
     >
       <div>
         {imagesToPost.map((img) => (
-          <img src={`${imageBaseUrl}/${img.s3_key}`} alt="image to upload" style={{width: 300}} />
+          <img src={`${imageBaseUrl}/${img.s3_key}`} alt="selected to upload" style={{width: 300}} />
         ))}
       </div>
       <TextInput
