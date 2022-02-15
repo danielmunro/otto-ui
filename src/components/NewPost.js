@@ -5,11 +5,12 @@ import { createLivestreamImage } from '../actions/image';
 import { createPost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
+import ImageToUpload from './ImageToUpload';
 import TextInput from './TextInput';
 
-export default function NewPost({ onPostCreated }) {
+export default function NewPost({ onPostCreated, images }) {
   const [newPost, setNewPost] = useState('');
-  const [imagesToPost, setImagesToPost] = useState([]);
+  const [imagesToPost, setImagesToPost] = useState(images || []);
   const [inputFocused, setInputFocused] = useState(false);
   const { sessionToken, loggedInUser } = useContext(Context);
   const ref = useRef();
@@ -38,15 +39,20 @@ export default function NewPost({ onPostCreated }) {
     }
   };
 
+  const tryRemoveImage = (image) => {
+    const newImages = imagesToPost.filter((i) => i.uuid !== image.uuid);
+    setImagesToPost(newImages);
+  };
+
   return (
     <form
       onSubmit={trySubmitNewPost}
       onFocus={() => setInputFocused(true)}
       onBlur={() => setInputFocused(false)}
     >
-      <div>
+      <div style={{display: "flex"}}>
         {imagesToPost.map((img) => (
-          <img src={`${imageBaseUrl}/${img.s3_key}`} alt="selected to upload" style={{width: 300}} />
+          <ImageToUpload image={img} onRemove={() => tryRemoveImage(img)} />
         ))}
       </div>
       <TextInput
