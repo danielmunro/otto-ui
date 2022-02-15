@@ -3,7 +3,6 @@ import { Button, IconButton } from '@mui/material';
 import React, { useContext, useRef, useState } from 'react';
 import { createLivestreamImage } from '../actions/image';
 import { createPost } from '../actions/post';
-import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 import ImageToUpload from './ImageToUpload';
 import TextInput from './TextInput';
