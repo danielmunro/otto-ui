@@ -18,3 +18,13 @@ export function createImage(sessionToken, uuid, image) {
     },
   });
 }
+
+export function createLivestreamImage(sessionToken, image) {
+  let formData = new FormData();
+  formData.append("image", image);
+  return post(`${baseUrl}/album/livestream`, formData, {
+    headers: {
+      "x-session-token": sessionToken,
+    },
+  });
+}

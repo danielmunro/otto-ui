@@ -1,16 +1,16 @@
 import { Button, IconButton } from '@mui/material';
-import { post } from '@tkrotoff/fetch';
 import React, {
   useContext,
   useEffect, useRef,
   useState
 } from 'react';
+import { createLivestreamImage } from '../actions/image';
 import { createPost, getPosts as requestGetPosts } from '../actions/post';
 import Container from '../components/Container';
 import Post from '../components/Post';
 import TextInput from '../components/TextInput';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { baseUrl, imageBaseUrl } from '../utils/config';
+import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function Home() {
@@ -47,14 +47,7 @@ export default function Home() {
   };
 
   const tryUploadNewPic = async (pic) => {
-    let formData = new FormData();
-    formData.append("image", pic);
-    const config = {
-      headers: {
-        "x-session-token": sessionToken,
-      },
-    };
-    const response = await post(`${baseUrl}/album/livestream`, formData, config);
+    const response = await createLivestreamImage(sessionToken, pic);
     const data = await response.json();
     const currentImages = [...imagesToPost];
     currentImages.push(data);
