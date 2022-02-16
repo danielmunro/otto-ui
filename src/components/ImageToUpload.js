@@ -2,18 +2,26 @@ import React, { useState } from 'react';
 import { backgroundColor, imageBaseUrl } from '../utils/config';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-export default function ImageToUpload({ image: { s3_key }, onRemove }) {
-  const [isHover, setIsHover] = useState(false);
+export default function ImageToUpload({ image: { s3_key }, onRemove, hover }) {
+  const [isHover, setIsHover] = useState(hover || false);
+  const [iconHover, setIconHover] = useState(false);
 
   return (
     <div
-      style={{position: 'relative'}}
+      style={{
+        position: 'relative',
+      }}
       onMouseOver={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
       {isHover ?
-        <a href="#" onClick={onRemove}>
-          <HighlightOffIcon style={{position: "absolute", right: 10, top: 10}} />
+        <a
+          href="#"
+          onClick={onRemove}
+          onMouseOver={() => setIconHover(true)}
+          onMouseOut={() => setIconHover(false)}
+        >
+          <HighlightOffIcon style={{position: "absolute", right: 10, top: 10, color: iconHover ? "white" : "black"}} />
         </a>
         :
         null
