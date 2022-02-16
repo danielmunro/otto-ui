@@ -21,7 +21,12 @@ export default function ImageToUpload({ image: { s3_key }, onRemove, hover }) {
           onMouseOver={() => setIconHover(true)}
           onMouseOut={() => setIconHover(false)}
         >
-          <HighlightOffIcon style={{position: "absolute", right: 10, top: 10, color: iconHover ? "white" : "black"}} />
+          <HighlightOffIcon style={{
+            position: "absolute",
+            right: 10,
+            top: 10,
+            color: iconHover ? "white" : "black"
+          }} />
         </a>
         :
         null
