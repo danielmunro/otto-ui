@@ -17,7 +17,7 @@ import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 import PostMenu from './PostMenu';
 
-export default function Post({post: {uuid, text, created_at, user: author, images, selfLiked}, onDelete, showReply}) {
+export default function Post({post: {uuid, text, created_at, user: author, images, selfLiked}, onDelete, showReply, sharePostClick}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSelfLiked, setIsSelfLiked] = useState(selfLiked);
   const { isLoggedIn, sessionToken } = useContext(Context);
@@ -86,7 +86,7 @@ export default function Post({post: {uuid, text, created_at, user: author, image
         </Button>
       )}
       { isLoggedIn && (
-        <Button>
+        <Button onClick={sharePostClick}>
           Share
         </Button>
       )}

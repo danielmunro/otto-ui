@@ -15,14 +15,20 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from '../utils/Context';
 
 const drawerWidth = 240;
 
 export default function Container({ children, title }) {
-  const { isLoggedIn, setIsLoggedIn, setSessionToken, setLoggedInUser, loggedInUser } = useContext(Context);
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    setSessionToken,
+    setLoggedInUser,
+    loggedInUser,
+  } = useContext(Context);
   const navigate = useNavigate();
 
   const tryLogout = (event) => {
@@ -43,7 +49,7 @@ export default function Container({ children, title }) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, backgroundColor: "#011627" }}
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, backgroundColor: "#011627", zIndex: 0, }}
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
@@ -59,6 +65,7 @@ export default function Container({ children, title }) {
             width: drawerWidth,
             boxSizing: 'border-box',
           },
+          zIndex: 0,
         }}
         variant="permanent"
         anchor="left"

@@ -10,9 +10,8 @@ import TextInput from './TextInput';
 export default function NewPost({ onPostCreated, images }) {
   const [newPost, setNewPost] = useState('');
   const [imagesToPost, setImagesToPost] = useState(images || []);
-  const [inputFocused, setInputFocused] = useState(false);
   const { sessionToken, loggedInUser } = useContext(Context);
-  const ref = useRef();
+  const imageRef = useRef();
 
   const tryUploadNewPic = async (pic) => {
     const response = await createLivestreamImage(sessionToken, pic);
@@ -20,12 +19,12 @@ export default function NewPost({ onPostCreated, images }) {
     const currentImages = [...imagesToPost];
     currentImages.push(data);
     setImagesToPost(currentImages);
-    ref.current.value = "";
+    imageRef.current.value = "";
   };
 
   const showFileSelector = (event) => {
     event.preventDefault();
-    ref.current.click();
+    imageRef.current.click();
   };
 
   const trySubmitNewPost = async (event) => {
@@ -46,8 +45,6 @@ export default function NewPost({ onPostCreated, images }) {
   return (
     <form
       onSubmit={trySubmitNewPost}
-      onFocus={() => setInputFocused(true)}
-      onBlur={() => setInputFocused(false)}
     >
       <div style={{display: "flex"}}>
         {imagesToPost.map((img) => (
@@ -60,12 +57,12 @@ export default function NewPost({ onPostCreated, images }) {
         onChangeValue={setNewPost}
         value={newPost}
         multiline
-        minRows={inputFocused ? 3 : 1}
         style={{width: 500}}
+        autoFocus
       />
       <input
         type="file"
-        ref={ref}
+        ref={imageRef}
         onChange={(event) => tryUploadNewPic(event.target.files[0])}
         style={{display: "none"}}
       />

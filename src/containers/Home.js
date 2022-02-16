@@ -1,15 +1,24 @@
 import React, {
   useContext,
   useEffect,
+  useState,
 } from 'react';
 import { getPosts as requestGetPosts } from '../actions/post';
+import BackdropNewPost from '../components/BackdropNewPost';
 import Container from '../components/Container';
 import NewPost from '../components/NewPost';
 import Post from '../components/Post';
 import Context from '../utils/Context';
 
 export default function Home() {
-  const { sessionToken, loggedInUser, isAppLoaded, posts, setPosts } = useContext(Context);
+  const [showBackdrop, setShowBackdrop] = useState(false);
+  const {
+    sessionToken,
+    loggedInUser,
+    isAppLoaded,
+    posts,
+    setPosts,
+  } = useContext(Context);
 
   const getPosts = async () => {
     const response = await requestGetPosts(sessionToken);
@@ -27,10 +36,16 @@ export default function Home() {
     setPosts(posts.filter((p) => p !== post));
   };
 
+  const newPostCreated = () => {
+    setShowBackdrop(false);
+    getPosts();
+  }
+
   return (
     <Container title={"Home"}>
+      <BackdropNewPost open={showBackdrop} onPostCreated={getPosts} closeBackdrop={() => setShowBackdrop(false)} />
       { loggedInUser && (
-        <NewPost onPostCreated={getPosts} />
+        <NewPost onPostCreated={newPostCreated} />
       )}
       {posts.map((post) => (
         <Post
@@ -38,6 +53,7 @@ export default function Home() {
           key={post.uuid}
           onDelete={() => removePost(post)}
           showReply
+          sharePostClick={() => setShowBackdrop(true)}
         />
       ))}
     </Container>
