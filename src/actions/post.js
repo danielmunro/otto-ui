@@ -13,6 +13,19 @@ export function createPost(sessionToken, userUuid, newPostText, images) {
   });
 }
 
+export function createShare(sessionToken, userUuid, newPostText, images, postUuid) {
+  return postJSON(`${baseUrl}/share`, {
+    user: {uuid: userUuid},
+    post: {uuid: postUuid},
+    text:  newPostText,
+    images,
+  }, {
+    headers: {
+      'x-session-token': sessionToken,
+    },
+  });
+}
+
 export function deletePost(sessionToken, postUuid) {
   return del(`${baseUrl}/post/${postUuid}`, {
     headers: {

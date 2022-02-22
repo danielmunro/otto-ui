@@ -12,6 +12,7 @@ import Context from '../utils/Context';
 
 export default function Home() {
   const [showBackdrop, setShowBackdrop] = useState(false);
+  const [postToShare, setPostToShare] = useState(null);
   const {
     sessionToken,
     loggedInUser,
@@ -41,9 +42,19 @@ export default function Home() {
     getPosts();
   }
 
+  const sharePostClicked = (post) => {
+    setShowBackdrop(true);
+    setPostToShare(post);
+  };
+
   return (
     <Container title={"Home"}>
-      <BackdropNewPost open={showBackdrop} onPostCreated={getPosts} closeBackdrop={() => setShowBackdrop(false)} />
+      <BackdropNewPost
+        open={showBackdrop}
+        onPostCreated={getPosts}
+        closeBackdrop={() => setShowBackdrop(false)}
+        post={postToShare}
+      />
       { loggedInUser && (
         <NewPost onPostCreated={newPostCreated} />
       )}
@@ -53,7 +64,7 @@ export default function Home() {
           key={post.uuid}
           onDelete={() => removePost(post)}
           showReply
-          sharePostClick={() => setShowBackdrop(true)}
+          sharePostClick={() => sharePostClicked(post)}
         />
       ))}
     </Container>

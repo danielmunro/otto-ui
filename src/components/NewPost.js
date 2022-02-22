@@ -2,12 +2,12 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { Button, IconButton } from '@mui/material';
 import React, { useContext, useRef, useState } from 'react';
 import { createLivestreamImage } from '../actions/image';
-import { createPost } from '../actions/post';
+import { createPost, createShare } from '../actions/post';
 import Context from '../utils/Context';
 import ImageToUpload from './ImageToUpload';
 import TextInput from './TextInput';
 
-export default function NewPost({ onPostCreated, images }) {
+export default function NewPost({ onPostCreated, images, post }) {
   const [newPost, setNewPost] = useState('');
   const [imagesToPost, setImagesToPost] = useState(images || []);
   const { sessionToken, loggedInUser } = useContext(Context);
@@ -29,7 +29,9 @@ export default function NewPost({ onPostCreated, images }) {
 
   const trySubmitNewPost = async (event) => {
     event.preventDefault();
-    const response = await createPost(sessionToken, loggedInUser.uuid, newPost, imagesToPost);
+    const response = post ?
+      await createShare(sessionToken, loggedInUser.uuid, newPost, imagesToPost, post.uuid) :
+      await createPost(sessionToken, loggedInUser.uuid, newPost, imagesToPost);
     if (response.status === 201) {
       setNewPost('');
       setImagesToPost([]);

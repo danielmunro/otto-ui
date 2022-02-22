@@ -17,11 +17,18 @@ import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 import PostMenu from './PostMenu';
 
-export default function Post({post: {uuid, text, created_at, user: author, images, selfLiked}, onDelete, showReply, sharePostClick}) {
+export default function Post({
+  post: {uuid, text, created_at, user: author, images, selfLiked},
+  onDelete,
+  showReply,
+  showShare,
+  sharePostClick,
+}) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSelfLiked, setIsSelfLiked] = useState(selfLiked);
   const { isLoggedIn, sessionToken } = useContext(Context);
   const created = new Date(created_at);
+  showShare = showShare === undefined || Boolean(showShare);
 
   const tryDelete = async () => {
     await deletePost(sessionToken, uuid);
@@ -85,7 +92,7 @@ export default function Post({post: {uuid, text, created_at, user: author, image
           Unlike
         </Button>
       )}
-      { isLoggedIn && (
+      { isLoggedIn && showShare && (
         <Button onClick={sharePostClick}>
           Share
         </Button>

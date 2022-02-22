@@ -2,10 +2,9 @@ import { Backdrop } from '@mui/material';
 import { useContext } from 'react';
 import Context from '../utils/Context';
 import NewPost from './NewPost';
+import Post from './Post';
 
-export default function BackdropNewPost({ open, onPostCreated, closeBackdrop }) {
-  const { loggedInUser } = useContext(Context);
-
+export default function BackdropNewPost({ open, onPostCreated, closeBackdrop, post }) {
   return (
     <Backdrop
       open={open}
@@ -14,19 +13,20 @@ export default function BackdropNewPost({ open, onPostCreated, closeBackdrop }) 
         zIndex: 1,
       }}
     >
-      { loggedInUser && (
-        <div
-          onClick={(event) => event.stopPropagation() }
-          style={{
-            backgroundColor: "white",
-            position: "relative",
-            padding: 5,
-            borderRadius: 5,
-          }}
-        >
-          <NewPost expanded onPostCreated={onPostCreated} />
-        </div>
-      )}
+      <div
+        onClick={(event) => event.stopPropagation() }
+        style={{
+          backgroundColor: "white",
+          position: "relative",
+          padding: 5,
+          borderRadius: 5,
+        }}
+      >
+        <NewPost post={post} onPostCreated={onPostCreated} />
+        { post && (
+          <Post post={post} showShare={false} />
+        )}
+      </div>
     </Backdrop>
   );
 }
