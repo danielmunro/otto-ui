@@ -1,6 +1,4 @@
 import { Backdrop } from '@mui/material';
-import { useContext } from 'react';
-import Context from '../utils/Context';
 import NewPost from './NewPost';
 import Post from './Post';
 

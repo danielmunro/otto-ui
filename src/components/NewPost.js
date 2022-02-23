@@ -32,10 +32,12 @@ export default function NewPost({ onPostCreated, images, post }) {
     const response = post ?
       await createShare(sessionToken, loggedInUser.uuid, newPost, imagesToPost, post.uuid) :
       await createPost(sessionToken, loggedInUser.uuid, newPost, imagesToPost);
-    if (response.status === 201) {
+    if (response.status === 200 || response.status === 201) {
       setNewPost('');
       setImagesToPost([]);
+      console.log("NEW POST CREATED");
       onPostCreated();
+      console.log("done");
     }
   };
 

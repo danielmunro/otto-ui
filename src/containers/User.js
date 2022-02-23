@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { createAlbum, getAlbums } from '../actions/album';
 import {
@@ -14,7 +14,7 @@ import Album from '../components/Album';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
-import Post from '../components/Post';
+import PostCollection from '../components/PostCollection';
 import TextInput from '../components/TextInput';
 import UserTabs from '../components/UserTabs';
 import { imageBaseUrl } from '../utils/config';
@@ -29,7 +29,14 @@ export default function User() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showNewAlbum, setShowNewAlbum] = useState(false);
   const [newAlbumName, setNewAlbumName] = useState("");
-  const { follows, setFollows, loggedInUser, sessionToken, isLoggedIn, isAppLoaded } = useContext(Context);
+  const {
+    follows,
+    setFollows,
+    loggedInUser,
+    sessionToken,
+    isLoggedIn,
+    isAppLoaded,
+  } = useContext(Context);
   const params = useParams();
 
   const reloadUser = async () => {
@@ -57,6 +64,10 @@ export default function User() {
     const response = await getAlbums(params.username);
     const data = await response.json();
     setAlbums(data);
+  };
+
+  const removePost = (post) => {
+    setPosts(posts.filter((p) => p.uuid !== post.uuid));
   };
 
   useEffect(() => {
@@ -134,11 +145,13 @@ export default function User() {
       )}
       <Divider sx={{mt: 1, mb: 1}} />
       <UserTabs
-        posts={(<div>
-          {posts.map((post) => (
-            <Post post={post} key={post.uuid} />
-          ))}
-        </div>)}
+        posts={(
+          <PostCollection
+            posts={posts}
+            reloadPosts={reloadPosts}
+            onDelete={removePost}
+          />
+        )}
         pictures={(<div>
           { !showNewAlbum && (
             <Button variant="outlined" onClick={() => setShowNewAlbum(true)}>

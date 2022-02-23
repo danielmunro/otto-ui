@@ -1,18 +1,14 @@
 import React, {
   useContext,
   useEffect,
-  useState,
 } from 'react';
 import { getPosts as requestGetPosts } from '../actions/post';
-import BackdropNewPost from '../components/BackdropNewPost';
 import Container from '../components/Container';
 import NewPost from '../components/NewPost';
-import Post from '../components/Post';
+import PostCollection from '../components/PostCollection';
 import Context from '../utils/Context';
 
 export default function Home() {
-  const [showBackdrop, setShowBackdrop] = useState(false);
-  const [postToShare, setPostToShare] = useState(null);
   const {
     sessionToken,
     loggedInUser,
@@ -38,35 +34,19 @@ export default function Home() {
   };
 
   const newPostCreated = () => {
-    setShowBackdrop(false);
     getPosts();
   }
 
-  const sharePostClicked = (post) => {
-    setShowBackdrop(true);
-    setPostToShare(post);
-  };
-
   return (
     <Container title={"Home"}>
-      <BackdropNewPost
-        open={showBackdrop}
-        onPostCreated={getPosts}
-        closeBackdrop={() => setShowBackdrop(false)}
-        post={postToShare}
-      />
       { loggedInUser && (
         <NewPost onPostCreated={newPostCreated} />
       )}
-      {posts.map((post) => (
-        <Post
-          post={post}
-          key={post.uuid}
-          onDelete={() => removePost(post)}
-          showReply
-          sharePostClick={() => sharePostClicked(post)}
-        />
-      ))}
+      <PostCollection
+        posts={posts}
+        reloadPosts={getPosts}
+        onDelete={removePost}
+      />
     </Container>
   );
 }
