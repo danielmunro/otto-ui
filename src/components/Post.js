@@ -18,7 +18,15 @@ import Context from '../utils/Context';
 import PostMenu from './PostMenu';
 
 export default function Post({
-  post: {uuid, text, created_at, user: author, images, selfLiked},
+  post: {
+    uuid,
+    text,
+    created_at,
+    user: author,
+    images,
+    selfLiked,
+    share,
+  },
   onDelete,
   showReply,
   showShare,
@@ -70,6 +78,28 @@ export default function Post({
       <Typography>
         {nl2br(text)}
       </Typography>
+      { share && (
+        <Paper
+          sx={{p: 1, mb: 1, }}
+          elevation={0}
+          variant="outlined"
+        >
+          <Avatar
+            alt={share.user.name}
+            src={share.user.profile_pic ? `${imageBaseUrl}/${share.user.profile_pic}` : ''}
+            style={{ float: "left", marginRight: 10 }}
+          />
+          <Link to={`/u/${share.user.username}`}>
+            @{share.user.username}
+          </Link>
+          <Typography color="text.secondary">
+            {new Date(share.created_at).toLocaleString()}
+          </Typography>
+          <Typography>
+            {nl2br(share.text)}
+          </Typography>
+        </Paper>
+      )}
       <div>
         {images && images.map((i) => (
           <Link to={`/i/${i.uuid}`} key={i.uuid}>

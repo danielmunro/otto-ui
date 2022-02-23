@@ -49,7 +49,12 @@ export default function Container({ children, title }) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, backgroundColor: "#011627", zIndex: 0, }}
+        sx={{
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+          backgroundColor: "#011627",
+          zIndex: 1,
+        }}
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
