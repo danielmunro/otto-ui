@@ -38,30 +38,31 @@ export default function User() {
     isAppLoaded,
   } = useContext(Context);
   const params = useParams();
+  const username = params.username;
 
   const reloadUser = async () => {
-    const response = await getUserByUsername(params.username);
+    const response = await getUserByUsername(username);
     const data = await response.json();
     setUser(data);
   };
 
   const reloadPosts = async () => {
-    const response = await getPostsForUser(sessionToken, params.username);
+    const response = await getPostsForUser(sessionToken, username);
     const data = await response.json();
     setPosts(data);
   };
 
   const reloadUserFollows = async () => {
-    const followingResponse = await getFollowing(params.username);
+    const followingResponse = await getFollowing(username);
     const followingData = await followingResponse.json();
     setFollowing(followingData);
-    const followersResponse = await getFollowers(params.username);
+    const followersResponse = await getFollowers(username);
     const followersData = await followersResponse.json();
     setFollowers(followersData);
   };
 
   const reloadAlbums = async () => {
-    const response = await getAlbums(params.username);
+    const response = await getAlbums(username);
     const data = await response.json();
     setAlbums(data);
   };
@@ -71,6 +72,7 @@ export default function User() {
   };
 
   useEffect(() => {
+    setIsLoaded(false);
     if (isAppLoaded) {
       (async function () {
         await reloadUser();
@@ -80,10 +82,10 @@ export default function User() {
         setIsLoaded(true);
       })();
     }
-  }, [isAppLoaded]);
+  }, [isAppLoaded, username]);
 
-  const isSelf = loggedInUser && params.username === loggedInUser.username;
-  const follow = follows.find((f) => f.following.username === params.username);
+  const isSelf = loggedInUser && username === loggedInUser.username;
+  const follow = follows.find((f) => f.following.username === username);
 
   const followUser = async () => {
     const response = await createFollow(sessionToken, loggedInUser.uuid, user.uuid);
