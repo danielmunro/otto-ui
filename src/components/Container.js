@@ -9,36 +9,18 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import LogoutIcon from '@mui/icons-material/Logout';
-import LoginIcon from '@mui/icons-material/Login';
-import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Context from '../utils/Context';
+import AuthMenu from './menu/AuthMenu';
+import UnauthMenu from './menu/UnauthMenu';
 
 const drawerWidth = 240;
 
 export default function Container({ children, title }) {
-  const {
-    isLoggedIn,
-    setIsLoggedIn,
-    setSessionToken,
-    setLoggedInUser,
-    loggedInUser,
-  } = useContext(Context);
+  const { isLoggedIn } = useContext(Context);
   const navigate = useNavigate();
-
-  const tryLogout = (event) => {
-    event.preventDefault();
-    setSessionToken(null);
-    setLoggedInUser(null);
-    setIsLoggedIn(false);
-    localStorage.clear();
-    navigate("/");
-  };
 
   useEffect(() => {
     document.title = title;
@@ -85,41 +67,9 @@ export default function Container({ children, title }) {
             <ListItemText primary={"Home"} />
           </ListItem>
           { isLoggedIn ? (
-            <div>
-              <ListItem button onClick={() => navigate(`/u/${loggedInUser.username}`)}>
-                <ListItemIcon>
-                  <AccountBoxIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Profile"} />
-              </ListItem>
-              <ListItem button onClick={() => navigate(`/update-profile`)}>
-                <ListItemIcon>
-                  <EditIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Update Profile"} />
-              </ListItem>
-              <ListItem button onClick={tryLogout}>
-                <ListItemIcon>
-                  <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Logout"} />
-              </ListItem>
-            </div>
+            <AuthMenu />
           ) : (
-            <div>
-              <ListItem button onClick={() => navigate("/login")}>
-                <ListItemIcon>
-                  <LoginIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Login"} />
-              </ListItem>
-              <ListItem button onClick={() => navigate("/signup")}>
-                <ListItemIcon>
-                  <FollowTheSignsIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Signup"} />
-              </ListItem>
-            </div>
+            <UnauthMenu />
           )}
         </List>
       </Drawer>
