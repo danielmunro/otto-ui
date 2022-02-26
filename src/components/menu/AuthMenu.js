@@ -35,18 +35,18 @@ export default function AuthMenu() {
         </ListItemIcon>
         <ListItemText primary={"Profile"} />
       </ListItem>
-    <ListItem button onClick={() => navigate(`/update-profile`)}>
-      <ListItemIcon>
-        <EditIcon />
-      </ListItemIcon>
-      <ListItemText primary={"Update Profile"} />
-    </ListItem>
-    <ListItem button onClick={tryLogout}>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary={"Logout"} />
-    </ListItem>
-  </div>
+      <ListItem button onClick={() => navigate(`/update-profile`)}>
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+        <ListItemText primary={"Update Profile"} />
+      </ListItem>
+      <ListItem button onClick={tryLogout}>
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <ListItemText primary={"Logout"} />
+      </ListItem>
+    </div>
   );
 }
