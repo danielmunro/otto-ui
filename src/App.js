@@ -33,13 +33,9 @@ const theme = createTheme({
     },
     action: {
       active: '#0052cc',
-      activeOpacity: 1,
       hover: '#0052cc',
-      hoverOpacity: 0.7,
       focus: '#0052cc',
-      focusOpacity: 1,
       selected: '#0052cc',
-      selectedOpacity: 1
     },
   },
 });
