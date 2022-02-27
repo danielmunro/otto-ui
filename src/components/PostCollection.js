@@ -12,7 +12,6 @@ export default function PostCollection({ posts, reloadPosts, onDelete }) {
   };
 
   const closeBackdropAndReloadPosts = () => {
-    console.log("closeBackdropAndReloadPosts called");
     setShowBackdrop(false);
     reloadPosts();
   };

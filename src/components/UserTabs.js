@@ -37,10 +37,17 @@ function a11yProps(index) {
   };
 }
 
-export default function UserTabs({posts, pictures}) {
+export default function UserTabs({ children, onChange }) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
+    let tab = "";
+    if (newValue === 0) {
+      tab = "posts";
+    } else if (newValue === 1) {
+      tab = "albums";
+    }
+    onChange(tab);
     setValue(newValue);
   };
 
@@ -52,11 +59,8 @@ export default function UserTabs({posts, pictures}) {
           <Tab label="Pictures" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        {posts}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        {pictures}
+      <TabPanel value={value} index={value}>
+        {children}
       </TabPanel>
     </Box>
   );

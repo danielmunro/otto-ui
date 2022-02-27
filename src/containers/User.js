@@ -1,34 +1,28 @@
 import { Avatar, Button, Divider, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { createAlbum, getAlbums } from '../actions/album';
 import {
   createFollow,
   deleteFollow,
   getFollowers,
   getFollowing
 } from '../actions/follow';
-import { getPostsForUser } from '../actions/post';
 import { getUserByUsername } from '../actions/user';
-import Album from '../components/Album';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
 import FollowDetails from '../components/FollowDetails';
-import PostCollection from '../components/PostCollection';
-import TextInput from '../components/TextInput';
 import UserTabs from '../components/UserTabs';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
+import Albums from './Albums';
+import Posts from './Posts';
 
 export default function User() {
   const [user, setUser] = useState({});
-  const [posts, setPosts] = useState([]);
-  const [albums, setAlbums] = useState([]);
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showNewAlbum, setShowNewAlbum] = useState(false);
-  const [newAlbumName, setNewAlbumName] = useState("");
+  const [tab, setTab] = useState("posts");
   const {
     follows,
     setFollows,
@@ -46,12 +40,6 @@ export default function User() {
     setUser(data);
   };
 
-  const reloadPosts = async () => {
-    const response = await getPostsForUser(sessionToken, username);
-    const data = await response.json();
-    setPosts(data);
-  };
-
   const reloadUserFollows = async () => {
     const followingResponse = await getFollowing(username);
     const followingData = await followingResponse.json();
@@ -61,24 +49,12 @@ export default function User() {
     setFollowers(followersData);
   };
 
-  const reloadAlbums = async () => {
-    const response = await getAlbums(username);
-    const data = await response.json();
-    setAlbums(data);
-  };
-
-  const removePost = (post) => {
-    setPosts(posts.filter((p) => p.uuid !== post.uuid));
-  };
-
   useEffect(() => {
     setIsLoaded(false);
     if (isAppLoaded) {
       (async function () {
         await reloadUser();
-        await reloadPosts();
         await reloadUserFollows();
-        await reloadAlbums();
         setIsLoaded(true);
       })();
     }
@@ -98,17 +74,6 @@ export default function User() {
     setFollows(follows.filter((f) => f.uuid !== follow.uuid));
   };
 
-  const cancelAddAlbum = () => {
-    setShowNewAlbum(false);
-    setNewAlbumName("");
-  }
-
-  const tryCreateAlbum = async () => {
-    await createAlbum(sessionToken, newAlbumName);
-    setNewAlbumName("");
-    await reloadAlbums();
-  };
-
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
 
   if (!isLoaded) {
@@ -120,6 +85,12 @@ export default function User() {
   }
 
   const displayName = user.name || '@' + user.username;
+  let tabToDisplay;
+  if (tab === "posts") {
+    tabToDisplay = <Posts username={username} />;
+  } else if (tab === "albums") {
+    tabToDisplay = <Albums username={username} />;
+  }
 
   return (
     <Container title={`${displayName}'s Profile`}>
@@ -146,44 +117,9 @@ export default function User() {
           )
       )}
       <Divider sx={{mt: 1, mb: 1}} />
-      <UserTabs
-        posts={(
-          <PostCollection
-            posts={posts}
-            reloadPosts={reloadPosts}
-            onDelete={removePost}
-          />
-        )}
-        pictures={(<div>
-          { !showNewAlbum && (
-            <Button variant="outlined" onClick={() => setShowNewAlbum(true)}>
-              Add Album
-            </Button>
-          )}
-          { showNewAlbum && (
-            <Button variant="outlined" onClick={cancelAddAlbum}>
-              Cancel
-            </Button>
-          )}
-          { showNewAlbum && (
-            <div style={{marginTop: 10}}>
-              <TextInput
-                label="Album name"
-                variant="outlined"
-                onChangeValue={setNewAlbumName}
-                value={newAlbumName}
-                style={{width: 400}}
-              />
-              <Button style={{margin: 16}} onClick={tryCreateAlbum}>
-                Create New Album
-              </Button>
-            </div>
-          )}
-          {albums.map((album) => (
-            <Album album={album} key={album.uuid} />
-          ))}
-        </div>)}
-      />
+      <UserTabs onChange={(value) => setTab(value)}>
+        {tabToDisplay}
+      </UserTabs>
     </Container>
   )
 }
