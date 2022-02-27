@@ -42,6 +42,10 @@ export function getPostsForUser(sessionToken, username) {
   });
 }
 
+export function getLikedPostsForUser(username) {
+  return get(`${baseUrl}/user/${username}/like`);
+}
+
 export function getFollowPostsForUser(sessionToken, userUuid) {
   return get(`${baseUrl}/post/follows/${userUuid}`);
 }

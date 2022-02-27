@@ -46,6 +46,8 @@ export default function UserTabs({ children, onChange }) {
       tab = "posts";
     } else if (newValue === 1) {
       tab = "albums";
+    } else if (newValue === 2) {
+      tab = "likes"
     }
     onChange(tab);
     setValue(newValue);
@@ -57,6 +59,7 @@ export default function UserTabs({ children, onChange }) {
         <Tabs value={value} onChange={handleChange} aria-label="User posts and pictures">
           <Tab label="Posts" {...a11yProps(0)} />
           <Tab label="Pictures" {...a11yProps(1)} />
+          <Tab label="Likes" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={value}>

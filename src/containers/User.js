@@ -15,6 +15,7 @@ import UserTabs from '../components/UserTabs';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 import Albums from './Albums';
+import Likes from './Likes';
 import Posts from './Posts';
 
 export default function User() {
@@ -90,6 +91,8 @@ export default function User() {
     tabToDisplay = <Posts username={username} />;
   } else if (tab === "albums") {
     tabToDisplay = <Albums username={username} />;
+  } else if (tab === "likes") {
+    tabToDisplay = <Likes username={username} />;
   }
 
   return (
