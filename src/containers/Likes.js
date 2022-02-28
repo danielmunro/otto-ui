@@ -19,19 +19,22 @@ export default function Likes() {
     setPosts(posts.filter((p) => p.uuid !== post.uuid));
   };
 
+  const onUnlike = (post) => {
+    setPosts(posts.filter((p) => p.uuid !== post.uuid));
+  };
+
   useEffect(() => {
     (async function () {
       await reloadPosts();
     })();
   }, []);
 
-  console.log("liked posts", posts);
-
   return (
     <PostCollection
       posts={posts}
       reloadPosts={reloadPosts}
       onDelete={removePost}
+      onUnlike={onUnlike}
     />
   );
 }

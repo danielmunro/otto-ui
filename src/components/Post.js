@@ -28,6 +28,7 @@ export default function Post({
     share,
   },
   onDelete,
+  onUnlike,
   showReply,
   showShare,
   sharePostClick,
@@ -37,6 +38,7 @@ export default function Post({
   const { isLoggedIn, sessionToken } = useContext(Context);
   const created = new Date(created_at);
   showShare = showShare === undefined || Boolean(showShare);
+  onUnlike = onUnlike === undefined ? () => {} : onUnlike;
 
   const tryDelete = async () => {
     await deletePost(sessionToken, uuid);
@@ -55,6 +57,7 @@ export default function Post({
 
   const tryUnlikePost = async () => {
     await deletePostLike(sessionToken, uuid);
+    onUnlike();
     setIsSelfLiked(false);
   };
 
