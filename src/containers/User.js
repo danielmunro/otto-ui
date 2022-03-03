@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, Typography } from '@mui/material';
+import { Avatar, Button, Chip, Divider, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
@@ -95,6 +95,14 @@ export default function User() {
     tabToDisplay = <Likes username={username} />;
   }
 
+  let chip = null;
+  const { role } = user;
+  if (role === "admin") {
+    chip = <Chip label="Admin" color="primary" variant="outlined" sx={{ml: 1}} size="small" />;
+  } else if (role === "moderator") {
+    chip = <Chip label="Moderator" color="secondary" variant="outlined" sx={{ml: 1}} size="small" />;
+  }
+
   return (
     <Container title={`${displayName}'s Profile`}>
       <div style={{paddingBottom: 10}}>
@@ -103,8 +111,13 @@ export default function User() {
           src={profilePic}
           style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
         />
-        <Typography variant="h5">{user.name}</Typography>
-        <Typography style={{ fontSize: 12 }}>@{user.username}</Typography>
+        <Typography variant="h5">
+          {user.name}
+          {chip}
+        </Typography>
+        <Typography style={{ fontSize: 12 }}>
+          @{user.username}
+        </Typography>
       </div>
       <Typography>{user.bio_message}</Typography>
       <FollowDetails username={user.username} follows={following} followers={followers} />
