@@ -3,10 +3,12 @@ import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
+import ProtectedRoute from './components/ProtectedRoute';
 import Album from './containers/Album';
 import Followers from './containers/Followers';
 import Following from './containers/Following';
 import Image from './containers/Image';
+import ModerateUser from './containers/ModerateUser';
 import Post from './containers/Post';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
@@ -147,8 +149,10 @@ function App() {
             <Route path="/a/:uuid" element={<Album />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
+            <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
+            <Route path="/moderate-post/:uuid" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>

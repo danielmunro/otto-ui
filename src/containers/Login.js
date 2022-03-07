@@ -29,6 +29,7 @@ export default function Login() {
       setLoggedInUser(data.User);
       setIsLoggedIn(true);
       setSessionToken(data.Token);
+      console.log("setting session token into local storage");
       localStorage.setItem("token", data.Token);
       navigate("/");
     }
