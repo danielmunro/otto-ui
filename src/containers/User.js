@@ -1,6 +1,6 @@
 import { Avatar, Button, Chip, Divider, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   createFollow,
   deleteFollow,
@@ -14,6 +14,7 @@ import FollowDetails from '../components/FollowDetails';
 import UserTabs from '../components/UserTabs';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
+import { canAdminister, Role } from '../utils/role';
 import Albums from './Albums';
 import Likes from './Likes';
 import Posts from './Posts';
@@ -97,41 +98,50 @@ export default function User() {
 
   let chip = null;
   const { role } = user;
-  if (role === "admin") {
+  if (role === Role.admin) {
     chip = <Chip label="Admin" color="primary" variant="outlined" sx={{ml: 1}} size="small" />;
-  } else if (role === "moderator") {
+  } else if (role === Role.moderator) {
     chip = <Chip label="Moderator" color="secondary" variant="outlined" sx={{ml: 1}} size="small" />;
   }
 
+  const canAdmin = canAdminister(loggedInUser.role, Role.moderator) && loggedInUser.uuid !== user.uuid;
+
   return (
     <Container title={`${displayName}'s Profile`}>
-      <div style={{paddingBottom: 10}}>
-        <Avatar
-          alt={user.username}
-          src={profilePic}
-          style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
-        />
-        <Typography variant="h5">
-          {user.name}
-          {chip}
-        </Typography>
-        <Typography style={{ fontSize: 12 }}>
-          @{user.username}
-        </Typography>
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        <div style={{paddingBottom: 10, width: "80%"}}>
+          <Avatar
+            alt={user.username}
+            src={profilePic}
+            style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
+          />
+          <Typography variant="h5">
+            {user.name}
+            {chip}
+          </Typography>
+          <Typography style={{ fontSize: 12 }}>
+            @{user.username}
+          </Typography>
+          <FollowDetails username={user.username} follows={following} followers={followers} />
+          <Typography paragraph>{user.bio_message}</Typography>
+        </div>
+        <div>
+          { canAdmin && (
+            <Link to={`/moderate-user/${user.username}`}>Moderate User</Link>
+          )}
+          { isLoggedIn && !isSelf && (
+            follow ? (
+                <Button onClick={unfollowUser}>
+                  Unfollow
+                </Button>
+              ) : (
+                <Button onClick={followUser}>
+                  Follow
+                </Button>
+              )
+          )}
+        </div>
       </div>
-      <Typography>{user.bio_message}</Typography>
-      <FollowDetails username={user.username} follows={following} followers={followers} />
-      { isLoggedIn && !isSelf && (
-        follow ? (
-            <Button onClick={unfollowUser}>
-              Unfollow
-            </Button>
-          ) : (
-            <Button onClick={followUser}>
-              Follow
-            </Button>
-          )
-      )}
       <Divider sx={{mt: 1, mb: 1}} />
       <UserTabs onChange={(value) => setTab(value)}>
         {tabToDisplay}

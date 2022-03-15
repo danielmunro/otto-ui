@@ -1,7 +1,13 @@
 export function canAdminister(userRole, role) {
-  if (role === "moderator") {
-    return userRole === "moderator" || userRole === "admin";
+  if (role === Role.moderator) {
+    return userRole === Role.moderator || userRole === Role.admin;
   }
 
-  return userRole === "admin";
+  return userRole === Role.admin;
 }
+
+export const Role = {
+  user: "user",
+  moderator: "moderator",
+  admin: "admin",
+};
