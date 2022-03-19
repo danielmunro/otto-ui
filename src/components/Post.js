@@ -78,7 +78,7 @@ export default function Post({
       <Typography color="text.secondary">
         {created.toLocaleString()}
       </Typography>
-      <Typography>
+      <Typography variant="body2">
         {nl2br(text)}
       </Typography>
       { share && (
@@ -98,7 +98,7 @@ export default function Post({
           <Typography color="text.secondary">
             {new Date(share.created_at).toLocaleString()}
           </Typography>
-          <Typography>
+          <Typography variant="body2">
             {nl2br(share.text)}
           </Typography>
         </Paper>

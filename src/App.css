@@ -1,5 +1,4 @@
 body {
-  background-color: #FDFFFC;
   color: #011627;
   font-size: 18pt;
 }
@@ -76,4 +75,13 @@ h5 {
   max-height: 100px;
   border-radius: 10px;
   padding: 4px;
+}
+
+.MuiTypography-body2 {
+  padding: 10px 0;
+  font-size: 14pt !important;
+}
+
+.MuiTypography-subtitle1, .MuiTypography-subtitle1 a {
+  color: #393939;
 }

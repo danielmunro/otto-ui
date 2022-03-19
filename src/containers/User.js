@@ -1,4 +1,10 @@
-import { Avatar, Button, Chip, Divider, Typography } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  Chip,
+  Divider,
+  Typography,
+} from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
@@ -25,6 +31,7 @@ export default function User() {
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [tab, setTab] = useState("posts");
+
   const {
     follows,
     setFollows,
@@ -108,39 +115,35 @@ export default function User() {
 
   return (
     <Container title={`${displayName}'s Profile`}>
-      <div style={{display: "flex", justifyContent: "space-between"}}>
-        <div style={{paddingBottom: 10, width: "80%"}}>
-          <Avatar
-            alt={user.username}
-            src={profilePic}
-            style={{ float: "left", marginRight: 10, width: 48, height: 48 }}
-          />
-          <Typography variant="h5">
-            {user.name}
-            {chip}
-          </Typography>
-          <Typography style={{ fontSize: 12 }}>
-            @{user.username}
-          </Typography>
-          <FollowDetails username={user.username} follows={following} followers={followers} />
-          <Typography paragraph>{user.bio_message}</Typography>
-        </div>
-        <div>
-          { canAdmin && (
-            <Link to={`/moderate-user/${user.username}`}>Moderate User</Link>
-          )}
-          { isLoggedIn && !isSelf && (
-            follow ? (
-                <Button onClick={unfollowUser}>
-                  Unfollow
-                </Button>
-              ) : (
-                <Button onClick={followUser}>
-                  Follow
-                </Button>
-              )
-          )}
-        </div>
+      <Avatar
+        alt={user.username}
+        src={profilePic}
+        style={{ marginRight: 10, width: 128, height: 128 }}
+      />
+      <Typography variant="h5">
+        {user.name}
+        {chip}
+      </Typography>
+      <Typography variant="subtitle1">
+        @{user.username}
+      </Typography>
+      <FollowDetails username={user.username} follows={following} followers={followers} />
+      <Typography variant="body2">{user.bio_message}</Typography>
+      <div>
+        { canAdmin && (
+          <Link to={`/moderate-user/${user.username}`}>Moderate User</Link>
+        )}
+        { isLoggedIn && !isSelf && (
+          follow ? (
+              <Button onClick={unfollowUser}>
+                Unfollow
+              </Button>
+            ) : (
+              <Button onClick={followUser}>
+                Follow
+              </Button>
+            )
+        )}
       </div>
       <Divider sx={{mt: 1, mb: 1}} />
       <UserTabs onChange={(value) => setTab(value)}>

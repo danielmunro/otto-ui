@@ -39,6 +39,13 @@ const theme = createTheme({
       focus: '#0052cc',
       selected: '#0052cc',
     },
+    text: {
+      primary: "#111",
+    },
+    background: {
+      default: "#fff",
+      paper: "#fff",
+    },
   },
 });
 
@@ -137,8 +144,8 @@ function App() {
   }, [isLoggedIn]);
 
   return (
-    <Context.Provider value={appContext}>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Context.Provider value={appContext}>
         <Router>
           <Routes>
             <Route path="/u/:username" element={<User />} />
@@ -156,8 +163,8 @@ function App() {
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>
-      </ThemeProvider>
-    </Context.Provider>
+      </Context.Provider>
+    </ThemeProvider>
   );
 }
 
