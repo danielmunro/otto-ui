@@ -16,6 +16,7 @@ import {
 import { getUserByUsername } from '../actions/user';
 import CircularIndeterminate from '../components/CircularIndeterminate';
 import Container from '../components/Container';
+import FollowButtonToggle from '../components/FollowButtonToggle';
 import FollowDetails from '../components/FollowDetails';
 import UserTabs from '../components/UserTabs';
 import { imageBaseUrl } from '../utils/config';
@@ -36,8 +37,6 @@ export default function User() {
     follows,
     setFollows,
     loggedInUser,
-    sessionToken,
-    isLoggedIn,
     isAppLoaded,
   } = useContext(Context);
   const params = useParams();
@@ -49,13 +48,22 @@ export default function User() {
     setUser(data);
   };
 
-  const reloadUserFollows = async () => {
+  const reloadFollowing = async () => {
     const followingResponse = await getFollowing(username);
     const followingData = await followingResponse.json();
     setFollowing(followingData);
+  };
+
+  const reloadFollowers = async () => {
     const followersResponse = await getFollowers(username);
     const followersData = await followersResponse.json();
     setFollowers(followersData);
+    return followersData;
+  };
+
+  const reloadUserFollows = async () => {
+    await reloadFollowing();
+    await reloadFollowers();
   };
 
   useEffect(() => {
@@ -69,18 +77,15 @@ export default function User() {
     }
   }, [isAppLoaded, username]);
 
-  const isSelf = loggedInUser && username === loggedInUser.username;
-  const follow = follows.find((f) => f.following.username === username);
-
-  const followUser = async () => {
-    const response = await createFollow(sessionToken, loggedInUser.uuid, user.uuid);
-    const data = await response.json();
-    setFollows([...follows, data]);
+  const addFollow = async () => {
+    const data = await reloadFollowers();
+    setFollows(data);
   };
 
-  const unfollowUser = async () => {
-    await deleteFollow(sessionToken, follow.uuid);
-    setFollows(follows.filter((f) => f.uuid !== follow.uuid));
+  const removeFollow = () => {
+    const newFollows = followers.filter((f) => f.uuid !== follow.uuid);
+    setFollowers(newFollows);
+    setFollows(newFollows);
   };
 
   const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
@@ -112,6 +117,8 @@ export default function User() {
   }
 
   const canAdmin = canAdminister(loggedInUser.role, Role.moderator) && loggedInUser.uuid !== user.uuid;
+  const isSelf = loggedInUser && username === loggedInUser.username;
+  const follow = follows.find((f) => f.following.username === username);
 
   return (
     <Container title={`${displayName}'s Profile`}>
@@ -133,17 +140,13 @@ export default function User() {
         { canAdmin && (
           <Link to={`/moderate-user/${user.username}`}>Moderate User</Link>
         )}
-        { isLoggedIn && !isSelf && (
-          follow ? (
-              <Button onClick={unfollowUser}>
-                Unfollow
-              </Button>
-            ) : (
-              <Button onClick={followUser}>
-                Follow
-              </Button>
-            )
-        )}
+        <FollowButtonToggle
+          follow={follow}
+          user={user}
+          isSelf={isSelf}
+          addFollow={addFollow}
+          removeFollow={removeFollow}
+        />
       </div>
       <Divider sx={{mt: 1, mb: 1}} />
       <UserTabs onChange={(value) => setTab(value)}>
