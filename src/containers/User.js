@@ -6,10 +6,9 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {
-  createFollow,
-  deleteFollow,
   getFollowers,
   getFollowing
 } from '../actions/follow';
@@ -27,11 +26,13 @@ import Likes from './Likes';
 import Posts from './Posts';
 
 export default function User() {
+  const [notFound, setNotFound] = useState(false);
   const [user, setUser] = useState({});
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [tab, setTab] = useState("posts");
+  const navigate = useNavigate();
 
   const {
     follows,
@@ -43,9 +44,14 @@ export default function User() {
   const username = params.username;
 
   const reloadUser = async () => {
-    const response = await getUserByUsername(username);
-    const data = await response.json();
-    setUser(data);
+    try {
+      const response = await getUserByUsername(username);
+      const data = await response.json();
+      setUser(data);
+    } catch (e) {
+      setNotFound(true);
+      setIsLoaded(true);
+    }
   };
 
   const reloadFollowing = async () => {
@@ -119,6 +125,21 @@ export default function User() {
   const canAdmin = canAdminister(loggedInUser.role, Role.moderator) && loggedInUser.uuid !== user.uuid;
   const isSelf = loggedInUser && username === loggedInUser.username;
   const follow = follows.find((f) => f.following.username === username);
+
+  if (notFound) {
+    return (
+      <Container title="User not found">
+        <Typography variant="h1">Sorry! They were not found</Typography>
+        <Button
+          variant="outlined"
+          onClick={() => navigate(-1)}
+          startIcon={<ChevronLeftIcon />}
+        >
+          Go Back
+        </Button>
+      </Container>
+    )
+  }
 
   return (
     <Container title={`${displayName}'s Profile`}>

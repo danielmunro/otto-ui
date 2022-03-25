@@ -71,9 +71,11 @@ export default function Post({
         src={profilePic}
         style={{ float: "left", marginRight: 10 }}
       />
-      <Link to={`/u/${author.username}`}>
-        @{author.username}
-      </Link>
+      <Typography variant="h6">
+        <Link to={`/u/${author.username}`}>
+          <b>{author.name}</b> @{author.username}
+        </Link>
+      </Typography>
       <PostMenu handleDelete={() => setIsDialogOpen(true)} />
       <Typography color="text.secondary">
         {created.toLocaleString()}
@@ -93,7 +95,7 @@ export default function Post({
             style={{ float: "left", marginRight: 10 }}
           />
           <Link to={`/u/${share.user.username}`}>
-            @{share.user.username}
+            {share.user.name} @{share.user.username}
           </Link>
           <Typography color="text.secondary">
             {new Date(share.created_at).toLocaleString()}
