@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: otto-ui
+  description: Frontend for otto social network
+  tags:
+    - javascript
+    - react
+  links:
+    - url: https://github.com/danielmunro/otto-ui
+      title: Git Repository
+spec:
+  type: website
+  lifecycle: production
+  owner: frontend-team
