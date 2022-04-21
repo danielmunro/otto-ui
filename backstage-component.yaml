@@ -13,3 +13,5 @@ spec:
   type: website
   lifecycle: production
   owner: dev-team
+  consumesApis:
+    - otto-api-gw
