@@ -14,5 +14,4 @@ spec:
   lifecycle: production
   owner: dev-team
   dependsOn:
-    - kind: Component
-      name: public-api/api-gw
+    - public-api/api-gw
