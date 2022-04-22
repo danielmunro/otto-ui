@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: otto-ui
+  name: web-ui
   description: Frontend for otto social network
   tags:
     - javascript
@@ -15,4 +15,4 @@ spec:
   owner: dev-team
   dependsOn:
     - kind: Component
-      name: api-gw
+      name: public-api/api-gw
