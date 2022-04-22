@@ -13,5 +13,6 @@ spec:
   type: website
   lifecycle: production
   owner: dev-team
-  consumesApis:
-    - public-api
+  dependsOn:
+    - kind: Component
+      name: api-gw
