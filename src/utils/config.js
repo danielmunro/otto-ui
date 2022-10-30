@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.thirdplaceapp.com';
+const baseUrl = 'https://thirdplaceapp.com';
 const appName = 'Home';
 const primaryColor = '#e71d36';
 const secondaryColor = '#95d5b2';
