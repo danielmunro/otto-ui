@@ -1,9 +1,9 @@
-const baseUrl = 'http://localhost';
+const baseUrl = 'https://thirdplaceapp.com';
 const appName = 'Home';
 const primaryColor = '#e71d36';
 const secondaryColor = '#95d5b2';
 const backgroundColor = '#FDFFFC';
-const imageBaseUrl = 'https://otto-image-uploads.s3.us-west-2.amazonaws.com';
+const imageBaseUrl = 'https://third-place-prod.s3.us-west-2.amazonaws.com';
 
 export {
   baseUrl,
