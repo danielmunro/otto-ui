@@ -9,7 +9,7 @@ export default function Splash() {
       <Typography variant={"h1"}>
         Coming Soon
       </Typography>
-      <p>A radical reimagining of how the internet can connect us and make improve our lives.</p>
+      <p>A radical reimagining of how the internet can connect us and improve our lives.</p>
     </Box>
   );
 }
