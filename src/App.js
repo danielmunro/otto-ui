@@ -13,7 +13,7 @@ import Post from './containers/Post';
 import Splash from './containers/Splash';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
-import { baseUrl, primaryColor, secondaryColor } from './utils/config';
+import { baseUrl, env, primaryColor, secondaryColor } from './utils/config';
 import Home from './containers/Home';
 import './App.css';
 import Login from './containers/Login';
@@ -161,7 +161,7 @@ function App() {
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
             <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
             <Route path="/moderate-post/:uuid" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
-            <Route path="/" element={process.env.REACT_APP_ENV === "dev" ? <Home /> : <Splash />} />
+            <Route path="/" element={env === "dev" ? <Home /> : <Splash />} />
           </Routes>
         </Router>
       </Context.Provider>
