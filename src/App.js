@@ -10,6 +10,7 @@ import Following from './containers/Following';
 import Image from './containers/Image';
 import ModerateUser from './containers/ModerateUser';
 import Post from './containers/Post';
+import Splash from './containers/Splash';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
 import { baseUrl, primaryColor, secondaryColor } from './utils/config';

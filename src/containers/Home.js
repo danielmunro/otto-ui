@@ -7,12 +7,13 @@ import Container from '../components/Container';
 import NewPost from '../components/NewPost';
 import PostCollection from '../components/PostCollection';
 import Context from '../utils/Context';
+// import Splash from './Splash';
 
 export default function Home() {
   const {
     sessionToken,
     loggedInUser,
-    isAppLoaded,
+    isLoggedIn,
     posts,
     setPosts,
   } = useContext(Context);
@@ -24,10 +25,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (isAppLoaded) {
+    if (isLoggedIn) {
       getPosts();
     }
-  }, [isAppLoaded]);
+  }, [isLoggedIn]);
 
   const removePost = (post) => {
     setPosts(posts.filter((p) => p !== post));
@@ -36,6 +37,10 @@ export default function Home() {
   const newPostCreated = () => {
     getPosts();
   }
+
+  // return (
+  //   <Splash />
+  // );
 
   return (
     <Container title={"Home"}>
