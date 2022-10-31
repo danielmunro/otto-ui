@@ -29,21 +29,6 @@ export default function Container({ children, title }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: `calc(100% - ${drawerWidth}px)`,
-          ml: `${drawerWidth}px`,
-          backgroundColor: "#011627",
-          zIndex: 1,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            {title}
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -77,7 +62,6 @@ export default function Container({ children, title }) {
         component="main"
         sx={{ p: 1, width: 680 }}
       >
-        <Toolbar />
         {children}
       </Box>
     </Box>

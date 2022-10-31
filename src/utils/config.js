@@ -1,9 +1,9 @@
-const baseUrl = 'https://thirdplaceapp.com';
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL;
 const appName = 'Home';
 const primaryColor = '#e71d36';
 const secondaryColor = '#95d5b2';
 const backgroundColor = '#FDFFFC';
-const imageBaseUrl = 'https://third-place-prod.s3.us-west-2.amazonaws.com';
 
 export {
   baseUrl,
