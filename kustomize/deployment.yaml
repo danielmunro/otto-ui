@@ -31,11 +31,11 @@ spec:
             protocol: TCP
         env:
           - name: REACT_APP_BASE_URL
-            value: https://thirdplaceapp.com
+            value: https://api.thirdplaceapp.com
           - name: REACT_APP_IMAGE_BASE_URL
             value: https://third-place-prod.s3.us-west-2.amazonaws.com
           - name: REACT_APP_ENV
-            value: prod
+            value: staging
         resources:
           limits:
             cpu: 250m
