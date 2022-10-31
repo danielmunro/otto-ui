@@ -161,7 +161,7 @@ function App() {
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
             <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
             <Route path="/moderate-post/:uuid" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={process.env.REACT_APP_ENV === "dev" ? <Home /> : <Splash />} />
           </Routes>
         </Router>
       </Context.Provider>

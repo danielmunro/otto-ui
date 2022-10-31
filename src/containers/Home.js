@@ -7,7 +7,6 @@ import Container from '../components/Container';
 import NewPost from '../components/NewPost';
 import PostCollection from '../components/PostCollection';
 import Context from '../utils/Context';
-// import Splash from './Splash';
 
 export default function Home() {
   const {
@@ -37,10 +36,6 @@ export default function Home() {
   const newPostCreated = () => {
     getPosts();
   }
-
-  // return (
-  //   <Splash />
-  // );
 
   return (
     <Container title={"Home"}>
