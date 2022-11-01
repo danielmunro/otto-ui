@@ -6,6 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { deleteSession } from '../../actions/session';
 import Context from '../../utils/Context';
 
 export default function AuthMenu() {
@@ -13,15 +14,17 @@ export default function AuthMenu() {
     loggedInUser,
     setLoggedInUser,
     setIsLoggedIn,
+    sessionToken,
     setSessionToken,
   } = useContext(Context);
 
-  const tryLogout = (event) => {
+  const tryLogout = async (event) => {
     event.preventDefault();
     setSessionToken(null);
     setLoggedInUser(null);
     setIsLoggedIn(false);
-    localStorage.clear();
+    await deleteSession(sessionToken);
+    localStorage.deleteItem("token");
     navigate("/");
   };
 
