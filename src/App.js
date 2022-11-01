@@ -26,7 +26,7 @@ import {
   Route,
 } from "react-router-dom";
 
-const theme = createTheme({
+const lightTheme = createTheme({
   palette: {
     primary: {
       main: primaryColor,
@@ -44,12 +44,35 @@ const theme = createTheme({
       primary: "#111",
     },
     background: {
-      default: "#fff",
-      paper: "#fff",
+      default: "#fcfdfd",
+      paper: "#fefefe",
     },
   },
 });
 
+const darkTheme = createTheme({
+  palette: {
+    primary: {
+      main: primaryColor,
+    },
+    secondary: {
+      main: secondaryColor,
+    },
+    action: {
+      active: '#ccc',
+      hover: '#2f54d0',
+      focus: '#2f54d0',
+      selected: '#2f54d0',
+    },
+    text: {
+      primary: "#ccc",
+    },
+    background: {
+      default: "#333",
+      paper: "#3a3a3a",
+    },
+  },
+});
 
 function App() {
   const [sessionToken, setSessionToken] = useState(null);
@@ -60,6 +83,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [follows, setFollows] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode") ?? "light");
 
   const appContext = {
     sessionToken,
@@ -77,6 +101,8 @@ function App() {
     setFollowers,
     isLoggedIn,
     setIsLoggedIn,
+    uiMode,
+    setUiMode,
   };
 
   const getUser = async (token) => {
@@ -145,7 +171,7 @@ function App() {
   }, [isLoggedIn]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={uiMode === "light" ? lightTheme : darkTheme}>
       <Context.Provider value={appContext}>
         <Router>
           <Routes>

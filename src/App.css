@@ -5,7 +5,6 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #011627;
   font-size: 18pt;
 }
 
@@ -70,7 +69,6 @@ div.row {
 
 a {
   text-decoration: none !important;
-  color: #011627;
 }
 
 h2 {
@@ -95,8 +93,4 @@ h5 {
 .MuiTypography-body2 {
   padding: 10px 0;
   font-size: 14pt !important;
-}
-
-.MuiTypography-subtitle1, .MuiTypography-subtitle1 a {
-  color: #393939;
 }

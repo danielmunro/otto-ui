@@ -1,4 +1,14 @@
-import { Avatar, Button, Divider } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  Divider,
+  ToggleButton,
+  ToggleButtonGroup
+} from '@mui/material';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 import { post } from '@tkrotoff/fetch';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +26,13 @@ export default function UpdateProfile() {
   const [bio, setBio] = useState('');
   const [imageToUpload, setImageToUpload] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
-  const { loggedInUser, setLoggedInUser, sessionToken } = useContext(Context);
+  const {
+    loggedInUser,
+    setLoggedInUser,
+    sessionToken,
+    uiMode,
+    setUiMode,
+  } = useContext(Context);
   const navigate = useNavigate();
   const ref = useRef();
 
@@ -80,6 +96,13 @@ export default function UpdateProfile() {
 
   const profilePic = loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
 
+  const onChangeUiMode = (event, newValue) => {
+    console.log(event, newValue);
+    console.log("setUIMode", newValue);
+    localStorage.setItem("uiMode", newValue);
+    setUiMode(newValue);
+  };
+
   return (
     <Container title={"Update Profile"}>
       <Avatar
@@ -141,6 +164,14 @@ export default function UpdateProfile() {
           </Button>
         </div>
       </form>
+      <ToggleButtonGroup exclusive value={uiMode} onChange={onChangeUiMode} style={{paddingTop: 10}}>
+        <ToggleButton value="light" aria-label="light mode">
+          <LightModeIcon />
+        </ToggleButton>
+        <ToggleButton value="dark" aria-label="dark mode">
+          <DarkModeIcon />
+        </ToggleButton>
+      </ToggleButtonGroup>
     </Container>
   );
 }
