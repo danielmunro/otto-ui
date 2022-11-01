@@ -1,4 +1,4 @@
-const baseUrl = process.env.REACT_APP_BASE_URL || "https://api.thirdplaceapp.com/";
+const baseUrl = process.env.REACT_APP_BASE_URL || "https://api.thirdplaceapp.com";
 const imageBaseUrl = process.env.REACT_APP_IMAGE_BASE_URL || "https://third-place-prod.s3.us-west-2.amazonaws.com";
 const env = process.env.REACT_APP_ENV || "dev";
 const appName = 'Home';
