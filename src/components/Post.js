@@ -5,12 +5,14 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle, Paper,
-  Typography
+  DialogTitle,
+  Paper,
+  Typography,
+  Link,
 } from '@mui/material';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { createPostLike, deletePostLike } from '../actions/like';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
@@ -72,7 +74,7 @@ export default function Post({
         style={{ float: "left", marginRight: 10 }}
       />
       <Typography variant="h6">
-        <Link to={`/u/${author.username}`}>
+        <Link component={RouterLink} to={`/u/${author.username}`}>
           <b>{author.name}</b> @{author.username}
         </Link>
       </Typography>
@@ -94,7 +96,7 @@ export default function Post({
             src={share.user.profile_pic ? `${imageBaseUrl}/${share.user.profile_pic}` : ''}
             style={{ float: "left", marginRight: 10 }}
           />
-          <Link to={`/u/${share.user.username}`}>
+          <Link component={RouterLink} to={`/u/${share.user.username}`}>
             {share.user.name} @{share.user.username}
           </Link>
           <Typography color="text.secondary">
@@ -107,13 +109,13 @@ export default function Post({
       )}
       <div>
         {images && images.map((i) => (
-          <Link to={`/i/${i.uuid}`} key={i.uuid}>
+          <Link component={RouterLink} to={`/i/${i.uuid}`} key={i.uuid}>
             <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" alt="" />
           </Link>
         ))}
       </div>
       { showReply && (
-        <Button component={Link} to={`/p/${uuid}`}>
+        <Button component={RouterLink} to={`/p/${uuid}`}>
           Reply
         </Button>
       )}
