@@ -35,7 +35,7 @@ export function deletePost(sessionToken, postUuid) {
 }
 
 export function getPostsForUser(sessionToken, username) {
-  return get(`${baseUrl}/user/${username}/posts`, {
+  return get(`${baseUrl}/posts/${username}`, {
     headers: {
       'x-session-token': sessionToken,
     },
@@ -43,7 +43,7 @@ export function getPostsForUser(sessionToken, username) {
 }
 
 export function getLikedPostsForUser(username) {
-  return get(`${baseUrl}/user/${username}/like`);
+  return get(`${baseUrl}/likes/${username}`);
 }
 
 export function getFollowPostsForUser(sessionToken, userUuid) {
