@@ -8,7 +8,7 @@ import ImageToUpload from './ImageToUpload';
 import TextInput from './TextInput';
 
 export default function NewPost({ onPostCreated, images, post }) {
-  const [newPost, setNewPost] = useState('');
+  const [newPost, setNewPost] = useState(localStorage.getItem("newPost") || "");
   const [imagesToPost, setImagesToPost] = useState(images || []);
   const { sessionToken, loggedInUser } = useContext(Context);
   const imageRef = useRef();
@@ -34,11 +34,15 @@ export default function NewPost({ onPostCreated, images, post }) {
       await createPost(sessionToken, loggedInUser.uuid, newPost, imagesToPost);
     if (response.status === 200 || response.status === 201) {
       setNewPost('');
+      localStorage.deleteItem("newPost");
       setImagesToPost([]);
-      console.log("NEW POST CREATED");
       onPostCreated();
-      console.log("done");
     }
+  };
+
+  const onChangeNewPost = (value) => {
+    localStorage.setItem("newPost", value);
+    setNewPost(value);
   };
 
   const tryRemoveImage = (image) => {
@@ -58,7 +62,7 @@ export default function NewPost({ onPostCreated, images, post }) {
       <TextInput
         label="Share something"
         variant="standard"
-        onChangeValue={setNewPost}
+        onChangeValue={onChangeNewPost}
         value={newPost}
         multiline
         style={{width: 500}}
