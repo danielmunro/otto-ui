@@ -45,7 +45,7 @@ export default function Post() {
   }, []);
 
   if (!post) {
-    return <img src={logo} className="App-logo" alt="logo" />;
+    return <Container />;
   }
 
   const trySubmit = async (event) => {

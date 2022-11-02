@@ -13,6 +13,7 @@ import {
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import { createPostLike, deletePostLike } from '../actions/like';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
@@ -86,9 +87,11 @@ export default function Post({
       <Typography color="text.secondary">
         {created.toLocaleString()}
       </Typography>
-      <Typography variant="body2">
-        {nl2br(text)}
-      </Typography>
+      <div style={{fontSize: "larger"}}>
+        <ReactMarkdown>
+          {text}
+        </ReactMarkdown>
+      </div>
       { share && (
         <Paper
           sx={{p: 1, mb: 1, }}
