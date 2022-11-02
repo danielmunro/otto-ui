@@ -1,17 +1,23 @@
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Paper } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import {Editor, EditorState} from 'draft-js';
 import React, { useContext, useRef, useState } from 'react';
 import { createLivestreamImage } from '../actions/image';
 import { createPost, createShare } from '../actions/post';
 import Context from '../utils/Context';
 import ImageToUpload from './ImageToUpload';
-import TextInput from './TextInput';
 
 export default function NewPost({ onPostCreated, images, post }) {
-  const [newPost, setNewPost] = useState(localStorage.getItem("newPost") || "");
+  const [editorState, setEditorState] = React.useState(
+    () => EditorState.createWithText(
+      localStorage.getItem("newPost") || ""
+    ),
+  );
   const [imagesToPost, setImagesToPost] = useState(images || []);
   const { sessionToken, loggedInUser } = useContext(Context);
   const imageRef = useRef();
+  const theme = useTheme();
 
   const tryUploadNewPic = async (pic) => {
     const response = await createLivestreamImage(sessionToken, pic);
@@ -30,10 +36,21 @@ export default function NewPost({ onPostCreated, images, post }) {
   const trySubmitNewPost = async (event) => {
     event.preventDefault();
     const response = post ?
-      await createShare(sessionToken, loggedInUser.uuid, newPost, imagesToPost, post.uuid) :
-      await createPost(sessionToken, loggedInUser.uuid, newPost, imagesToPost);
+      await createShare(
+        sessionToken,
+        loggedInUser.uuid,
+        editorState.getCurrentContent().getPlainText(),
+        imagesToPost,
+        post.uuid
+      ) :
+      await createPost(
+        sessionToken,
+        loggedInUser.uuid,
+        editorState.getCurrentContent().getPlainText(),
+        imagesToPost
+      );
     if (response.status === 200 || response.status === 201) {
-      setNewPost('');
+      setEditorState(EditorState.createEmpty());
       localStorage.deleteItem("newPost");
       setImagesToPost([]);
       onPostCreated();
@@ -41,8 +58,9 @@ export default function NewPost({ onPostCreated, images, post }) {
   };
 
   const onChangeNewPost = (value) => {
-    localStorage.setItem("newPost", value);
-    setNewPost(value);
+    localStorage.setItem("newPost", value.getCurrentContent().getPlainText());
+    setEditorState(value);
+    console.log("value", value);
   };
 
   const tryRemoveImage = (image) => {
@@ -59,15 +77,14 @@ export default function NewPost({ onPostCreated, images, post }) {
           <ImageToUpload image={img} onRemove={() => tryRemoveImage(img)} />
         ))}
       </div>
-      <TextInput
-        label="Share something"
-        variant="standard"
-        onChangeValue={onChangeNewPost}
-        value={newPost}
-        multiline
-        style={{width: 500}}
-        autoFocus
-      />
+      <div style={{borderBottom: `1px solid ${theme.palette.background.paper}`}}>
+        <Editor
+          placeholder={"What are you thinking about?"}
+          spellCheck={true}
+          editorState={editorState}
+          onChange={onChangeNewPost}
+        />
+      </div>
       <input
         type="file"
         ref={imageRef}
