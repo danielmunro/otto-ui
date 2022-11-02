@@ -41,7 +41,7 @@ export default function Post() {
     (async function() {
       await loadPost();
       await loadReplies();
-    })()
+    })();
   }, []);
 
   if (!post) {

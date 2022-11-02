@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { createPostLike, deletePostLike } from '../actions/like';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
@@ -41,6 +41,7 @@ export default function Post({
   const created = new Date(created_at);
   showShare = showShare === undefined || Boolean(showShare);
   onUnlike = onUnlike === undefined ? () => {} : onUnlike;
+  const navigate = useNavigate();
 
   const tryDelete = async () => {
     await deletePost(sessionToken, uuid);
@@ -78,7 +79,10 @@ export default function Post({
           <b>{author.name}</b> @{author.username}
         </Link>
       </Typography>
-      <PostMenu handleDelete={() => setIsDialogOpen(true)} />
+      <PostMenu
+        handleDelete={() => setIsDialogOpen(true)}
+        handleEdit={() => navigate(`/p-edit/${uuid}`)}
+      />
       <Typography color="text.secondary">
         {created.toLocaleString()}
       </Typography>

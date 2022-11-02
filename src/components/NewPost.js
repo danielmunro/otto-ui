@@ -60,7 +60,6 @@ export default function NewPost({ onPostCreated, images, post }) {
   const onChangeNewPost = (value) => {
     localStorage.setItem("newPost", value.getCurrentContent().getPlainText());
     setEditorState(value);
-    console.log("value", value);
   };
 
   const tryRemoveImage = (image) => {

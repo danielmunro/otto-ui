@@ -10,6 +10,7 @@ import Following from './containers/Following';
 import Image from './containers/Image';
 import ModerateUser from './containers/ModerateUser';
 import Post from './containers/Post';
+import PostEdit from './containers/PostEdit';
 import Splash from './containers/Splash';
 import UpdateProfile from './containers/UpdateProfile';
 import User from './containers/User';
@@ -180,6 +181,7 @@ function App() {
             <Route path="/u/:username/followers" element={<Followers />} />
             <Route path="/i/:uuid" element={<Image />} />
             <Route path="/p/:uuid" element={<Post />} />
+            <Route path="/p-edit/:uuid" element={<PostEdit />} />
             <Route path="/a/:uuid" element={<Album />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

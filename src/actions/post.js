@@ -1,4 +1,4 @@
-import { postJSON, get, del } from '@tkrotoff/fetch';
+import { postJSON, get, del, putJSON } from '@tkrotoff/fetch';
 import { baseUrl } from '../utils/config';
 
 export function createPost(sessionToken, userUuid, newPostText, images) {
@@ -60,6 +60,17 @@ export function getPosts(sessionToken) {
 
 export function getPost(sessionToken, postUuid) {
   return get(`${baseUrl}/post/${postUuid}`, {
+    headers: {
+      'x-session-token': sessionToken,
+    },
+  });
+}
+
+export function updatePost(sessionToken, uuid, text) {
+  return putJSON(`${baseUrl}/post`, {
+    uuid,
+    text,
+  }, {
     headers: {
       'x-session-token': sessionToken,
     },
