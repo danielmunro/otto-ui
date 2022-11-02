@@ -22,9 +22,9 @@ export function deleteFollow(sessionToken, followUuid) {
 }
 
 export function getFollowing(userUuid) {
-  return get(`${baseUrl}/user/${userUuid}/follows`);
+  return get(`${baseUrl}/follows/${userUuid}`);
 }
 
 export function getFollowers(userUuid) {
-  return get(`${baseUrl}/user/${userUuid}/followers`);
+  return get(`${baseUrl}/followers/${userUuid}`);
 }
