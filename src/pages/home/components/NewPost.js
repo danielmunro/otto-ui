@@ -3,9 +3,9 @@ import { Button, IconButton, Paper } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import {Editor, EditorState} from 'draft-js';
 import React, { useContext, useRef, useState } from 'react';
-import { createLivestreamImage } from '../actions/image';
-import { createPost, createShare } from '../actions/post';
-import Context from '../utils/Context';
+import { createLivestreamImage } from '../../../actions/image';
+import { createPost, createShare } from '../../../actions/post';
+import Context from '../../../utils/Context';
 import ImageToUpload from './ImageToUpload';
 
 export default function NewPost({ onPostCreated, images, post }) {

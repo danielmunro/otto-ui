@@ -11,19 +11,19 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {
   getFollowers,
   getFollowing
-} from '../actions/follow';
-import { getUserByUsername } from '../actions/user';
-import CircularIndeterminate from '../components/CircularIndeterminate';
-import Container from '../components/Container';
-import FollowButtonToggle from '../components/FollowButtonToggle';
-import FollowDetails from '../components/FollowDetails';
-import UserTabs from '../components/UserTabs';
-import { imageBaseUrl } from '../utils/config';
-import Context from '../utils/Context';
-import { canAdminister, Role } from '../utils/role';
-import Albums from './Albums';
-import Likes from './Likes';
-import Posts from './Posts';
+} from '../../actions/follow';
+import { getUserByUsername } from '../../actions/user';
+import CircularIndeterminate from '../../components/CircularIndeterminate';
+import Container from '../../components/Container';
+import FollowButtonToggle from './components/FollowButtonToggle';
+import FollowDetails from './components/FollowDetails';
+import UserTabs from './components/UserTabs';
+import { imageBaseUrl } from '../../utils/config';
+import Context from '../../utils/Context';
+import { canAdminister, Role } from '../../utils/role';
+import Albums from '../Albums';
+import Likes from '../Likes';
+import Posts from '../Posts';
 
 export default function User() {
   const [notFound, setNotFound] = useState(false);

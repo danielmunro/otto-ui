@@ -2,11 +2,11 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
-import { getPosts as requestGetPosts } from '../actions/post';
-import Container from '../components/Container';
-import NewPost from '../components/NewPost';
-import PostCollection from '../components/PostCollection';
-import Context from '../utils/Context';
+import { getPosts as requestGetPosts } from '../../actions/post';
+import Container from '../../components/Container';
+import NewPost from './components/NewPost';
+import PostCollection from '../../components/PostCollection';
+import Context from '../../utils/Context';
 
 export default function Home() {
   const {

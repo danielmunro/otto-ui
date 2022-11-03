@@ -1,6 +1,6 @@
 import { Backdrop } from '@mui/material';
 import NewPost from './NewPost';
-import Post from './Post';
+import Post from '../../../components/Post';
 
 export default function BackdropNewPost({ open, onPostCreated, closeBackdrop, post }) {
   return (

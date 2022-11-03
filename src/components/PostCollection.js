@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BackdropNewPost from './BackdropNewPost';
+import BackdropNewPost from '../pages/home/components/BackdropNewPost';
 import Post from './Post';
 
 export default function PostCollection({ posts, reloadPosts, onDelete, onUnlike }) {

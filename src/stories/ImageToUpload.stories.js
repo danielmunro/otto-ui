@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import FollowDetails from '../components/FollowDetails';
-import ImageToUpload from '../components/ImageToUpload';
+import FollowDetails from '../pages/user/components/FollowDetails';
+import ImageToUpload from '../pages/home/components/ImageToUpload';
 
 export default {
   title: 'UI/ImageToUpload',

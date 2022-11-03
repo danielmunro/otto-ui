@@ -13,9 +13,10 @@ import OTP from './pages/OTP';
 import Post from './pages/Post';
 import PostEdit from './pages/PostEdit';
 import UpdateProfile from './pages/UpdateProfile';
-import User from './pages/User';
-import { baseUrl } from './utils/config';
-import Home from './pages/Home';
+import {
+  User,
+  Home,
+} from './pages';
 import './App.css';
 import Login from './pages/Login';
 import PasswordReset from './pages/PasswordReset';

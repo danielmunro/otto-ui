@@ -5,8 +5,6 @@ import {
   ToggleButton,
   ToggleButtonGroup
 } from '@mui/material';
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { post } from '@tkrotoff/fetch';

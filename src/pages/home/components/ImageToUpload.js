@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { backgroundColor, imageBaseUrl } from '../utils/config';
+import { backgroundColor, imageBaseUrl } from '../../../utils/config';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 export default function ImageToUpload({ image: { s3_key }, onRemove, hover }) {

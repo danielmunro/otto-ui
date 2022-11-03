@@ -1,5 +1,5 @@
 import React from 'react';
-import NewPost from '../components/NewPost';
+import NewPost from '../pages/home/components/NewPost';
 
 export default {
   title: 'UI/NewPost',

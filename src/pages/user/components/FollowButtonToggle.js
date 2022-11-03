@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useContext } from 'react';
-import { createFollow, deleteFollow } from '../actions/follow';
-import Context from '../utils/Context';
+import { createFollow, deleteFollow } from '../../../actions/follow';
+import Context from '../../../utils/Context';
 
 export default function FollowButtonToggle({ isSelf, user, follow, addFollow, removeFollow }) {
   const {

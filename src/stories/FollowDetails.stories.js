@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import FollowDetails from '../components/FollowDetails';
+import FollowDetails from '../pages/user/components/FollowDetails';
 
 export default {
   title: 'Navigation/FollowDetails',

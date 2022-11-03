@@ -1,5 +1,5 @@
 import React from 'react';
-import UserTabs from '../components/UserTabs';
+import UserTabs from '../pages/user/components/UserTabs';
 
 export default {
   title: 'Navigation/UserTabs',
