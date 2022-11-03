@@ -65,7 +65,7 @@ export default function Container({ children, title }) {
       </Drawer>
       <Box
         component="main"
-        sx={{ p: 1 }}
+        sx={{ p: 1, minWidth: 320, maxWidth: 800 }}
       >
         {children}
       </Box>

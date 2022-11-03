@@ -50,8 +50,7 @@ export default function NewPost({ onPostCreated, images, post }) {
         imagesToPost
       );
     if (response.status === 200 || response.status === 201) {
-      setEditorState(EditorState.createEmpty());
-      localStorage.deleteItem("newPost");
+      onChangeNewPost(EditorState.createEmpty());
       setImagesToPost([]);
       onPostCreated();
     }
