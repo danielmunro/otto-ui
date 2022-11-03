@@ -84,7 +84,7 @@ export default function Post({
         handleDelete={() => setIsDialogOpen(true)}
         handleEdit={() => navigate(`/p-edit/${uuid}`)}
       />
-      <Typography color="text.secondary">
+      <Typography>
         {created.toLocaleString()}
       </Typography>
       <div style={{fontSize: "larger"}}>
