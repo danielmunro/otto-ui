@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Avatar from '../components/Avatar';
+import Avatar from '../pages/post/components/Avatar';
 
 export default {
   title: 'UI/Avatar',

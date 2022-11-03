@@ -1,7 +1,7 @@
 import { Avatar as MUIAvatar, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { imageBaseUrl } from '../utils/config';
+import { imageBaseUrl } from '../../../utils/config';
 
 export default function Avatar({ name, profilePic, username }) {
   const fullPathProfilePic = profilePic ? `${imageBaseUrl}/${profilePic}` : '';

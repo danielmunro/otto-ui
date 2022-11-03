@@ -1,14 +1,13 @@
 import { Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getPost } from '../actions/post';
-import { createReply, getReplies } from '../actions/reply';
-import Container from '../components/Container';
-import Reply from '../components/Reply';
-import TextInput from '../components/TextInput';
-import logo from '../logo.svg';
-import { default as PostComponent } from '../components/Post';
-import Context from '../utils/Context';
+import { getPost } from '../../actions/post';
+import { createReply, getReplies } from '../../actions/reply';
+import Container from '../../components/Container';
+import Reply from './components/Reply';
+import TextInput from '../../components/TextInput';
+import { default as PostComponent } from '../../components/Post';
+import Context from '../../utils/Context';
 
 export default function Post() {
   const [post, setPost] = useState(null);

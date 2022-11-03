@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@emotion/react';
-import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
 import { getUser, refreshSession } from './actions/session';
@@ -10,12 +9,12 @@ import Following from './pages/Following';
 import Image from './pages/Image';
 import ModerateUser from './pages/ModerateUser';
 import OTP from './pages/OTP';
-import Post from './pages/Post';
 import PostEdit from './pages/PostEdit';
 import UpdateProfile from './pages/UpdateProfile';
 import {
   User,
   Home,
+  Post,
 } from './pages';
 import './App.css';
 import Login from './pages/Login';

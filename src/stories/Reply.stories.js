@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Reply from '../components/Reply';
+import Reply from '../pages/post/components/Reply';
 
 export default {
   title: 'UI/Reply',
