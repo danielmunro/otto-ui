@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteSession } from '../../actions/session';
 import Context from '../../utils/Context';
 
-export default function AuthMenu() {
+export default function AuthMenu({ showLabel }) {
   const {
     loggedInUser,
     setLoggedInUser,
@@ -35,13 +35,13 @@ export default function AuthMenu() {
         <ListItemIcon>
           <AccountBoxIcon />
         </ListItemIcon>
-        <ListItemText primary={"Profile"} />
+        <ListItemText primary={showLabel ? "Profile" : ""} />
       </ListItem>
       <ListItem button onClick={() => navigate(`/update-profile`)}>
         <ListItemIcon>
           <EditIcon />
         </ListItemIcon>
-        <ListItemText primary={"Update Profile"} />
+        <ListItemText primary={showLabel ? "Update Profile" : ""} />
       </ListItem>
       <ListItem button onClick={tryLogout}>
         <ListItemIcon>

@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function UnauthMenu() {
+export default function UnauthMenu({ showLabel }) {
   const navigate = useNavigate();
 
   return (
@@ -15,13 +15,13 @@ export default function UnauthMenu() {
         <ListItemIcon>
           <LoginIcon />
         </ListItemIcon>
-        <ListItemText primary={"Login"} />
+        <ListItemText primary={showLabel ? "Login" : ""} />
       </ListItem>
       <ListItem button onClick={() => navigate("/signup")}>
         <ListItemIcon>
           <FollowTheSignsIcon />
         </ListItemIcon>
-        <ListItemText primary={"Signup"} />
+        <ListItemText primary={showLabel ? "Signup" : ""} />
       </ListItem>
     </div>
   );

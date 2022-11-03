@@ -10,31 +10,36 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useWindowDimensions from '../hooks/window';
 import Context from '../utils/Context';
 import AuthMenu from './menu/AuthMenu';
 import UnauthMenu from './menu/UnauthMenu';
 
-const drawerWidth = 240;
-
 export default function Container({ children, title }) {
+  const [showLabel, setShowLabel] = useState(true);
   const { isLoggedIn } = useContext(Context);
   const navigate = useNavigate();
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     document.title = title;
   }, [title]);
+
+  useEffect(() => {
+    setShowLabel(width > 800);
+  }, [width]);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: "18%",
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: "18%",
             boxSizing: 'border-box',
           },
           zIndex: 0,
@@ -49,18 +54,18 @@ export default function Container({ children, title }) {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary={"Home"} />
+            <ListItemText primary={showLabel ? "Home" : ""} />
           </ListItem>
           { isLoggedIn ? (
-            <AuthMenu />
+            <AuthMenu showLabel={showLabel} />
           ) : (
-            <UnauthMenu />
+            <UnauthMenu showLabel={showLabel} />
           )}
         </List>
       </Drawer>
       <Box
         component="main"
-        sx={{ p: 1, width: 680 }}
+        sx={{ p: 1 }}
       >
         {children}
       </Box>
