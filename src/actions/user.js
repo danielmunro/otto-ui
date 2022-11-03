@@ -21,3 +21,10 @@ export function updateUser(sessionToken, uuid, name, birthday, bio) {
     },
   });
 }
+
+export function submitOtp(username, code) {
+  return postJSON(`${baseUrl}/otp`, {
+    user: { username },
+    code,
+  });
+}

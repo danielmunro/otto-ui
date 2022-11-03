@@ -9,6 +9,7 @@ import Followers from './containers/Followers';
 import Following from './containers/Following';
 import Image from './containers/Image';
 import ModerateUser from './containers/ModerateUser';
+import OTP from './containers/OTP';
 import Post from './containers/Post';
 import PostEdit from './containers/PostEdit';
 import Splash from './containers/Splash';
@@ -185,11 +186,12 @@ function App() {
             <Route path="/a/:uuid" element={<Album />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/otp" element={<OTP />} />
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
             <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
             <Route path="/moderate-post/:uuid" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
-            <Route path="/" element={env === "dev" ? <Home /> : <Splash />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </Router>
       </Context.Provider>

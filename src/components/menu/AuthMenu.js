@@ -17,6 +17,7 @@ export default function AuthMenu() {
     sessionToken,
     setSessionToken,
   } = useContext(Context);
+  const navigate = useNavigate();
 
   const tryLogout = async (event) => {
     event.preventDefault();
@@ -27,8 +28,6 @@ export default function AuthMenu() {
     localStorage.deleteItem("token");
     navigate("/");
   };
-
-  const navigate = useNavigate();
 
   return (
     <div>

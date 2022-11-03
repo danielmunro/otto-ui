@@ -1,9 +1,10 @@
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../actions/user';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
+import { env } from '../utils/config';
 
 function getNewErrorsState() {
   return {
@@ -48,7 +49,7 @@ export default function Signup() {
     }
     const response = await signUp(username, email, password);
     if (response.status === 201) {
-      navigate("/login");
+      navigate("/otp");
     }
   };
 
@@ -75,6 +76,16 @@ export default function Signup() {
     }
     return ""
   };
+
+  if (env === "prod") {
+    return (
+      <Container title={"Signup"}>
+        <Typography variant="h1">
+          Coming Soon
+        </Typography>
+      </Container>
+    );
+  }
 
   return (
     <Container title={"Signup"}>
@@ -135,5 +146,5 @@ export default function Signup() {
         </div>
       </form>
     </Container>
-  )
+  );
 }
