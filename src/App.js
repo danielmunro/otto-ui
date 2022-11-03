@@ -59,7 +59,7 @@ function App() {
   };
 
   const getUser = async (token) => {
-    const response = await get(`${baseUrl}/session?token=${token}`);
+    const response = await getUser(token);
     const data = await response.json();
     setLoggedInUser(data.user);
     setIsLoggedIn(true);
@@ -67,11 +67,7 @@ function App() {
   };
 
   const refreshSession = async (token) => {
-    const response = await patchJSON(
-      `${baseUrl}/session`,
-      {
-        token,
-      });
+    const response = await refreshSession(token);
     const data = await response.json();
     setSessionToken(data.token);
     localStorage.setItem("token", data.token);
