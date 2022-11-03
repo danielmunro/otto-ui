@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@emotion/react';
-import { createTheme } from '@mui/material';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
@@ -12,10 +11,9 @@ import ModerateUser from './pages/ModerateUser';
 import OTP from './pages/OTP';
 import Post from './pages/Post';
 import PostEdit from './pages/PostEdit';
-import Splash from './pages/Splash';
 import UpdateProfile from './pages/UpdateProfile';
 import User from './pages/User';
-import { baseUrl, env, primaryColor, secondaryColor } from './utils/config';
+import { baseUrl } from './utils/config';
 import Home from './pages/Home';
 import './App.css';
 import Login from './pages/Login';
@@ -27,54 +25,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-
-const lightTheme = createTheme({
-  palette: {
-    primary: {
-      main: primaryColor,
-    },
-    secondary: {
-      main: secondaryColor,
-    },
-    action: {
-      active: '#0052cc',
-      hover: '#0052cc',
-      focus: '#0052cc',
-      selected: '#0052cc',
-    },
-    text: {
-      primary: "#111",
-    },
-    background: {
-      default: "#fcfdfd",
-      paper: "#fefefe",
-    },
-  },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    primary: {
-      main: primaryColor,
-    },
-    secondary: {
-      main: secondaryColor,
-    },
-    action: {
-      active: '#ccc',
-      hover: '#2f54d0',
-      focus: '#2f54d0',
-      selected: '#2f54d0',
-    },
-    text: {
-      primary: "#ccc",
-    },
-    background: {
-      default: "#333",
-      paper: "#3a3a3a",
-    },
-  },
-});
+import { darkTheme, lightTheme } from './utils/theme';
 
 function App() {
   const [sessionToken, setSessionToken] = useState(null);
