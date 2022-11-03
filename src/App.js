@@ -2,6 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import { get, patchJSON } from '@tkrotoff/fetch';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
+import { getUser, refreshSession } from './actions/session';
 import ProtectedRoute from './components/ProtectedRoute';
 import Album from './pages/Album';
 import Followers from './pages/Followers';
@@ -28,7 +29,7 @@ import {
 import { darkTheme, lightTheme } from './utils/theme';
 
 function App() {
-  const [sessionToken, setSessionToken] = useState(null);
+  const [sessionToken, setSessionToken] = useState(localStorage.getItem("token"));
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
@@ -58,7 +59,7 @@ function App() {
     setUiMode,
   };
 
-  const getUser = async (token) => {
+  const tryGetUser = async (token) => {
     const response = await getUser(token);
     const data = await response.json();
     setLoggedInUser(data.user);
@@ -66,7 +67,7 @@ function App() {
     setIsAppLoaded(true);
   };
 
-  const refreshSession = async (token) => {
+  const tryRefreshSession = async (token) => {
     const response = await refreshSession(token);
     const data = await response.json();
     setSessionToken(data.token);
@@ -88,10 +89,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      console.log("initialize user session");
-      const token = localStorage.getItem("token");
-      setSessionToken(token);
-      if (!token) {
+      if (!sessionToken) {
         console.log("no session found");
         setLoggedInUser(null);
         setIsLoggedIn(false);
@@ -99,11 +97,11 @@ function App() {
         return;
       }
       try {
-        await getUser(token);
+        await tryGetUser(sessionToken);
       } catch (e) {
         try {
-          const refreshToken = await refreshSession(token);
-          await getUser(refreshToken);
+          const refreshToken = await tryRefreshSession(sessionToken);
+          await tryGetUser(refreshToken);
         } catch (e) {
         }
       }

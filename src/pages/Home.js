@@ -33,14 +33,10 @@ export default function Home() {
     setPosts(posts.filter((p) => p !== post));
   };
 
-  const newPostCreated = () => {
-    getPosts();
-  }
-
   return (
     <Container title={"Home"}>
       { loggedInUser && (
-        <NewPost onPostCreated={newPostCreated} />
+        <NewPost onPostCreated={getPosts} />
       )}
       <PostCollection
         posts={posts}
