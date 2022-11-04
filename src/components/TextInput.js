@@ -9,14 +9,16 @@ const CssTextField = styled(TextField)({
     borderBottomColor: '#011627',
   },
   '& .MuiOutlinedInput-root': {
-    marginTop: 8,
-    marginBottom: 8,
   }
 });
 
 export default function TextInput({onChangeValue, ...props}) {
-  return <CssTextField
-    {...props}
-    onChange={(event) => onChangeValue(event.target.value)}
-  />
+  return (
+    <div style={{ marginBottom: 10 }}>
+      <CssTextField
+        {...props}
+        onChange={(event) => onChangeValue(event.target.value)}
+      />
+    </div>
+  );
 }

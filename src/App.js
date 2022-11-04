@@ -18,7 +18,7 @@ import {
 } from './pages';
 import './App.css';
 import Login from './pages/Login';
-import PasswordReset from './pages/PasswordReset';
+import ForgotPassword from './pages/ForgotPassword';
 import Signup from './pages/Signup';
 import Context from './utils/Context';
 import {
@@ -132,7 +132,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
-            <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
             <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
             <Route path="/moderate-post/:uuid" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />

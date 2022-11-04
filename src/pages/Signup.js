@@ -1,6 +1,6 @@
-import { Button, Typography } from '@mui/material';
+import { Alert, Button, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signUp } from '../actions/user';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -12,6 +12,7 @@ function getNewErrorsState() {
     passwordLength: false,
     usernameFormat: false,
     emailLength: false,
+    serverError: false,
   };
 }
 
@@ -43,13 +44,19 @@ export default function Signup() {
       newErrors.usernameFormat = true;
       hasError = true;
     }
+    setErrors(newErrors);
     if (hasError) {
-      setErrors(newErrors);
       return;
     }
-    const response = await signUp(username, email, password);
-    if (response.status === 201) {
+    try {
+      console.log(1)
+      await signUp(username, email, password);
+      console.log(2)
       navigate("/otp");
+    } catch (e) {
+      console.log("ya")
+      newErrors.serverError = true;
+      setErrors(newErrors);
     }
   };
 
@@ -89,6 +96,13 @@ export default function Signup() {
 
   return (
     <Container title={"Join The Discussion"}>
+      {errors.serverError && (
+        <div style={{padding: "10px 0 10px 0"}}>
+          <Alert severity="error">
+            There was an error submitting your account information. Did you <Link to="/forgot-password">forget your password?</Link>
+          </Alert>
+        </div>
+      )}
       <form onSubmit={trySignup}>
         <div>
           <TextInput

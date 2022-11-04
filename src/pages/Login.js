@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../actions/session';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -64,7 +64,7 @@ export default function Login() {
             color="primary"
           >
             Login
-          </Button>
+          </Button> or <Link to="/forgot-password">Forgot Password</Link>
         </div>
       </form>
     </Container>

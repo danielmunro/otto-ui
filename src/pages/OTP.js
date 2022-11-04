@@ -33,13 +33,13 @@ export default function OTP() {
 
   return (
     <Container title="Confirm Your Account">
-      <div style={{padding: "10px 0 10px 0"}}>
       { error && (
-        <Alert severity="error">
-          There was an error submitting this confirmation code. Please check your email for the right code.
-        </Alert>
+        <div style={{padding: "10px 0 10px 0"}}>
+          <Alert severity="error">
+            There was an error submitting this confirmation code. Please check your email for the right code.
+          </Alert>
+        </div>
       )}
-      </div>
       <form onSubmit={trySubmitOtp}>
         <div>
           <TextInput
