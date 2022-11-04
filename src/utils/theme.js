@@ -5,6 +5,7 @@ const shared = {
   typography: {
     h1: {
       fontSize: "50pt",
+      paddingBottom: 10,
     },
   },
 };

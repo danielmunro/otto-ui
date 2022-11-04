@@ -84,22 +84,22 @@ export default function UpdateProfile() {
     setShowUpload(false);
   };
 
-  if (!isLoaded) {
-    return (
-      <Container>
-        <CircularIndeterminate />
-      </Container>
-    );
-  }
-
-  const profilePic = loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
-
   const onChangeUiMode = (event, newValue) => {
     console.log(event, newValue);
     console.log("setUIMode", newValue);
     localStorage.setItem("uiMode", newValue);
     setUiMode(newValue);
   };
+
+  if (!isLoaded || !loggedInUser) {
+    return (
+      <Container title={"Update Profile"}>
+        <CircularIndeterminate />
+      </Container>
+    );
+  }
+
+  const profilePic = loggedInUser.profile_pic ? `${imageBaseUrl}/${loggedInUser.profile_pic}` : '';
 
   return (
     <Container title={"Update Profile"}>

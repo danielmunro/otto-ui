@@ -67,6 +67,11 @@ export default function Container({ children, title }) {
         component="main"
         sx={{ p: 1, minWidth: 320, maxWidth: 800 }}
       >
+        { title && (
+          <Typography variant="h1">
+            {title}
+          </Typography>
+        )}
         {children}
       </Box>
     </Box>

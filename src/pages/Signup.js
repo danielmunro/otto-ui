@@ -79,7 +79,7 @@ export default function Signup() {
 
   if (env === "prod") {
     return (
-      <Container title={"Signup"}>
+      <Container title={"Join The Discussion"}>
         <Typography variant="h1">
           Coming Soon
         </Typography>
@@ -88,7 +88,7 @@ export default function Signup() {
   }
 
   return (
-    <Container title={"Signup"}>
+    <Container title={"Join The Discussion"}>
       <form onSubmit={trySignup}>
         <div>
           <TextInput

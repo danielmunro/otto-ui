@@ -25,9 +25,13 @@ export default function AuthMenu({ showLabel }) {
     setLoggedInUser(null);
     setIsLoggedIn(false);
     await deleteSession(sessionToken);
-    localStorage.deleteItem("token");
+    localStorage.setItem("token", null);
     navigate("/");
   };
+
+  if (!loggedInUser) {
+    return <div />;
+  }
 
   return (
     <div>

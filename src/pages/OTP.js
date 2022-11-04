@@ -32,10 +32,7 @@ export default function OTP() {
   }, []);
 
   return (
-    <Container title="Confirmation Code">
-      <Typography variant="h1">
-        Confirm Your Account
-      </Typography>
+    <Container title="Confirm Your Account">
       <div style={{padding: "10px 0 10px 0"}}>
       { error && (
         <Alert severity="error">
