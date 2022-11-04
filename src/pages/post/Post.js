@@ -62,8 +62,9 @@ export default function Post() {
   const description = post.text.split(".")[0];
 
   return (
-    <Container title={title}>
+    <Container>
       <MetaTags>
+        <title>{title}</title>
         <meta
           property="og:title"
           content={title}
