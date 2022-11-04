@@ -1,52 +1,66 @@
 import { createTheme } from '@mui/material';
 import { primaryColor, secondaryColor } from './config';
 
+const shared = {
+  typography: {
+    h1: {
+      fontSize: "50pt",
+    },
+  },
+};
+
 const lightTheme = createTheme({
-  palette: {
-    primary: {
-      main: primaryColor,
-    },
-    secondary: {
-      main: secondaryColor,
-    },
-    action: {
-      active: '#0052cc',
-      hover: '#0052cc',
-      focus: '#0052cc',
-      selected: '#0052cc',
-    },
-    text: {
-      primary: "#111",
-    },
-    background: {
+  ...shared,
+  ...{
+    palette: {
+      primary: {
+        main: primaryColor,
+      },
+      secondary: {
+        main: secondaryColor,
+      },
+      action: {
+        active: '#0052cc',
+          hover: '#0052cc',
+          focus: '#0052cc',
+          selected: '#0052cc',
+      },
+      text: {
+        primary: "#111",
+      },
+      background: {
       default: "#fcfdfd",
-      paper: "#fefefe",
+          paper: "#fefefe",
+      },
     },
   },
 });
 
 const darkTheme = createTheme({
-  palette: {
-    primary: {
-      main: primaryColor,
+  ...shared,
+  ...{
+    palette: {
+      primary: {
+        main: primaryColor,
+      },
+      secondary: {
+        main: secondaryColor,
+      },
+      action: {
+        active: '#ccc',
+        hover: '#2f54d0',
+        focus: '#2f54d0',
+        selected: '#2f54d0',
+      },
+      text: {
+        primary: "#ccc",
+      },
+      background: {
+        default: "#333",
+        paper: "#3a3a3a",
+      },
     },
-    secondary: {
-      main: secondaryColor,
-    },
-    action: {
-      active: '#ccc',
-      hover: '#2f54d0',
-      focus: '#2f54d0',
-      selected: '#2f54d0',
-    },
-    text: {
-      primary: "#ccc",
-    },
-    background: {
-      default: "#333",
-      paper: "#3a3a3a",
-    },
-  },
+  }
 });
 
 export {
