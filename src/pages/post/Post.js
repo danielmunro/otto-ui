@@ -1,9 +1,11 @@
 import { Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import MetaTags from 'react-meta-tags';
 import { getPost } from '../../actions/post';
 import { createReply, getReplies } from '../../actions/reply';
 import Container from '../../components/Container';
+import { imageBaseUrl } from '../../utils/config';
 import Reply from './components/Reply';
 import TextInput from '../../components/TextInput';
 import { default as PostComponent } from '../../components/Post';
@@ -56,8 +58,31 @@ export default function Post() {
     }
   };
 
+  const title = `Read ${post.user.name || '@'+post.user.username}'s Post`;
+  const description = post.text.split(".")[0];
+
   return (
-    <Container title={`Read ${post.user.name || '@'+post.user.username}'s Post`}>
+    <Container title={title}>
+      <MetaTags>
+        <meta
+          property="og:title"
+          content={title}
+        />
+        <meta
+          property="og:url"
+          content={`https://thirdplaceapp.com/p/${post.uuid}`}
+        />
+        { post.images && post.images.length > 0 && (
+          <meta
+            property="og:image"
+            content={`${imageBaseUrl}/${post.images[0].s3_key}`}
+          />
+        )}
+        <meta property="og:description" content={description} />
+        <meta property="og:site_name" content="Third Place" />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={post.created_at} />
+      </MetaTags>
       <PostComponent post={post} onDelete={() => navigate("/")} showReply={false} />
       <h3>Replies</h3>
       { isLoggedIn && (
