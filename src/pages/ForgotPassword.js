@@ -1,6 +1,8 @@
 import { Button } from '@mui/material';
 import { postJSON, putJSON } from '@tkrotoff/fetch';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../actions/session';
 import Alert from '../components/Alert';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -8,11 +10,32 @@ import { baseUrl } from '../utils/config';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const tryForgotPassword = async (event) => {
     event.preventDefault();
+    if (submitted && !error) {
+      try {
+        await putJSON(`${baseUrl}/forgot-password`, {
+          user: {
+            username: email,
+            current_password: password,
+          },
+          code,
+        });
+        await login(email, password);
+        setCompleted(true);
+        navigate("/");
+      } catch {
+        setError(false);
+      }
+      return;
+    }
     setSubmitted(false);
     setError(false);
     try {
@@ -25,9 +48,14 @@ export default function ForgotPassword() {
 
   return (
     <Container title="Account Recovery">
-      { submitted && (
+      { submitted && !completed && (
+        <Alert severity="info">
+          A password reset request has been submitted. Please check your email and provide the code here, along with your new password.
+        </Alert>
+      )}
+      { completed && (
         <Alert severity="success">
-          A password reset request has been submitted. Please check your email.
+          Your password has been successfully reset!
         </Alert>
       )}
       { error && (
@@ -43,13 +71,33 @@ export default function ForgotPassword() {
             value={email}
             onChangeValue={setEmail}
             style={{width: 400}}
+            disabled={submitted}
           />
         </div>
+        { submitted && (
+          <div>
+            <TextInput
+              label="Confirmation Code"
+              variant="outlined"
+              value={code}
+              onChangeValue={setCode}
+              style={{width: 400}}
+            />
+            <TextInput
+              label="New Password"
+              variant="outlined"
+              value={password}
+              onChangeValue={setPassword}
+              type="password"
+              style={{width: 400}}
+            />
+          </div>
+        )}
         <div>
           <Button
             variant="contained"
             type="submit"
-            disabled={submitted}
+            disabled={completed}
           >
             Submit Password Reset Request
           </Button>
