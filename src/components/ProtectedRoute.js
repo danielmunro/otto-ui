@@ -7,7 +7,7 @@ export default function ProtectedRoute({ component: Component }) {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate.push("/useLogin");
+      navigate.push("/login");
     }
   }, []);
 
