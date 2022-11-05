@@ -7,6 +7,7 @@ import Album from './pages/Album';
 import Followers from './pages/Followers';
 import Following from './pages/Following';
 import Image from './pages/Image';
+import InviteList from './pages/InviteList';
 import ModerateUser from './pages/ModerateUser';
 import OTP from './pages/OTP';
 import PostEdit from './pages/PostEdit';
@@ -132,6 +133,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
+            <Route path="/invite" element={<InviteList />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
             <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />

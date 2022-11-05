@@ -21,6 +21,7 @@ export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [inviteCode, setInviteCode] = useState('');
   const [errors, setErrors] = useState(getNewErrorsState());
   const navigate = useNavigate();
 
@@ -52,7 +53,7 @@ export default function Signup() {
       await signUp(username, email, password);
       navigate("/otp");
     } catch (e) {
-      newErrors.serverError = true;
+      newErrors.serverError = e.toString();
       setErrors(newErrors);
     }
   };
@@ -81,22 +82,12 @@ export default function Signup() {
     return ""
   };
 
-  if (env === "prod") {
-    return (
-      <Container title={"Join The Discussion"}>
-        <Typography variant="h1">
-          Coming Soon
-        </Typography>
-      </Container>
-    );
-  }
-
   return (
     <Container title={"Join The Discussion"}>
       {errors.serverError && (
         <div style={{padding: "10px 0 10px 0"}}>
           <Alert severity="error">
-            There was an error submitting your account information. Did you <Link to="/forgot-password">forget your password?</Link>
+            There was an error submitting your account information, the server responded with: {errors.serverError}
           </Alert>
         </div>
       )}
@@ -144,6 +135,15 @@ export default function Signup() {
             style={{width: 400}}
             error={ errors.passwordMatch || errors.passwordLength }
             helperText={getPasswordHelperText()}
+          />
+        </div>
+        <div>
+          <TextInput
+            label="Invite Code"
+            variant="outlined"
+            onChangeValue={setInviteCode}
+            value={inviteCode}
+            style={{width: 400}}
           />
         </div>
         <div className="row">
