@@ -17,11 +17,12 @@ function getNewErrorsState() {
 }
 
 export default function Signup() {
+  const params = new URLSearchParams(document.location.search);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [inviteCode, setInviteCode] = useState('');
+  const [inviteCode, setInviteCode] = useState(params.get("invite") ?? "");
   const [errors, setErrors] = useState(getNewErrorsState());
   const navigate = useNavigate();
 
