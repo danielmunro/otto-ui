@@ -3,6 +3,7 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import { useContext, useEffect, useState } from 'react';
 import { createInvite, getInvites } from '../actions/invite';
 import Container from '../components/Container';
+import { baseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function InviteList() {
@@ -25,7 +26,7 @@ export default function InviteList() {
     setInvites(allInvites);
   };
 
-  const copyToClipboard = (code) => navigator.clipboard.writeText(code);
+  const copyToClipboard = (code) => navigator.clipboard.writeText(`https://thirdplaceapp.com/signup?invite=${code}`);
 
   return (
     <Container title="Invitations">
