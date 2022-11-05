@@ -94,8 +94,6 @@ export default function User() {
     setFollows(newFollows);
   };
 
-  const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
-
   if (!isLoaded) {
     return (
       <Container>
@@ -104,6 +102,7 @@ export default function User() {
     );
   }
 
+  const profilePic = user.profile_pic ? `${imageBaseUrl}/${user.profile_pic}` : '';
   const displayName = user.name || '@' + user.username;
   let tabToDisplay;
   if (tab === "posts") {
@@ -122,7 +121,7 @@ export default function User() {
     chip = <Chip label="Moderator" color="secondary" variant="outlined" sx={{ml: 1}} size="small" />;
   }
 
-  const canAdmin = canAdminister(loggedInUser.role, Role.moderator) && loggedInUser.uuid !== user.uuid;
+  const canAdmin = loggedInUser && canAdminister(loggedInUser.role, Role.moderator) && loggedInUser.uuid !== user.uuid;
   const isSelf = loggedInUser && username === loggedInUser.username;
   const follow = follows.find((f) => f.following.username === username);
 
