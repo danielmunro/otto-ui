@@ -1,6 +1,6 @@
 import { Alert, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { submitOtp } from '../actions/user';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
@@ -40,6 +40,9 @@ export default function OTP() {
           </Alert>
         </div>
       )}
+      <Typography>
+        Check your email for a confirmation code. If you don't have one, try the <Link to="/forgot-password">forgot password</Link> link.
+      </Typography>
       <form onSubmit={trySubmitOtp}>
         <div>
           <TextInput

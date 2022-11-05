@@ -49,12 +49,9 @@ export default function Signup() {
       return;
     }
     try {
-      console.log(1)
       await signUp(username, email, password);
-      console.log(2)
       navigate("/otp");
     } catch (e) {
-      console.log("ya")
       newErrors.serverError = true;
       setErrors(newErrors);
     }
