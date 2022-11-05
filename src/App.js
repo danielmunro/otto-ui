@@ -133,7 +133,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
-            <Route path="/invite" element={<InviteList />} />
+            <Route path="/invite" element={<ProtectedRoute component={InviteList} role="admin" />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
             <Route path="/moderate-user/:username" element={<ProtectedRoute role="moderator" component={ModerateUser} />} />
