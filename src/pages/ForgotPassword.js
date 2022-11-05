@@ -2,11 +2,11 @@ import { Button } from '@mui/material';
 import { postJSON, putJSON } from '@tkrotoff/fetch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../actions/session';
 import Alert from '../components/Alert';
 import Container from '../components/Container';
 import TextInput from '../components/TextInput';
 import { baseUrl } from '../utils/config';
+import { useLogin } from '../hooks/login';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -16,6 +16,7 @@ export default function ForgotPassword() {
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const login = useLogin();
 
   const tryForgotPassword = async (event) => {
     event.preventDefault();

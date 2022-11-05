@@ -19,7 +19,7 @@ export default function OTP() {
     setError(false);
     try {
       await submitOtp(email, code);
-      navigate("/login");
+      navigate("/useLogin");
     } catch (e) {
       setError(true);
     }
