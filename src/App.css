@@ -62,7 +62,7 @@ div.row {
 }
 
 div.post img {
-  width: 100%;
+  max-width: 100%;
 }
 
 a {
