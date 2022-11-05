@@ -61,6 +61,10 @@ div.row {
     margin: 10px;
 }
 
+div.post {
+  overflow-x: scroll;
+}
+
 div.post img {
   max-width: 100%;
 }
