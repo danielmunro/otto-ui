@@ -89,7 +89,7 @@ export default function Post({
       <Typography>
         {created.toLocaleString()}
       </Typography>
-      <div style={{fontSize: "larger"}}>
+      <div style={{fontSize: "larger"}} className="post">
         <ReactMarkdown>
           {text}
         </ReactMarkdown>
