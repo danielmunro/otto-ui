@@ -38,7 +38,7 @@ export default function Post({
 }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSelfLiked, setIsSelfLiked] = useState(selfLiked);
-  const { isLoggedIn, sessionToken } = useContext(Context);
+  const { isLoggedIn, sessionToken, loggedInUser } = useContext(Context);
   const created = new Date(created_at);
   showShare = showShare === undefined || Boolean(showShare);
   onUnlike = onUnlike === undefined ? () => {} : onUnlike;
@@ -80,10 +80,12 @@ export default function Post({
           <b>{author.name}</b> @{author.username}
         </Link>
       </Typography>
-      <PostMenu
-        handleDelete={() => setIsDialogOpen(true)}
-        handleEdit={() => navigate(`/p-edit/${uuid}`)}
-      />
+      { isLoggedIn && loggedInUser.uuid === author.uuid && (
+        <PostMenu
+          handleDelete={() => setIsDialogOpen(true)}
+          handleEdit={() => navigate(`/p-edit/${uuid}`)}
+        />
+      )}
       <Typography>
         {created.toLocaleString()}
       </Typography>
