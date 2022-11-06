@@ -30,8 +30,8 @@ const lightTheme = createTheme({
         primary: "#111",
       },
       background: {
-      default: "#fcfdfd",
-          paper: "#fefefe",
+        default: "#c9c9c9",
+        paper: "#fafafa",
       },
     },
   },

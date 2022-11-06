@@ -8,7 +8,7 @@ import {
   DialogTitle,
   Paper,
   Typography,
-  Link,
+  Link, Card,
 } from '@mui/material';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
@@ -69,7 +69,15 @@ export default function Post({
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Paper sx={{p: 1, mb: 1}}>
+    <Card
+      sx={{p: 1, mb: 1}}
+    >
+      { isLoggedIn && loggedInUser.uuid === author.uuid && (
+        <PostMenu
+          handleDelete={() => setIsDialogOpen(true)}
+          handleEdit={() => navigate(`/p-edit/${uuid}`)}
+        />
+      )}
       <Avatar
         alt={authorDisplayName}
         src={profilePic}
@@ -80,12 +88,6 @@ export default function Post({
           <b>{author.name}</b> @{author.username}
         </Link>
       </Typography>
-      { isLoggedIn && loggedInUser.uuid === author.uuid && (
-        <PostMenu
-          handleDelete={() => setIsDialogOpen(true)}
-          handleEdit={() => navigate(`/p-edit/${uuid}`)}
-        />
-      )}
       <Typography>
         {created.toLocaleString()}
       </Typography>
@@ -164,6 +166,6 @@ export default function Post({
           </Button>
         </DialogActions>
       </Dialog>
-    </Paper>
+    </Card>
   );
 }
