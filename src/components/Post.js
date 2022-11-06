@@ -65,7 +65,7 @@ export default function Post({
     setIsSelfLiked(false);
   };
 
-  const authorDisplayName = author.name ? author.name : "(no name)";
+  const authorDisplayName = author.name ? author.name : "";
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
@@ -82,15 +82,14 @@ export default function Post({
         alt={authorDisplayName}
         src={profilePic}
         style={{ float: "left", marginRight: 10 }}
+        sx={{ width: 56, height: 56 }}
       />
       <Typography variant="h6">
         <Link component={RouterLink} to={`/u/${author.username}`}>
-          <b>{author.name}</b> @{author.username}
+          <b>{author.name}</b> <span style={{color: "#f17887"}}>@{author.username}</span>
         </Link>
       </Typography>
-      <Typography>
-        {created.toLocaleString()}
-      </Typography>
+      <Typography><Link href={`/p/${uuid}`}>link</Link></Typography>
       <div style={{fontSize: "larger"}} className="post">
         <ReactMarkdown>
           {text}
@@ -125,6 +124,9 @@ export default function Post({
           </Link>
         ))}
       </div>
+      <Typography>
+        Originally posted {created.toLocaleString()}
+      </Typography>
       { showReply && (
         <Button component={RouterLink} to={`/p/${uuid}`}>
           Reply

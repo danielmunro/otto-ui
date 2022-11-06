@@ -30,7 +30,7 @@ const lightTheme = createTheme({
         primary: "#111",
       },
       background: {
-        default: "#c9c9c9",
+        default: "#dfdfdf",
         paper: "#fafafa",
       },
     },
