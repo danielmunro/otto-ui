@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
@@ -26,36 +26,38 @@ export default function Login() {
 
   return (
     <Container title={"Login"}>
-      <form onSubmit={tryLogin}>
-        <div>
-          <TextInput
-            label="Email/username"
-            variant="outlined"
-            onChangeValue={setEmail}
-            value={email}
-            style={{width: 400}}
-          />
-        </div>
-        <div>
-          <TextInput
-            label="Password"
-            variant="outlined"
-            onChangeValue={setPassword}
-            value={password}
-            type="password"
-            style={{width: 400}}
-          />
-        </div>
-        <div className="row">
-          <Button
-            variant="contained"
-            type="submit"
-            color="primary"
-          >
-            Login
-          </Button> or <Link to="/forgot-password">Forgot Password</Link>
-        </div>
-      </form>
+      <Paper sx={{p: 1}}>
+        <form onSubmit={tryLogin}>
+          <div>
+            <TextInput
+              label="Email/username"
+              variant="outlined"
+              onChangeValue={setEmail}
+              value={email}
+              style={{width: 400}}
+            />
+          </div>
+          <div>
+            <TextInput
+              label="Password"
+              variant="outlined"
+              onChangeValue={setPassword}
+              value={password}
+              type="password"
+              style={{width: 400}}
+            />
+          </div>
+          <div className="row">
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+            >
+              Login
+            </Button> or <Link to="/forgot-password">Forgot Password</Link>
+          </div>
+        </form>
+      </Paper>
     </Container>
   )
 }

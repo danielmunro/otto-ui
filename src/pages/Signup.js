@@ -1,4 +1,4 @@
-import { Alert, Button, Typography } from '@mui/material';
+import { Alert, Button, Paper, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUp } from '../actions/user';
@@ -92,71 +92,73 @@ export default function Signup() {
           </Alert>
         </div>
       )}
-      <form onSubmit={trySignup}>
-        <div>
-          <TextInput
-            label="Email"
-            variant="outlined"
-            onChangeValue={setEmail}
-            value={email}
-            style={{width: 400}}
-            error={ errors.emailLength }
-            helperText={getEmailHelperText()}
-          />
-        </div>
-        <div>
-          <TextInput
-            label="Username"
-            variant="outlined"
-            onChangeValue={setUsername}
-            value={username}
-            style={{width: 400}}
-            error={ errors.usernameFormat === true }
-            helperText={getUsernameHelperText()}
-          />
-        </div>
-        <div>
-          <TextInput
-            label="Password"
-            variant="outlined"
-            onChangeValue={setPassword}
-            value={password}
-            type="password"
-            style={{width: 400}}
-            error={ errors.passwordMatch || errors.passwordLength }
-          />
-        </div>
-        <div>
-          <TextInput
-            label="Password (again)"
-            variant="outlined"
-            onChangeValue={setPasswordConfirm}
-            value={passwordConfirm}
-            type="password"
-            style={{width: 400}}
-            error={ errors.passwordMatch || errors.passwordLength }
-            helperText={getPasswordHelperText()}
-          />
-        </div>
-        <div>
-          <TextInput
-            label="Invite Code"
-            variant="outlined"
-            onChangeValue={setInviteCode}
-            value={inviteCode}
-            style={{width: 400}}
-          />
-        </div>
-        <div className="row">
-          <Button
-            variant="contained"
-            onClick={trySignup}
-            type="submit"
-          >
-            Signup
-          </Button>
-        </div>
-      </form>
+      <Paper sx={{p: 1}}>
+        <form onSubmit={trySignup}>
+          <div>
+            <TextInput
+              label="Email"
+              variant="outlined"
+              onChangeValue={setEmail}
+              value={email}
+              style={{width: 400}}
+              error={ errors.emailLength }
+              helperText={getEmailHelperText()}
+            />
+          </div>
+          <div>
+            <TextInput
+              label="Username"
+              variant="outlined"
+              onChangeValue={setUsername}
+              value={username}
+              style={{width: 400}}
+              error={ errors.usernameFormat === true }
+              helperText={getUsernameHelperText()}
+            />
+          </div>
+          <div>
+            <TextInput
+              label="Password"
+              variant="outlined"
+              onChangeValue={setPassword}
+              value={password}
+              type="password"
+              style={{width: 400}}
+              error={ errors.passwordMatch || errors.passwordLength }
+            />
+          </div>
+          <div>
+            <TextInput
+              label="Password (again)"
+              variant="outlined"
+              onChangeValue={setPasswordConfirm}
+              value={passwordConfirm}
+              type="password"
+              style={{width: 400}}
+              error={ errors.passwordMatch || errors.passwordLength }
+              helperText={getPasswordHelperText()}
+            />
+          </div>
+          <div>
+            <TextInput
+              label="Invite Code"
+              variant="outlined"
+              onChangeValue={setInviteCode}
+              value={inviteCode}
+              style={{width: 400}}
+            />
+          </div>
+          <div className="row">
+            <Button
+              variant="contained"
+              onClick={trySignup}
+              type="submit"
+            >
+              Signup
+            </Button>
+          </div>
+        </form>
+      </Paper>
     </Container>
   );
 }
