@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUp } from '../actions/user';
 import Container from '../components/Container';
+import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
 import { env } from '../utils/config';
 
@@ -92,7 +93,7 @@ export default function Signup() {
           </Alert>
         </div>
       )}
-      <Paper sx={{p: 1}}>
+      <PaperContainer>
         <Alert severity="info" sx={{marginBottom: 1}}>
           Third place is currently in <b>closed beta</b>, all sign ups require an invite code.
         </Alert>
@@ -161,7 +162,7 @@ export default function Signup() {
             </Button>
           </div>
         </form>
-      </Paper>
+      </PaperContainer>
     </Container>
   );
 }

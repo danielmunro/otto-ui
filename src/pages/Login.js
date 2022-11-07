@@ -1,7 +1,8 @@
-import { Button, Paper } from '@mui/material';
+import { Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
+import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
 import Context from '../utils/Context';
 import { useLogin } from '../hooks/login';
@@ -26,7 +27,7 @@ export default function Login() {
 
   return (
     <Container title={"Login"}>
-      <Paper sx={{p: 1}}>
+      <PaperContainer>
         <form onSubmit={tryLogin}>
           <div>
             <TextInput
@@ -57,7 +58,7 @@ export default function Login() {
             </Button> or <Link to="/forgot-password">Forgot Password</Link>
           </div>
         </form>
-      </Paper>
+      </PaperContainer>
     </Container>
   )
 }

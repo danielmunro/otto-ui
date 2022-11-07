@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React, {
   useContext,
   useEffect,
@@ -6,6 +6,7 @@ import React, {
 import { Link } from 'react-router-dom';
 import { getPosts as requestGetPosts } from '../../actions/post';
 import Container from '../../components/Container';
+import PaperContainer from '../../components/PaperContainer';
 import NewPost from './components/NewPost';
 import PostCollection from '../../components/PostCollection';
 import Context from '../../utils/Context';
@@ -38,7 +39,7 @@ export default function Home() {
   return (
     <Container title={"Home"}>
       { !loggedInUser && (
-        <Paper sx={{p: 1}}>
+        <PaperContainer>
           <Typography>
             Third place is an open source social network.
             The <Link to="//thirdplaceapp.com/p/277ad822-c24a-4801-83ad-7cc6a68b4564">code that powers this site</Link> is free for anyone to download, view, and modify. We embrace open source because that is how we learned to program, and we hope others find this project useful in their learning journey.
@@ -55,7 +56,7 @@ export default function Home() {
           <Typography sx={{paddingTop: 1}}>
             <Link to="//thirdplaceapp.com/p/9aed55cd-1d3b-4208-befe-4b3e3500291b">Part II</Link> covers the sign up flow for new users.
           </Typography>
-        </Paper>
+        </PaperContainer>
       )}
       { loggedInUser && (
         <NewPost onPostCreated={getPosts} />
