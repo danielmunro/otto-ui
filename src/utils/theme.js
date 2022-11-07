@@ -7,6 +7,14 @@ const shared = {
       fontSize: "50pt",
       paddingBottom: 10,
     },
+    h2: {
+      fontSize: "36pt",
+      padding: "10px 0 10px 0",
+    },
+    fontSize: 16,
+    body1: {
+      lineHeight: 1.6,
+    },
   },
 };
 
