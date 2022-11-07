@@ -9,7 +9,7 @@ const shared = {
     },
     h2: {
       fontSize: "36pt",
-      padding: "10px 0 10px 0",
+      padding: "40px 0 20px 0",
     },
     fontSize: 16,
     body1: {
