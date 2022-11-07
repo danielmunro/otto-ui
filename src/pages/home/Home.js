@@ -40,7 +40,7 @@ export default function Home() {
       { !loggedInUser && (
         <Paper sx={{p: 1}}>
           <Typography>
-            Third Place is an open source social network.
+            Third place is an open source social network.
             The <Link to="//thirdplaceapp.com/p/277ad822-c24a-4801-83ad-7cc6a68b4564">code that powers this site</Link> is free for anyone to download, view, and modify. We embrace open source because that is how we learned to program, and we hope others find this project useful in their learning journey.
           </Typography>
           <Typography sx={{paddingTop: 1}}>

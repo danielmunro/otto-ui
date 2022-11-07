@@ -94,7 +94,7 @@ export default function Signup() {
       )}
       <Paper sx={{p: 1}}>
         <Alert severity="info" sx={{marginBottom: 1}}>
-          Third Place is currently in <b>closed beta</b>, all sign ups require an invite code.
+          Third place is currently in <b>closed beta</b>, all sign ups require an invite code.
         </Alert>
         <form onSubmit={trySignup}>
           <div>
