@@ -8,7 +8,8 @@ import Context from '../utils/Context';
 import { useLogin } from '../hooks/login';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const params = new URLSearchParams(document.location.search);
+  const [email, setEmail] = useState(params.get('email') ?? '');
   const [password, setPassword] = useState('');
   const { isLoggedIn } = useContext(Context);
   const navigate = useNavigate();

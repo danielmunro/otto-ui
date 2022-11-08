@@ -7,16 +7,6 @@ import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
 import { env } from '../utils/config';
 
-function getNewErrorsState() {
-  return {
-    passwordMatch: false,
-    passwordLength: false,
-    usernameFormat: false,
-    emailLength: false,
-    serverError: false,
-  };
-}
-
 export default function Signup() {
   const params = new URLSearchParams(document.location.search);
   const [email, setEmail] = useState('');
@@ -24,13 +14,13 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [inviteCode, setInviteCode] = useState(params.get("invite") ?? "");
-  const [errors, setErrors] = useState(getNewErrorsState());
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const trySignup = async (event) => {
     event.preventDefault();
     let hasError = false;
-    const newErrors = getNewErrorsState();
+    const newErrors = {};
     if (email.length < 2) {
       newErrors.emailLength = true;
       hasError = true;
@@ -47,16 +37,21 @@ export default function Signup() {
       newErrors.usernameFormat = true;
       hasError = true;
     }
+    if (inviteCode.length < 7) {
+      newErrors.inviteCode = true;
+      hasError = true
+    }
     setErrors(newErrors);
     if (hasError) {
       return;
     }
-    try {
-      await signUp(username, email, password);
-      navigate("/otp");
-    } catch (e) {
-      newErrors.serverError = e.toString();
-      setErrors(newErrors);
+    const response = await signUp(username, email, password, inviteCode);
+    if (response.status !== 201) {
+      newErrors.serverError = true;
+      newErrors.serverErrorMessage = await response.text();
+      setErrors(e => ({...e, ...newErrors}));
+    } else {
+      navigate(`/otp?email=${email}`);
     }
   };
 
@@ -70,26 +65,21 @@ export default function Signup() {
     return ""
   };
 
-  const getUsernameHelperText = () => {
-    if (errors.usernameFormat) {
-      return "username must be 2-16 alpha-numeric characters"
-    }
-    return ""
-  };
+  const getUsernameHelperText =
+    () => errors.usernameFormat ? "username must be 2-16 alpha-numeric characters" : "";
 
-  const getEmailHelperText = () => {
-    if (errors.emailLength) {
-      return "email is required"
-    }
-    return ""
-  };
+  const getEmailHelperText = () => errors.emailLength ? "email is required" : "";
+
+  const getInviteCodeHelperText = () => errors.inviteCode ? "Code appears to be a bad format" : "";
+
+  console.log(errors);
 
   return (
     <Container title={"Join The Discussion"}>
       {errors.serverError && (
         <div style={{padding: "10px 0 10px 0"}}>
           <Alert severity="error">
-            There was an error submitting your account information, the server responded with: {errors.serverError}
+            There was an error submitting your request: {errors.serverErrorMessage}
           </Alert>
         </div>
       )}
@@ -150,6 +140,8 @@ export default function Signup() {
               onChangeValue={setInviteCode}
               value={inviteCode}
               style={{width: 400}}
+              error={ errors.inviteCode }
+              helperText={getInviteCodeHelperText()}
             />
           </div>
           <div className="row">

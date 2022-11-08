@@ -7,7 +7,7 @@ import TextInput from '../components/TextInput';
 
 export default function OTP() {
   const params = new URLSearchParams(document.location.search);
-  const [email, setEmail] = useState(params.get("username") ?? "");
+  const [email, setEmail] = useState(params.get("email") ?? "");
   const [code, setCode] = useState(params.get("code") ?? "");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function OTP() {
     setError(false);
     try {
       await submitOtp(email, code);
-      navigate("/useLogin");
+      navigate(`/login?email=${email}`);
     } catch (e) {
       setError(true);
     }
