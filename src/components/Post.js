@@ -69,9 +69,7 @@ export default function Post({
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Card
-      sx={{p: 1, mb: 1}}
-    >
+    <Card sx={{p: 1, mb: 1}}>
       { isLoggedIn && loggedInUser.uuid === author.uuid && (
         <PostMenu
           handleDelete={() => setIsDialogOpen(true)}
