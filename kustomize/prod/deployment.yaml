@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: otto-ui
-        image: ghcr.io/danielmunro/otto-ui:v0.1.28
+        image: ghcr.io/danielmunro/otto-ui:v0.1.29
         imagePullPolicy: Always
         ports:
           - containerPort: 80
