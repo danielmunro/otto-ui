@@ -1,5 +1,5 @@
 import { Switch, Typography } from '@mui/material';
-import { del, postJSON, putJSON } from '@tkrotoff/fetch';
+import { del, postJSON } from '@tkrotoff/fetch';
 import { useContext, useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { getUserByUsername } from '../actions/user';

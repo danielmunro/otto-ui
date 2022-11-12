@@ -1,5 +1,5 @@
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { Button, IconButton, Paper } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import {Editor, EditorState} from 'draft-js';
 import React, { useContext, useRef, useState } from 'react';

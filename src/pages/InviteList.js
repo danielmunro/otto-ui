@@ -3,17 +3,15 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import { useContext, useEffect, useState } from 'react';
 import { createInvite, getInvites } from '../actions/invite';
 import Container from '../components/Container';
-import { baseUrl } from '../utils/config';
 import Context from '../utils/Context';
 
 export default function InviteList() {
   const [invites, setInvites] = useState([]);
-  const [offset, setOffset] = useState(0);
   const { sessionToken } = useContext(Context);
 
   useEffect(() => {
     (async function() {
-      const response = await getInvites(offset);
+      const response = await getInvites(0);
       const data = await response.json();
       setInvites(data);
     })();

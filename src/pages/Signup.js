@@ -1,11 +1,10 @@
-import { Alert, Button, Paper, Typography } from '@mui/material';
+import { Alert, Button } from '@mui/material';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { signUp } from '../actions/user';
 import Container from '../components/Container';
 import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
-import { env } from '../utils/config';
 
 export default function Signup() {
   const params = new URLSearchParams(document.location.search);

@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { backgroundColor, imageBaseUrl } from '../../../utils/config';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -15,8 +16,7 @@ export default function ImageToUpload({ image: { s3_key }, onRemove, hover }) {
       onMouseLeave={() => setIsHover(false)}
     >
       {isHover ?
-        <a
-          href="#"
+        <Button
           onClick={onRemove}
           onMouseOver={() => setIconHover(true)}
           onMouseOut={() => setIconHover(false)}
@@ -27,7 +27,7 @@ export default function ImageToUpload({ image: { s3_key }, onRemove, hover }) {
             top: 10,
             color: iconHover ? "white" : "black"
           }} />
-        </a>
+        </Button>
         :
         null
       }
