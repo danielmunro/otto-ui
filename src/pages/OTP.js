@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { submitOtp } from '../actions/user';
 import Container from '../components/Container';
+import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
 
 export default function OTP() {
@@ -40,38 +41,40 @@ export default function OTP() {
           </Alert>
         </div>
       )}
-      <Typography>
-        Check your email for a confirmation code. If you don't have one, try the <Link to="/forgot-password">forgot password</Link> link.
-      </Typography>
-      <form onSubmit={trySubmitOtp}>
-        <div>
-          <TextInput
-            label="Email"
-            variant="outlined"
-            onChangeValue={setEmail}
-            value={email}
-            style={{width: 400}}
-            error
-          />
-        </div>
-        <div>
-          <TextInput
-            label="Confirmation Code"
-            variant="outlined"
-            onChangeValue={setCode}
-            value={code}
-            style={{width: 400}}
-          />
-        </div>
-        <div className="row">
-          <Button
-            variant="contained"
-            type="submit"
-          >
-            Signup
-          </Button>
-        </div>
-      </form>
+      <PaperContainer>
+        <Typography>
+          Check your email for a confirmation code. If you don't have one, try the <Link to="/forgot-password">forgot password</Link> link.
+        </Typography>
+        <form onSubmit={trySubmitOtp}>
+          <div>
+            <TextInput
+              label="Email"
+              variant="outlined"
+              onChangeValue={setEmail}
+              value={email}
+              style={{width: 400}}
+              error
+            />
+          </div>
+          <div>
+            <TextInput
+              label="Confirmation Code"
+              variant="outlined"
+              onChangeValue={setCode}
+              value={code}
+              style={{width: 400}}
+            />
+          </div>
+          <div className="row">
+            <Button
+              variant="contained"
+              type="submit"
+            >
+              Signup
+            </Button>
+          </div>
+        </form>
+      </PaperContainer>
     </Container>
   )
 }

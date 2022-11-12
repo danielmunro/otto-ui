@@ -19,67 +19,51 @@ export default function Signup() {
 
   const trySignup = async (event) => {
     event.preventDefault();
-    let hasError = false;
     const newErrors = {};
     if (email.length < 2) {
-      newErrors.emailLength = true;
-      hasError = true;
+      newErrors.email = "email address appears to be invalid";
     }
     if (password !== passwordConfirm) {
-      newErrors.passwordMatch = true;
-      hasError = true;
+      newErrors.password = "passwords do not match";
     }
-    if (password.length < 8) {
-      newErrors.passwordLength = true;
-      hasError = true;
+    if (username.length < 2) {
+      newErrors.username = "username is too short";
     }
-    if (username.length < 2 || username.length > 16) {
-      newErrors.usernameFormat = true;
-      hasError = true;
+    if (username.length > 16) {
+      newErrors.username = "username too long";
     }
     if (inviteCode.length < 7) {
-      newErrors.inviteCode = true;
-      hasError = true
+      newErrors.inviteCode = "invite code format appears invalid";
     }
     setErrors(newErrors);
-    if (hasError) {
+    if (Object.keys(newErrors).length > 0) {
       return;
     }
     const response = await signUp(username, email, password, inviteCode);
     if (response.status !== 201) {
       newErrors.serverError = true;
-      newErrors.serverErrorMessage = await response.text();
+      const data = await response.json();
+      newErrors[data.input] = data.message;
       setErrors(e => ({...e, ...newErrors}));
     } else {
       navigate(`/otp?email=${email}`);
     }
   };
 
-  const getPasswordHelperText = () => {
-    if (errors.passwordMatch) {
-      return "passwords do not match"
-    }
-    if (errors.passwordLength) {
-      return "password is too short"
-    }
-    return ""
-  };
+  const getPasswordHelperText = () => errors.password ? errors.password : "";
 
-  const getUsernameHelperText =
-    () => errors.usernameFormat ? "username must be 2-16 alpha-numeric characters" : "";
+  const getUsernameHelperText = () => errors.username ? errors.username : "";
 
-  const getEmailHelperText = () => errors.emailLength ? "email is required" : "";
+  const getEmailHelperText = () => errors.email ? errors.email : "";
 
-  const getInviteCodeHelperText = () => errors.inviteCode ? "Code appears to be a bad format" : "";
-
-  console.log(errors);
+  const getInviteCodeHelperText = () => errors.inviteCode ? errors.inviteCode : "";
 
   return (
     <Container title={"Join The Discussion"}>
       {errors.serverError && (
         <div style={{padding: "10px 0 10px 0"}}>
           <Alert severity="error">
-            There was an error submitting your request: {errors.serverErrorMessage}
+            There was an error submitting your request.
           </Alert>
         </div>
       )}
@@ -95,7 +79,7 @@ export default function Signup() {
               onChangeValue={setEmail}
               value={email}
               style={{width: 400}}
-              error={ errors.emailLength }
+              error={ !!errors.email }
               helperText={getEmailHelperText()}
             />
           </div>
@@ -106,7 +90,7 @@ export default function Signup() {
               onChangeValue={setUsername}
               value={username}
               style={{width: 400}}
-              error={ errors.usernameFormat === true }
+              error={ !!errors.username }
               helperText={getUsernameHelperText()}
             />
           </div>
@@ -118,7 +102,7 @@ export default function Signup() {
               value={password}
               type="password"
               style={{width: 400}}
-              error={ errors.passwordMatch || errors.passwordLength }
+              error={ !!errors.password }
             />
           </div>
           <div>
@@ -129,7 +113,7 @@ export default function Signup() {
               value={passwordConfirm}
               type="password"
               style={{width: 400}}
-              error={ errors.passwordMatch || errors.passwordLength }
+              error={ !!errors.password }
               helperText={getPasswordHelperText()}
             />
           </div>
@@ -140,7 +124,7 @@ export default function Signup() {
               onChangeValue={setInviteCode}
               value={inviteCode}
               style={{width: 400}}
-              error={ errors.inviteCode }
+              error={ !!errors.inviteCode }
               helperText={getInviteCodeHelperText()}
             />
           </div>

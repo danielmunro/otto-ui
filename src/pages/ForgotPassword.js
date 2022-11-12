@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../components/Alert';
 import Container from '../components/Container';
+import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
 import { baseUrl } from '../utils/config';
 import { useLogin } from '../hooks/login';
@@ -64,46 +65,48 @@ export default function ForgotPassword() {
           An error occurred, is that email address registered?
         </Alert>
       )}
-      <form onSubmit={tryForgotPassword}>
-        <div>
-          <TextInput
-            label="Email Address"
-            variant="outlined"
-            value={email}
-            onChangeValue={setEmail}
-            style={{width: 400}}
-            disabled={submitted}
-          />
-        </div>
-        { submitted && (
+      <PaperContainer>
+        <form onSubmit={tryForgotPassword}>
           <div>
             <TextInput
-              label="Confirmation Code"
+              label="Email Address"
               variant="outlined"
-              value={code}
-              onChangeValue={setCode}
+              value={email}
+              onChangeValue={setEmail}
               style={{width: 400}}
-            />
-            <TextInput
-              label="New Password"
-              variant="outlined"
-              value={password}
-              onChangeValue={setPassword}
-              type="password"
-              style={{width: 400}}
+              disabled={submitted}
             />
           </div>
-        )}
-        <div>
-          <Button
-            variant="contained"
-            type="submit"
-            disabled={completed}
-          >
-            Submit Password Reset Request
-          </Button>
-        </div>
-      </form>
+          { submitted && (
+            <div>
+              <TextInput
+                label="Confirmation Code"
+                variant="outlined"
+                value={code}
+                onChangeValue={setCode}
+                style={{width: 400}}
+              />
+              <TextInput
+                label="New Password"
+                variant="outlined"
+                value={password}
+                onChangeValue={setPassword}
+                type="password"
+                style={{width: 400}}
+              />
+            </div>
+          )}
+          <div>
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={completed}
+            >
+              Submit Password Reset Request
+            </Button>
+          </div>
+        </form>
+      </PaperContainer>
     </Container>
   );
 }
