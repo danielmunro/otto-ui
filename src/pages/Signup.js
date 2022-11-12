@@ -77,7 +77,7 @@ export default function Signup() {
               variant="outlined"
               onChangeValue={setEmail}
               value={email}
-              style={{width: 400}}
+              style={{ width: 300 }}
               error={ !!errors.email }
               helperText={getEmailHelperText()}
             />
@@ -88,7 +88,7 @@ export default function Signup() {
               variant="outlined"
               onChangeValue={setUsername}
               value={username}
-              style={{width: 400}}
+              style={{ width: 300 }}
               error={ !!errors.username }
               helperText={getUsernameHelperText()}
             />
@@ -100,7 +100,7 @@ export default function Signup() {
               onChangeValue={setPassword}
               value={password}
               type="password"
-              style={{width: 400}}
+              style={{ width: 300 }}
               error={ !!errors.password }
             />
           </div>
@@ -111,7 +111,7 @@ export default function Signup() {
               onChangeValue={setPasswordConfirm}
               value={passwordConfirm}
               type="password"
-              style={{width: 400}}
+              style={{ width: 300 }}
               error={ !!errors.password }
               helperText={getPasswordHelperText()}
             />
@@ -122,7 +122,7 @@ export default function Signup() {
               variant="outlined"
               onChangeValue={setInviteCode}
               value={inviteCode}
-              style={{width: 400}}
+              style={{ width: 300 }}
               error={ !!errors.inviteCode }
               helperText={getInviteCodeHelperText()}
             />
