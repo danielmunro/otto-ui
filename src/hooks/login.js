@@ -19,10 +19,8 @@ export function useLogin() {
       setLoggedInUser(data.User);
       setIsLoggedIn(true);
       setSessionToken(data.Token);
-      console.log("setting session token into local storage");
       localStorage.setItem("token", data.Token);
     }
   }, [response]);
-  const tryLogin = async (email, password) => setResponse(await loginAction(email, password));
-  return (email, password) => tryLogin(email, password);
+  return async (email, password) => setResponse(await loginAction(email, password));
 }
