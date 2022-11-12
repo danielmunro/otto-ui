@@ -51,7 +51,7 @@ export default function AuthMenu({ showLabel }) {
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>
-        <ListItemText primary={"Logout"} />
+        <ListItemText primary={showLabel ? "Logout" : ""} />
       </ListItem>
     </div>
   );
