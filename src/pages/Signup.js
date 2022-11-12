@@ -80,6 +80,7 @@ export default function Signup() {
               style={{ width: 300 }}
               error={ !!errors.email }
               helperText={getEmailHelperText()}
+              required
             />
           </div>
           <div>
@@ -91,6 +92,7 @@ export default function Signup() {
               style={{ width: 300 }}
               error={ !!errors.username }
               helperText={getUsernameHelperText()}
+              required
             />
           </div>
           <div>
@@ -102,6 +104,7 @@ export default function Signup() {
               type="password"
               style={{ width: 300 }}
               error={ !!errors.password }
+              required
             />
           </div>
           <div>
@@ -114,6 +117,7 @@ export default function Signup() {
               style={{ width: 300 }}
               error={ !!errors.password }
               helperText={getPasswordHelperText()}
+              required
             />
           </div>
           <div>
@@ -125,6 +129,7 @@ export default function Signup() {
               style={{ width: 300 }}
               error={ !!errors.inviteCode }
               helperText={getInviteCodeHelperText()}
+              required
             />
           </div>
           <div className="row">

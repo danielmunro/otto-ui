@@ -22,5 +22,9 @@ export function useLogin() {
       localStorage.setItem("token", data.Token);
     }
   }, [response]);
-  return async (email, password) => setResponse(await loginAction(email, password));
+  return async (email, password) => {
+    const response = await loginAction(email, password);
+    setResponse(response);
+    return response;
+  }
 }

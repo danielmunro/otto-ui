@@ -6,7 +6,20 @@ export function getUser(sessionToken) {
 }
 
 export function login(email, password) {
-  return postJSON(`${baseUrl}/session`, { email, password });
+  return fetch(
+    `${baseUrl}/session`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }
+  );
 }
 
 export function refreshSession(sessionToken) {

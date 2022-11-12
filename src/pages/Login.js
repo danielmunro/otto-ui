@@ -1,30 +1,31 @@
 import { Button } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Container from '../components/Container';
 import PaperContainer from '../components/PaperContainer';
 import TextInput from '../components/TextInput';
-import Context from '../utils/Context';
 import { useLogin } from '../hooks/login';
 
 export default function Login() {
   const params = new URLSearchParams(document.location.search);
   const [email, setEmail] = useState(params.get('email') ?? '');
   const [password, setPassword] = useState('');
-  const { isLoggedIn } = useContext(Context);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const login = useLogin();
 
   const tryLogin = async (event) => {
     event.preventDefault();
-    await login(email, password);
-  };
-
-  useEffect(() => {
-    if (isLoggedIn) {
+    const response = await login(email, password);
+    if (response.status === 201) {
       navigate("/");
+      return;
     }
-  }, [isLoggedIn]);
+    const data = await response.json();
+    const newErrors = {};
+    newErrors[data.input] = data.message;
+    setErrors(newErrors);
+  };
 
   return (
     <Container title={"Login"}>
@@ -37,6 +38,9 @@ export default function Login() {
               onChangeValue={setEmail}
               value={email}
               style={{ width: 300 }}
+              error={!!errors.email}
+              helperText={errors.email ? errors.email : ''}
+              required
             />
           </div>
           <div>
@@ -47,6 +51,9 @@ export default function Login() {
               value={password}
               type="password"
               style={{ width: 300 }}
+              error={!!errors.password}
+              helperText={errors.password ? errors.password : ''}
+              required
             />
           </div>
           <div className="row">
