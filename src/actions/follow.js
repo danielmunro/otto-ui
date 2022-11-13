@@ -2,7 +2,7 @@ import { del, get, postJSON } from '@tkrotoff/fetch';
 import { baseUrl } from '../utils/config';
 
 export function createFollow(sessionToken, userUuid, followingUuid) {
-  return postJSON(`${baseUrl}/user/${userUuid}/follows`, {
+  return postJSON(`${baseUrl}/follow`, {
     following: {
       uuid: followingUuid,
     },
