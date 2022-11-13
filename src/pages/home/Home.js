@@ -37,9 +37,12 @@ export default function Home() {
   };
 
   return (
-    <Container title={"Home"}>
+    <Container>
       { !loggedInUser && (
         <PaperContainer>
+          <Typography variant="h1">
+            A New Social Network
+          </Typography>
           <Typography>
             Third place is an open source social network. The code that powers this site is free for anyone to download, view, and modify. We embrace open source because that is how we learned to program, and we hope others find this project useful in their learning journey.
           </Typography>

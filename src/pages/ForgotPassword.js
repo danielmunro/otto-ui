@@ -26,7 +26,7 @@ export default function ForgotPassword() {
         await putJSON(`${baseUrl}/forgot-password`, {
           user: {
             username: email,
-            current_password: password,
+            password: password,
           },
           code,
         });
