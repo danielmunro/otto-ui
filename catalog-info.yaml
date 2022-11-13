@@ -13,7 +13,7 @@ spec:
   type: website
   lifecycle: production
   owner: dev-team
-  dependsOn:
-    - component:community-service
-    - component:image-service
-    - component:user-service
+  consumesApis:
+    - user-service-api
+    - community-service-api
+    - image-service-api
