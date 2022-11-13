@@ -23,7 +23,9 @@ export default function Container({ children, title }) {
   const { width } = useWindowDimensions();
 
   useEffect(() => {
-    document.title = title;
+    if (title) {
+      document.title = title;
+    }
   }, [title]);
 
   useEffect(() => {
