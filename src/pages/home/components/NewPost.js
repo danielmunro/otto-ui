@@ -1,5 +1,5 @@
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { Button, IconButton } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import {Editor, EditorState} from 'draft-js';
 import React, { useContext, useRef, useState } from 'react';
@@ -15,6 +15,7 @@ export default function NewPost({ onPostCreated, images, post }) {
     ),
   );
   const [imagesToPost, setImagesToPost] = useState(images || []);
+  const [draft, setDraft] = useState(false);
   const { sessionToken, loggedInUser } = useContext(Context);
   const imageRef = useRef();
   const theme = useTheme();
@@ -47,6 +48,7 @@ export default function NewPost({ onPostCreated, images, post }) {
         sessionToken,
         loggedInUser.uuid,
         editorState.getCurrentContent().getPlainText(),
+        draft,
         imagesToPost
       );
     if (response.status === 200 || response.status === 201) {
@@ -97,6 +99,13 @@ export default function NewPost({ onPostCreated, images, post }) {
       >
         Submit
       </Button>
+      <FormControlLabel
+        style={{padding: "10px 0 0 10px"}}
+        control={<Checkbox />}
+        checked={draft}
+        onChange={() => setDraft(!draft) }
+        label={"Save as draft"}
+      />
       <p>
         <IconButton aria-label="upload an image" onClick={showFileSelector}>
           <AddPhotoAlternateIcon />

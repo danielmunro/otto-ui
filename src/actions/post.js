@@ -1,10 +1,11 @@
 import { postJSON, get, del, putJSON } from '@tkrotoff/fetch';
 import { baseUrl } from '../utils/config';
 
-export function createPost(sessionToken, userUuid, newPostText, images) {
+export function createPost(sessionToken, userUuid, newPostText, draft, images) {
   return postJSON(`${baseUrl}/post`, {
     user: {uuid: userUuid},
     text:  newPostText,
+    draft,
     images,
   }, {
     headers: {
