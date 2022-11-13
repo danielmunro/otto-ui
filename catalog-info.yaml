@@ -14,4 +14,6 @@ spec:
   lifecycle: production
   owner: dev-team
   dependsOn:
-    - component:api-gw
+    - component:community-service
+    - component:image-service
+    - component:user-service
