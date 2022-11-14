@@ -9,7 +9,7 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u danielmunro --password-stdin
       - run: docker build . --tag ghcr.io/danielmunro/otto-ui:${{ github.ref_name }}
       - run: docker push ghcr.io/danielmunro/otto-ui:${{ github.ref_name }}
