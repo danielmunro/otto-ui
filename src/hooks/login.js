@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login as loginAction } from '../actions/session';
 import Context from '../utils/Context';
 
@@ -9,6 +10,7 @@ export function useLogin() {
     setSessionToken,
   } = useContext(Context);
   const [response, setResponse] = useState(null);
+  const navigate = useNavigate();
   useEffect(async () => {
     if (response && response.status === 201) {
       const data = await response.json();
@@ -20,6 +22,7 @@ export function useLogin() {
       setIsLoggedIn(true);
       setSessionToken(data.Token);
       localStorage.setItem("token", data.Token);
+      navigate("/");
     }
   }, [response]);
   return async (email, password) => {
