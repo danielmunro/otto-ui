@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Editor, EditorState } from 'draft-js';
 import React, { useContext, useEffect, useState } from 'react';
@@ -12,6 +12,7 @@ export default function PostEdit() {
   const [editorState, setEditorState] = React.useState(
     () => EditorState.createEmpty(),
   );
+  const [draft, setDraft] = useState(false);
   const { sessionToken } = useContext(Context);
   const params = useParams();
   const navigate = useNavigate();
@@ -21,12 +22,13 @@ export default function PostEdit() {
     const response = await getPost(sessionToken, params.uuid);
     const data = await response.json();
     setPost(data);
+    setDraft(data.draft);
     setEditorState(EditorState.createWithText(data.text));
   };
 
   const tryUpdatePost = async (event) => {
     event.preventDefault();
-    await updatePost(sessionToken, post.uuid, editorState.getCurrentContent().getPlainText());
+    await updatePost(sessionToken, post.uuid, editorState.getCurrentContent().getPlainText(), draft);
     navigate(`/p/${post.uuid}`);
     return false;
   };
@@ -56,6 +58,13 @@ export default function PostEdit() {
         >
           Submit
         </Button>
+        <FormControlLabel
+          style={{padding: "10px 0 0 10px"}}
+          control={<Checkbox />}
+          checked={draft}
+          onChange={() => setDraft(!draft) }
+          label={"Save as draft"}
+        />
       </form>
     </Container>
   );

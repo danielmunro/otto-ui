@@ -35,6 +35,14 @@ export function deletePost(sessionToken, postUuid) {
   });
 }
 
+export function getDraftPosts(sessionToken) {
+  return get(`${baseUrl}/post/draft`, {
+    headers: {
+      'x-session-token': sessionToken,
+    }
+  });
+}
+
 export function getPostsForUser(sessionToken, username) {
   return get(`${baseUrl}/posts/${username}`, {
     headers: {
@@ -67,10 +75,11 @@ export function getPost(sessionToken, postUuid) {
   });
 }
 
-export function updatePost(sessionToken, uuid, text) {
+export function updatePost(sessionToken, uuid, text, draft) {
   return putJSON(`${baseUrl}/post`, {
     uuid,
     text,
+    draft,
   }, {
     headers: {
       'x-session-token': sessionToken,

@@ -53,6 +53,7 @@ export default function NewPost({ onPostCreated, images, post }) {
       );
     if (response.status === 200 || response.status === 201) {
       onChangeNewPost(EditorState.createEmpty());
+      setDraft(false);
       setImagesToPost([]);
       onPostCreated();
     }

@@ -18,6 +18,7 @@ export default function Home() {
     isLoggedIn,
     posts,
     setPosts,
+    isAppLoaded,
   } = useContext(Context);
 
   const getPosts = async () => {
@@ -35,6 +36,12 @@ export default function Home() {
   const removePost = (post) => {
     setPosts(posts.filter((p) => p !== post));
   };
+
+  if (!isAppLoaded) {
+    return (
+      <Container />
+    );
+  }
 
   return (
     <Container>

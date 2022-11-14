@@ -4,6 +4,7 @@ import { getFollowers, getFollowing } from './actions/follow';
 import { getUser, refreshSession } from './actions/session';
 import ProtectedRoute from './components/ProtectedRoute';
 import Album from './pages/Album';
+import Drafts from './pages/Drafts';
 import Followers from './pages/Followers';
 import Following from './pages/Following';
 import Image from './pages/Image';
@@ -130,6 +131,7 @@ function App() {
             <Route path="/p/:uuid" element={<Post />} />
             <Route path="/p-edit/:uuid" element={<PostEdit />} />
             <Route path="/a/:uuid" element={<Album />} />
+            <Route path="/drafts" element={<Drafts />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
