@@ -43,7 +43,7 @@ export default function AuthMenu({ showLabel }) {
     <div>
       <ListItem button onClick={() => navigate(`/notifications`)}>
         <ListItemIcon>
-          <Badge badgeContent={notifications.length} color="primary">
+          <Badge badgeContent={notifications.filter((n) => !n.seen).length} color="primary">
             <NotificationsIcon />
           </Badge>
         </ListItemIcon>

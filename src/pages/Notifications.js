@@ -9,7 +9,7 @@ export default function Notifications() {
   const { notifications, sessionToken } = useContext(Context);
 
   useEffect(() => {
-    if (notifications.length > 0) {
+    if (notifications.filter((n) => !n.seen).length > 0) {
       acknowledgeNotifications(sessionToken, notifications[0], notifications[notifications.length - 1]);
 
     }
