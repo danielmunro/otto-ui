@@ -1,4 +1,4 @@
-import { get } from '@tkrotoff/fetch';
+import { get, patchJSON } from '@tkrotoff/fetch';
 import { baseUrl } from '../utils/config';
 
 export function getNotifications(sessionToken) {
@@ -7,4 +7,18 @@ export function getNotifications(sessionToken) {
       'x-session-token': sessionToken,
     }
   });
+}
+
+export function acknowledgeNotifications(sessionToken, lastNotification, firstNotification) {
+  return patchJSON(
+    `${baseUrl}/notification`,
+    {
+      datetime_started: lastNotification.created_at,
+      datetime_ended: firstNotification.created_at,
+    },
+    {
+      headers: {
+      'x-session-token': sessionToken,
+    },
+  })
 }

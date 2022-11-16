@@ -1,11 +1,19 @@
 import { Avatar, Paper } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { acknowledgeNotifications } from '../actions/notification';
 import Container from '../components/Container';
 import Context from '../utils/Context';
 
 export default function Notifications() {
-  const { notifications } = useContext(Context);
+  const { notifications, sessionToken } = useContext(Context);
+
+  useEffect(() => {
+    if (notifications.length > 0) {
+      acknowledgeNotifications(sessionToken, notifications[0], notifications[notifications.length - 1]);
+
+    }
+  }, [notifications]);
 
   const getNotificationByType = notification => {
     switch (notification.notificationType) {
