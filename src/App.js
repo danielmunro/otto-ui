@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
+import { getNotifications } from './actions/notification';
 import { getUser, refreshSession } from './actions/session';
 import ProtectedRoute from './components/ProtectedRoute';
 import Album from './pages/Album';
@@ -10,6 +11,7 @@ import Following from './pages/Following';
 import Image from './pages/Image';
 import InviteList from './pages/InviteList';
 import ModerateUser from './pages/ModerateUser';
+import Notifications from './pages/Notifications';
 import OTP from './pages/OTP';
 import PostEdit from './pages/PostEdit';
 import UpdateProfile from './pages/UpdateProfile';
@@ -39,7 +41,14 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [follows, setFollows] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode") ?? "light");
+
+  const tryGetNotifications = async (token) => {
+    const response = await getNotifications(token);
+    const data = await response.json();
+    setNotifications(data);
+  };
 
   const appContext = {
     sessionToken,
@@ -59,6 +68,8 @@ function App() {
     setIsLoggedIn,
     uiMode,
     setUiMode,
+    notifications,
+    tryGetNotifications,
   };
 
   const tryGetUser = async (token) => {
@@ -67,6 +78,7 @@ function App() {
     setLoggedInUser(data.user);
     setIsLoggedIn(true);
     setIsAppLoaded(true);
+    return tryGetNotifications(token);
   };
 
   const tryRefreshSession = async (token) => {
@@ -135,6 +147,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
+            <Route path="notifications" element={<Notifications />} />
             <Route path="/invite" element={<ProtectedRoute component={InviteList} role="admin" />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />

@@ -1,10 +1,12 @@
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import EditIcon from '@mui/icons-material/Edit';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Badge } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { deleteSession } from '../../actions/session';
@@ -18,6 +20,7 @@ export default function AuthMenu({ showLabel }) {
     sessionToken,
     setSessionToken,
     setPosts,
+    notifications,
   } = useContext(Context);
   const navigate = useNavigate();
 
@@ -38,6 +41,14 @@ export default function AuthMenu({ showLabel }) {
 
   return (
     <div>
+      <ListItem button onClick={() => navigate(`/notifications`)}>
+        <ListItemIcon>
+          <Badge badgeContent={notifications.length} color="primary">
+            <NotificationsIcon />
+          </Badge>
+        </ListItemIcon>
+        <ListItemText primary={showLabel ? "Notifications" : ""} />
+      </ListItem>
       <ListItem button onClick={() => navigate(`/u/${loggedInUser.username}`)}>
         <ListItemIcon>
           <AccountBoxIcon />

@@ -8,6 +8,7 @@ export function useLogin() {
     setLoggedInUser,
     setIsLoggedIn,
     setSessionToken,
+    tryGetNotifications,
   } = useContext(Context);
   const [response, setResponse] = useState(null);
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export function useLogin() {
       setIsLoggedIn(true);
       setSessionToken(data.Token);
       localStorage.setItem("token", data.Token);
+      await tryGetNotifications(data.Token);
       navigate("/");
     }
   }, [response]);
