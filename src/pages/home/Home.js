@@ -68,6 +68,9 @@ export default function Home() {
           <Typography sx={{paddingTop: 1}}>
             <Link to="//thirdplaceapp.com/p/218dc22d-48d5-4146-80ac-0aac9011bdb0">Part III</Link> shows how to setup and run a local development environment
           </Typography>
+          <Typography sx={{paddingTop: 1}}>
+            <Link to="//thirdplaceapp.com/p/4a940a44-4408-473d-b390-41f4c8dd52a0">Part IV</Link> deep dives into the anatomy of a backend service
+          </Typography>
         </PaperContainer>
       )}
       { loggedInUser && (
