@@ -22,26 +22,26 @@ spec:
         app: ui
     spec:
       containers:
-      - name: otto-ui
-        image: ghcr.io/danielmunro/otto-ui:v0.1.38
-        imagePullPolicy: Always
-        ports:
-          - containerPort: 80
-            name: http
-            protocol: TCP
-        env:
-          - name: REACT_APP_BASE_URL
-            value: localhost
-          - name: REACT_APP_IMAGE_BASE_URL
-            value: https://otto-image-uploads.s3.us-west-2.amazonaws.com
-          - name: REACT_APP_ENV
-            value: dev
-        resources:
-          limits:
-            cpu: 250m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 64Mi
+        - name: otto-ui
+          image: ghcr.io/danielmunro/otto-ui:v0.1.39
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          env:
+            - name: REACT_APP_BASE_URL
+              value: localhost
+            - name: REACT_APP_IMAGE_BASE_URL
+              value: https://otto-image-uploads.s3.us-west-2.amazonaws.com
+            - name: REACT_APP_ENV
+              value: dev
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
       imagePullSecrets:
-      - name: dockerconfigjson-github-com
+        - name: dockerconfigjson-github-com
