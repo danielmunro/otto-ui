@@ -42,7 +42,7 @@ function App() {
   const [follows, setFollows] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode") ?? "light");
+  const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode") ?? "dark");
 
   const tryGetNotifications = async (token) => {
     const response = await getNotifications(token);

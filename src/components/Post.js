@@ -8,7 +8,7 @@ import {
   DialogTitle,
   Paper,
   Typography,
-  Link, Card,
+  Link, Card, IconButton,
 } from '@mui/material';
 import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
@@ -148,24 +148,24 @@ export default function Post({
       </div>
       <div style={{display: "flex", justifyContent: "space-evenly"}}>
         { showReply && (
-          <Button component={RouterLink} to={`/p/${uuid}`}>
-            <ChatBubbleOutlineIcon />
-          </Button>
+          <IconButton aria-label="reply" component={RouterLink} to={`/p/${uuid}`}>
+            <ChatBubbleOutlineIcon fontSize="small" />
+          </IconButton>
         )}
         { isLoggedIn && !isSelfLiked && (
-          <Button onClick={tryLikePost}>
-            <FavoriteBorderIcon />
-          </Button>
+          <IconButton aria-label="like" onClick={tryLikePost}>
+            <FavoriteBorderIcon fontSize="small" />
+          </IconButton>
         )}
         { isLoggedIn && isSelfLiked && (
-          <Button onClick={tryUnlikePost}>
-            <FavoriteIcon />
-          </Button>
+          <IconButton aria-label="unlike" onClick={tryUnlikePost}>
+            <FavoriteIcon fontSize="small" />
+          </IconButton>
         )}
         { isLoggedIn && showShare && (
-          <Button onClick={sharePostClick}>
-            <RepeatIcon />
-          </Button>
+          <IconButton aria-label="share" onClick={sharePostClick}>
+            <RepeatIcon fontSize="small" />
+          </IconButton>
         )}
       </div>
       <Dialog
