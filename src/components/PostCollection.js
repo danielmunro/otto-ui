@@ -32,6 +32,7 @@ export default function PostCollection({ posts, reloadPosts, onDelete, onUnlike 
           onUnlike={() => onUnlike(post)}
           showReply
           sharePostClick={() => sharePostClicked(post)}
+          compact={true}
         />
       ))}
     </div>

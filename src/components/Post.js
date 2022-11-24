@@ -11,7 +11,7 @@ import {
   Link, Card, IconButton,
 } from '@mui/material';
 import nl2br from 'react-nl2br';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -19,6 +19,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import { createPostLike, deletePostLike } from '../actions/like';
@@ -45,10 +46,13 @@ export default function Post({
   showReply,
   showShare,
   sharePostClick,
+  compact,
 }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSelfLiked, setIsSelfLiked] = useState(selfLiked);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(!compact);
+  const [element, setElement] = useState(null);
+  const [overflows, setOverflows] = useState(false);
   const { isLoggedIn, sessionToken, loggedInUser } = useContext(Context);
   const created = new Date(created_at);
   showShare = showShare === undefined || Boolean(showShare);
@@ -76,14 +80,25 @@ export default function Post({
     setIsSelfLiked(false);
   };
 
+  useEffect(() => {
+    if (element && compact) {
+      setOverflows(element.scrollHeight > element.clientHeight);
+    }
+  }, [element]);
+
   const authorDisplayName = author.name ? author.name : "";
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
-  const needsExpand = text && text.length > 1000;
+
+  const onClickCard = () => {
+    if (compact) {
+      setIsExpanded(!isExpanded);
+    }
+  };
 
   return (
     <Card
       sx={{ p: 1, mb: 1 }}
-      onClick={() => setIsExpanded(!isExpanded)}
+      onClick={onClickCard}
     >
       { isLoggedIn && loggedInUser.uuid === author.uuid && (
         <PostMenu
@@ -105,17 +120,26 @@ export default function Post({
             <span style={{fontSize: "smaller"}}>{timeAgo.format(created)}</span>
           </Link>
         </Typography>
-        <div style={{
-          maxHeight: isExpanded ? "inherit" : 190,
-          cursor: needsExpand ? "pointer" : "auto",
-        }} className="post">
+        <div
+          style={{
+            maxHeight: isExpanded ? "inherit" : 190,
+            cursor: overflows ? "pointer" : "auto",
+          }}
+          className="post"
+          ref={(el) => setElement(el)}
+        >
           <ReactMarkdown>
             {text}
           </ReactMarkdown>
         </div>
-        { !isExpanded && needsExpand && (
-          <ExpandMoreIcon />
-        )}
+        <div style={{width: "100%", textAlign: "center"}}>
+          { !isExpanded && overflows && (
+            <ExpandMoreIcon cursor="pointer" />
+          )}
+          { isExpanded && overflows && (
+            <ExpandLessIcon cursor="pointer" />
+          )}
+        </div>
         { share && (
           <Paper
             sx={{p: 1, mb: 1, }}
