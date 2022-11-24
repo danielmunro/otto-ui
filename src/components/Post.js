@@ -14,11 +14,21 @@ import nl2br from 'react-nl2br';
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import RepeatIcon from '@mui/icons-material/Repeat';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 import { createPostLike, deletePostLike } from '../actions/like';
 import { deletePost } from '../actions/post';
 import { imageBaseUrl } from '../utils/config';
 import Context from '../utils/Context';
 import PostMenu from './PostMenu';
+
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
 export default function Post({
   post: {
@@ -38,6 +48,7 @@ export default function Post({
 }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSelfLiked, setIsSelfLiked] = useState(selfLiked);
+  const [isExpanded, setIsExpanded] = useState(false);
   const { isLoggedIn, sessionToken, loggedInUser } = useContext(Context);
   const created = new Date(created_at);
   showShare = showShare === undefined || Boolean(showShare);
@@ -69,7 +80,10 @@ export default function Post({
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
   return (
-    <Card sx={{p: 1, mb: 1}}>
+    <Card
+      sx={{ p: 1, mb: 1 }}
+      onClick={() => setIsExpanded(!isExpanded)}
+    >
       { isLoggedIn && loggedInUser.uuid === author.uuid && (
         <PostMenu
           handleDelete={() => setIsDialogOpen(true)}
@@ -82,69 +96,74 @@ export default function Post({
         style={{ float: "left", marginRight: 10 }}
         sx={{ width: 56, height: 56 }}
       />
-      <Typography variant="h6">
-        <Link component={RouterLink} to={`/u/${author.username}`}>
-          <b>{author.name}</b> <span style={{color: "#f17887"}}>@{author.username}</span>
-        </Link>
-      </Typography>
-      <Typography><Link href={`/p/${uuid}`}>link</Link></Typography>
-      <div style={{fontSize: "larger"}} className="post">
-        <ReactMarkdown>
-          {text}
-        </ReactMarkdown>
-      </div>
-      { share && (
-        <Paper
-          sx={{p: 1, mb: 1, }}
-          elevation={0}
-          variant="outlined"
-        >
-          <Avatar
-            alt={share.user.name}
-            src={share.user.profile_pic ? `${imageBaseUrl}/${share.user.profile_pic}` : ''}
-            style={{ float: "left", marginRight: 10 }}
-          />
-          <Link component={RouterLink} to={`/u/${share.user.username}`}>
-            {share.user.name} @{share.user.username}
+      <div style={{width: "90%", paddingLeft: 72}}>
+        <Typography variant="h6">
+          <Link component={RouterLink} to={`/u/${author.username}`}>
+            <b>{author.name}</b>
+            <span style={{color: "#f17887", margin: "0 20px"}}>@{author.username}</span>
+            <span style={{fontSize: "smaller"}}>{timeAgo.format(created)}</span>
           </Link>
-          <Typography color="text.secondary">
-            {new Date(share.created_at).toLocaleString()}
-          </Typography>
-          <Typography variant="body2">
-            {nl2br(share.text)}
-          </Typography>
-        </Paper>
-      )}
-      <div>
-        {images && images.map((i) => (
-          <Link component={RouterLink} to={`/i/${i.uuid}`} key={i.uuid}>
-            <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" alt="" />
-          </Link>
-        ))}
+        </Typography>
+        <div style={{ maxHeight: isExpanded ? "inherit" : 190, overflow: "hidden" }}>
+          <ReactMarkdown>
+            {text}
+          </ReactMarkdown>
+        </div>
+        { !isExpanded && text && text.length > 1000 && (
+          <ExpandMoreIcon />
+        )}
+        { share && (
+          <Paper
+            sx={{p: 1, mb: 1, }}
+            elevation={0}
+            variant="outlined"
+          >
+            <Avatar
+              alt={share.user.name}
+              src={share.user.profile_pic ? `${imageBaseUrl}/${share.user.profile_pic}` : ''}
+              style={{ float: "left", marginRight: 10 }}
+            />
+            <Link component={RouterLink} to={`/u/${share.user.username}`}>
+              {share.user.name} @{share.user.username}
+            </Link>
+            <Typography color="text.secondary">
+              {new Date(share.created_at).toLocaleString()}
+            </Typography>
+            <Typography variant="body2">
+              {nl2br(share.text)}
+            </Typography>
+          </Paper>
+        )}
+        <div>
+          {images && images.map((i) => (
+            <Link component={RouterLink} to={`/i/${i.uuid}`} key={i.uuid}>
+              <img src={`${imageBaseUrl}/${i.s3_key}`} className="post-gallery" alt="" />
+            </Link>
+          ))}
+        </div>
       </div>
-      <Typography>
-        Originally posted {created.toLocaleString()}
-      </Typography>
-      { showReply && (
-        <Button component={RouterLink} to={`/p/${uuid}`}>
-          Reply
-        </Button>
-      )}
-      { isLoggedIn && !isSelfLiked && (
-        <Button onClick={tryLikePost}>
-          Like
-        </Button>
-      )}
-      { isLoggedIn && isSelfLiked && (
-        <Button onClick={tryUnlikePost}>
-          Unlike
-        </Button>
-      )}
-      { isLoggedIn && showShare && (
-        <Button onClick={sharePostClick}>
-          Share
-        </Button>
-      )}
+      <div style={{display: "flex", justifyContent: "space-evenly"}}>
+        { showReply && (
+          <Button component={RouterLink} to={`/p/${uuid}`}>
+            <ChatBubbleOutlineIcon />
+          </Button>
+        )}
+        { isLoggedIn && !isSelfLiked && (
+          <Button onClick={tryLikePost}>
+            <FavoriteBorderIcon />
+          </Button>
+        )}
+        { isLoggedIn && isSelfLiked && (
+          <Button onClick={tryUnlikePost}>
+            <FavoriteIcon />
+          </Button>
+        )}
+        { isLoggedIn && showShare && (
+          <Button onClick={sharePostClick}>
+            <RepeatIcon />
+          </Button>
+        )}
+      </div>
       <Dialog
         open={isDialogOpen}
         onClose={handleClose}

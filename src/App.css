@@ -82,6 +82,10 @@ h5 {
   margin: 0 !important;
 }
 
+p {
+  margin: 5px 0;
+}
+
 pre {
   background: #f4f4f4;
   border: 1px solid #ddd;
