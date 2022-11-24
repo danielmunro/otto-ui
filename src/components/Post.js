@@ -89,17 +89,14 @@ export default function Post({
   const authorDisplayName = author.name ? author.name : "";
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
 
-  const onClickCard = () => {
+  const onClickExpand = () => {
     if (compact) {
       setIsExpanded(!isExpanded);
     }
   };
 
   return (
-    <Card
-      sx={{ p: 1, mb: 1 }}
-      onClick={onClickCard}
-    >
+    <Card sx={{ p: 1, mb: 1 }}>
       { isLoggedIn && loggedInUser.uuid === author.uuid && (
         <PostMenu
           handleDelete={() => setIsDialogOpen(true)}
@@ -120,25 +117,27 @@ export default function Post({
             <span style={{fontSize: "smaller"}}>{timeAgo.format(created)}</span>
           </Link>
         </Typography>
-        <div
-          style={{
-            maxHeight: isExpanded ? "inherit" : 190,
-            cursor: overflows ? "pointer" : "auto",
-          }}
-          className="post"
-          ref={(el) => setElement(el)}
-        >
-          <ReactMarkdown>
-            {text}
-          </ReactMarkdown>
-        </div>
-        <div style={{width: "100%", textAlign: "center"}}>
-          { !isExpanded && overflows && (
-            <ExpandMoreIcon cursor="pointer" />
-          )}
-          { isExpanded && overflows && (
-            <ExpandLessIcon cursor="pointer" />
-          )}
+        <div onClick={onClickExpand}>
+          <div
+            style={{
+              maxHeight: isExpanded ? "inherit" : 190,
+              cursor: overflows ? "pointer" : "auto",
+            }}
+            className="post"
+            ref={(el) => setElement(el)}
+          >
+            <ReactMarkdown>
+              {text}
+            </ReactMarkdown>
+          </div>
+          <div style={{width: "100%", textAlign: "center"}}>
+            { !isExpanded && overflows && (
+              <ExpandMoreIcon cursor="pointer" />
+            )}
+            { isExpanded && overflows && (
+              <ExpandLessIcon cursor="pointer" />
+            )}
+          </div>
         </div>
         { share && (
           <Paper
