@@ -2,6 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { getFollowers, getFollowing } from './actions/follow';
 import { getNotifications } from './actions/notification';
+import { getPostsForUser } from './actions/post';
 import { getUser, refreshSession } from './actions/session';
 import ProtectedRoute from './components/ProtectedRoute';
 import Album from './pages/Album';
@@ -101,13 +102,20 @@ function App() {
     setFollowers(data);
   };
 
+  const setLoggedOutState = async () => {
+    setLoggedInUser(null);
+    setIsLoggedIn(false);
+    setIsAppLoaded(true);
+    const response = await getPostsForUser(null, 'dan');
+    const data = await response.json();
+    setPosts(data);
+  };
+
   useEffect(() => {
     (async () => {
       if (!sessionToken) {
         console.log("no session found");
-        setLoggedInUser(null);
-        setIsLoggedIn(false);
-        setIsAppLoaded(true);
+        await setLoggedOutState();
         return;
       }
       try {
@@ -117,6 +125,7 @@ function App() {
           const refreshToken = await tryRefreshSession(sessionToken);
           await tryGetUser(refreshToken);
         } catch (e) {
+          await setLoggedOutState();
         }
       }
     })();

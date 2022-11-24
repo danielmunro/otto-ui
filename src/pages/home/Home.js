@@ -37,6 +37,8 @@ export default function Home() {
     setPosts(posts.filter((p) => p !== post));
   };
 
+  console.log("isAppLoaded", isAppLoaded);
+
   if (!isAppLoaded) {
     return (
       <Container />
