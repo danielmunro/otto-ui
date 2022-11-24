@@ -63,6 +63,7 @@ div.row {
 
 div.post {
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 div.post img {

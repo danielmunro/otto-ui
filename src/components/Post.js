@@ -78,6 +78,7 @@ export default function Post({
 
   const authorDisplayName = author.name ? author.name : "";
   const profilePic = author.profile_pic ? `${imageBaseUrl}/${author.profile_pic}` : '';
+  const needsExpand = text && text.length > 1000;
 
   return (
     <Card
@@ -104,12 +105,15 @@ export default function Post({
             <span style={{fontSize: "smaller"}}>{timeAgo.format(created)}</span>
           </Link>
         </Typography>
-        <div style={{ maxHeight: isExpanded ? "inherit" : 190, overflow: "hidden" }}>
+        <div style={{
+          maxHeight: isExpanded ? "inherit" : 190,
+          cursor: needsExpand ? "pointer" : "auto",
+        }} className="post">
           <ReactMarkdown>
             {text}
           </ReactMarkdown>
         </div>
-        { !isExpanded && text && text.length > 1000 && (
+        { !isExpanded && needsExpand && (
           <ExpandMoreIcon />
         )}
         { share && (
