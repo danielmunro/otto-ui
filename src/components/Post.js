@@ -20,6 +20,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import LinkIcon from '@mui/icons-material/Link';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import { createPostLike, deletePostLike } from '../actions/like';
@@ -95,6 +96,10 @@ export default function Post({
     }
   };
 
+  const copyLinkToClipboard = (url) => {
+    navigator.clipboard.writeText(url);
+  };
+
   return (
     <Card sx={{ p: 1, mb: 1 }}>
       { isLoggedIn && loggedInUser.uuid === author.uuid && (
@@ -132,10 +137,14 @@ export default function Post({
           </div>
           <div style={{width: "100%", textAlign: "center"}}>
             { !isExpanded && overflows && (
-              <ExpandMoreIcon cursor="pointer" />
+              <IconButton>
+                <ExpandMoreIcon cursor="pointer" />
+              </IconButton>
             )}
             { isExpanded && overflows && (
-              <ExpandLessIcon cursor="pointer" />
+              <IconButton>
+                <ExpandLessIcon cursor="pointer" />
+              </IconButton>
             )}
           </div>
         </div>
@@ -169,28 +178,33 @@ export default function Post({
           ))}
         </div>
       </div>
-      <div style={{display: "flex", justifyContent: "space-evenly"}}>
-        { showReply && (
-          <IconButton aria-label="reply" component={RouterLink} to={`/p/${uuid}`}>
-            <ChatBubbleOutlineIcon fontSize="small" />
+      { isLoggedIn && (
+        <div style={{display: "flex", justifyContent: "space-evenly"}}>
+          { showReply && (
+            <IconButton aria-label="reply" component={RouterLink} to={`/p/${uuid}`}>
+              <ChatBubbleOutlineIcon fontSize="small" />
+            </IconButton>
+          )}
+          { !isSelfLiked && (
+            <IconButton aria-label="like" onClick={tryLikePost}>
+              <FavoriteBorderIcon fontSize="small" />
+            </IconButton>
+          )}
+          { isSelfLiked && (
+            <IconButton aria-label="unlike" onClick={tryUnlikePost}>
+              <FavoriteIcon fontSize="small" />
+            </IconButton>
+          )}
+          { showShare && (
+            <IconButton aria-label="share" onClick={sharePostClick}>
+              <RepeatIcon fontSize="small" />
+            </IconButton>
+          )}
+          <IconButton aria-label="link" onClick={() => copyLinkToClipboard(`${window.location.hostname}/p/${uuid}`)}>
+            <LinkIcon fontSize="small" />
           </IconButton>
-        )}
-        { isLoggedIn && !isSelfLiked && (
-          <IconButton aria-label="like" onClick={tryLikePost}>
-            <FavoriteBorderIcon fontSize="small" />
-          </IconButton>
-        )}
-        { isLoggedIn && isSelfLiked && (
-          <IconButton aria-label="unlike" onClick={tryUnlikePost}>
-            <FavoriteIcon fontSize="small" />
-          </IconButton>
-        )}
-        { isLoggedIn && showShare && (
-          <IconButton aria-label="share" onClick={sharePostClick}>
-            <RepeatIcon fontSize="small" />
-          </IconButton>
-        )}
-      </div>
+        </div>
+      )}
       <Dialog
         open={isDialogOpen}
         onClose={handleClose}
