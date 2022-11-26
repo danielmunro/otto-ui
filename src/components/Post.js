@@ -54,6 +54,7 @@ export default function Post({
   const [isExpanded, setIsExpanded] = useState(!compact);
   const [element, setElement] = useState(null);
   const [overflows, setOverflows] = useState(false);
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const { isLoggedIn, sessionToken, loggedInUser } = useContext(Context);
   const created = new Date(created_at);
   showShare = showShare === undefined || Boolean(showShare);
@@ -98,6 +99,10 @@ export default function Post({
 
   const copyLinkToClipboard = (url) => {
     navigator.clipboard.writeText(url);
+    setShowCopiedMessage(true);
+    setTimeout(() => {
+      setShowCopiedMessage(false);
+    }, 2000);
   };
 
   return (
@@ -202,6 +207,16 @@ export default function Post({
           )}
           <IconButton aria-label="link" onClick={() => copyLinkToClipboard(`${window.location.hostname}/p/${uuid}`)}>
             <LinkIcon fontSize="small" />
+            { showCopiedMessage && (
+              <span style={{
+                position: "absolute",
+                left: 24,
+                fontSize: "12pt",
+                width: 120,
+              }}>
+                Link copied!
+              </span>
+            )}
           </IconButton>
         </div>
       )}

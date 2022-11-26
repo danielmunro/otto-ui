@@ -59,6 +59,20 @@ export default function Home() {
             While Third place is in closed beta, invite codes are required for signing up.
           </Typography>
           <Typography variant="h2">
+            Why Third Place?
+          </Typography>
+          <Typography>
+            Here are some reasons we think Third place will be your new social home:
+          </Typography>
+          <ul>
+            <li>share your thoughts and photos</li>
+            <li>no ads</li>
+            <li>no bots</li>
+            <li>control your experience</li>
+            <li>RSS support</li>
+            <li>de-cluttered user interface</li>
+          </ul>
+          <Typography variant="h2">
             Building Third Place
           </Typography>
           <Typography>
@@ -73,11 +87,23 @@ export default function Home() {
           <Typography sx={{paddingTop: 1}}>
             <Link to="//thirdplaceapp.com/p/4a940a44-4408-473d-b390-41f4c8dd52a0">Part IV</Link> deep dives into the anatomy of a backend service
           </Typography>
+          <Typography variant="h2">
+            Todo List
+          </Typography>
+          <Typography>
+            There is still a lot of work to do in order to get Third place ready for prime time. Here are some of the features we need before we can launch to the public:
+          </Typography>
+          <ul>
+            <li><b>SES integration with cognito</b> will allow for branded, customized emails. Right now there is a (slightly scary) generic email from AWS Cognito for confirmation codes.</li>
+            <li><b>Single region instances, multi-region deployment</b> model for production. Right now, we have essentially the opposite: a single production instance spread out over multiple regions. This is not ideal for a number of reasons, but was chosen due to various free tiers for services Third place uses.</li>
+            <li><b>MFA support</b> for increased security. As a service provider, supporting MFA in 2022 is pretty necessary.</li>
+          </ul>
         </PaperContainer>
       )}
       { loggedInUser && (
         <NewPost onPostCreated={getPosts} />
       )}
+      <h2>Public Posts</h2>
       <PostCollection
         posts={posts}
         reloadPosts={getPosts}
