@@ -156,7 +156,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
-            <Route path="notifications" element={<Notifications />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/invite" element={<ProtectedRoute component={InviteList} role="admin" />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/update-profile" element={<ProtectedRoute component={UpdateProfile} />} />
