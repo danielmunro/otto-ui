@@ -8,7 +8,7 @@ exports[`renders correctly 1`] = `
     className="MuiDrawer-root MuiDrawer-docked css-1o2n5ug-MuiDrawer-docked"
   >
     <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-x60mnu-MuiPaper-root-MuiDrawer-paper"
+      className="MuiPaper-root MuiPaper-elevation MuiPaper-elevation0 MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft css-15q07m6-MuiPaper-root-MuiDrawer-paper"
     >
       <div
         className="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1t29gy6-MuiToolbar-root"
@@ -20,7 +20,7 @@ exports[`renders correctly 1`] = `
         className="MuiList-root MuiList-padding css-h4y409-MuiList-root"
       >
         <div
-          className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1j4ws2k-MuiButtonBase-root-MuiListItem-root"
+          className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-p5wds0-MuiButtonBase-root-MuiListItem-root"
           onBlur={[Function]}
           onClick={[Function]}
           onContextMenu={[Function]}
@@ -38,7 +38,7 @@ exports[`renders correctly 1`] = `
           tabIndex={0}
         >
           <div
-            className="MuiListItemIcon-root css-1e171y3-MuiListItemIcon-root"
+            className="MuiListItemIcon-root css-19g8jym-MuiListItemIcon-root"
           >
             <svg
               aria-hidden={true}
@@ -64,7 +64,7 @@ exports[`renders correctly 1`] = `
         </div>
         <div>
           <div
-            className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1j4ws2k-MuiButtonBase-root-MuiListItem-root"
+            className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-p5wds0-MuiButtonBase-root-MuiListItem-root"
             onBlur={[Function]}
             onClick={[Function]}
             onContextMenu={[Function]}
@@ -82,7 +82,7 @@ exports[`renders correctly 1`] = `
             tabIndex={0}
           >
             <div
-              className="MuiListItemIcon-root css-1e171y3-MuiListItemIcon-root"
+              className="MuiListItemIcon-root css-19g8jym-MuiListItemIcon-root"
             >
               <svg
                 aria-hidden={true}
@@ -107,7 +107,7 @@ exports[`renders correctly 1`] = `
             </div>
           </div>
           <div
-            className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1j4ws2k-MuiButtonBase-root-MuiListItem-root"
+            className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-p5wds0-MuiButtonBase-root-MuiListItem-root"
             onBlur={[Function]}
             onClick={[Function]}
             onContextMenu={[Function]}
@@ -125,7 +125,7 @@ exports[`renders correctly 1`] = `
             tabIndex={0}
           >
             <div
-              className="MuiListItemIcon-root css-1e171y3-MuiListItemIcon-root"
+              className="MuiListItemIcon-root css-19g8jym-MuiListItemIcon-root"
             >
               <svg
                 aria-hidden={true}
@@ -154,266 +154,7 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <main
-    className="MuiBox-root css-1qmf5u9"
-  >
-    <h1
-      className="MuiTypography-root MuiTypography-h1 css-1hzvuds-MuiTypography-root"
-    >
-      Home
-    </h1>
-    <div
-      className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1bb0eak-MuiPaper-root"
-    >
-      <p
-        className="MuiTypography-root MuiTypography-body1 css-1i35fk7-MuiTypography-root"
-      >
-        Third place is an open source social network. The code that powers this site is free for anyone to download, view, and modify. We embrace open source because that is how we learned to program, and we hope others find this project useful in their learning journey.
-      </p>
-      <p
-        className="MuiTypography-root MuiTypography-body1 css-1hswphs-MuiTypography-root"
-      >
-        While Third place is in closed beta, invite codes are required for signing up.
-      </p>
-      <h2
-        className="MuiTypography-root MuiTypography-h2 css-4su1tu-MuiTypography-root"
-      >
-        Building Third Place
-      </h2>
-      <p
-        className="MuiTypography-root MuiTypography-body1 css-1i35fk7-MuiTypography-root"
-      >
-        <a
-          href="//thirdplaceapp.com/p/277ad822-c24a-4801-83ad-7cc6a68b4564"
-          onClick={[Function]}
-        >
-          Part I
-        </a>
-         introduces the project, the technology, and the code
-      </p>
-      <p
-        className="MuiTypography-root MuiTypography-body1 css-1hswphs-MuiTypography-root"
-      >
-        <a
-          href="//thirdplaceapp.com/p/9aed55cd-1d3b-4208-befe-4b3e3500291b"
-          onClick={[Function]}
-        >
-          Part II
-        </a>
-         covers the sign up flow for new users
-      </p>
-      <p
-        className="MuiTypography-root MuiTypography-body1 css-1hswphs-MuiTypography-root"
-      >
-        <a
-          href="//thirdplaceapp.com/p/218dc22d-48d5-4146-80ac-0aac9011bdb0"
-          onClick={[Function]}
-        >
-          Part III
-        </a>
-         shows how to setup and run a local development environment
-      </p>
-    </div>
-    <div>
-      <div
-        aria-hidden={true}
-        className="MuiBackdrop-root css-sox5kk-MuiBackdrop-root"
-        onClick={[Function]}
-        style={
-          Object {
-            "opacity": 0,
-            "visibility": "hidden",
-            "zIndex": 1,
-          }
-        }
-      >
-        <div
-          onClick={[Function]}
-          style={
-            Object {
-              "backgroundColor": "white",
-              "borderRadius": 5,
-              "padding": 5,
-              "position": "relative",
-            }
-          }
-        >
-          <form
-            onSubmit={[Function]}
-          >
-            <div
-              style={
-                Object {
-                  "display": "flex",
-                }
-              }
-            />
-            <div
-              style={
-                Object {
-                  "borderBottom": "1px solid #fff",
-                }
-              }
-            >
-              <div
-                className="DraftEditor-root"
-              >
-                <div
-                  className="public-DraftEditorPlaceholder-root"
-                >
-                  <div
-                    className="public-DraftEditorPlaceholder-inner"
-                    id="placeholder-e5bfq"
-                    style={
-                      Object {
-                        "whiteSpace": "pre-wrap",
-                      }
-                    }
-                  >
-                    What are you thinking about?
-                  </div>
-                </div>
-                <div
-                  className="DraftEditor-editorContainer"
-                >
-                  <div
-                    aria-describedby="placeholder-e5bfq"
-                    aria-expanded={null}
-                    className="notranslate public-DraftEditor-content"
-                    contentEditable={true}
-                    onBeforeInput={[Function]}
-                    onBlur={[Function]}
-                    onCompositionEnd={[Function]}
-                    onCompositionStart={[Function]}
-                    onCopy={[Function]}
-                    onCut={[Function]}
-                    onDragEnd={[Function]}
-                    onDragEnter={[Function]}
-                    onDragLeave={[Function]}
-                    onDragOver={[Function]}
-                    onDragStart={[Function]}
-                    onDrop={[Function]}
-                    onFocus={[Function]}
-                    onInput={[Function]}
-                    onKeyDown={[Function]}
-                    onKeyPress={[Function]}
-                    onKeyUp={[Function]}
-                    onMouseUp={[Function]}
-                    onPaste={[Function]}
-                    onSelect={[Function]}
-                    role="textbox"
-                    spellCheck={true}
-                    style={
-                      Object {
-                        "WebkitUserSelect": "text",
-                        "outline": "none",
-                        "userSelect": "text",
-                        "whiteSpace": "pre-wrap",
-                        "wordWrap": "break-word",
-                      }
-                    }
-                    suppressContentEditableWarning={true}
-                  >
-                    <div
-                      data-contents="true"
-                    >
-                      <div
-                        className=""
-                        data-block={true}
-                        data-editor="e5bfq"
-                        data-offset-key="ne9t-0-0"
-                      >
-                        <div
-                          className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
-                          data-offset-key="ne9t-0-0"
-                        >
-                          <span
-                            data-offset-key="ne9t-0-0"
-                            style={Object {}}
-                          >
-                            <br
-                              data-text="true"
-                            />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <input
-              onChange={[Function]}
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-              type="file"
-            />
-            <button
-              className="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-hp6oir-MuiButtonBase-root-MuiButton-root"
-              disabled={false}
-              onBlur={[Function]}
-              onContextMenu={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              style={
-                Object {
-                  "marginLeft": 10,
-                  "marginTop": 10,
-                }
-              }
-              tabIndex={0}
-              type="submit"
-            >
-              Submit
-            </button>
-            <p>
-              <button
-                aria-label="upload an image"
-                className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1jonii5-MuiButtonBase-root-MuiIconButton-root"
-                disabled={false}
-                onBlur={[Function]}
-                onClick={[Function]}
-                onContextMenu={[Function]}
-                onDragLeave={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                onMouseDown={[Function]}
-                onMouseLeave={[Function]}
-                onMouseUp={[Function]}
-                onTouchEnd={[Function]}
-                onTouchMove={[Function]}
-                onTouchStart={[Function]}
-                tabIndex={0}
-                type="button"
-              >
-                <svg
-                  aria-hidden={true}
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1jxdcj3-MuiSvgIcon-root"
-                  data-testid="AddPhotoAlternateIcon"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"
-                  />
-                </svg>
-              </button>
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </main>
+    className="MuiBox-root css-1kxwji3"
+  />
 </div>
 `;

@@ -10,6 +10,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v3
+      - uses: mskelton/setup-yarn@v1
+      - run: yarn test
       - run: echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u danielmunro --password-stdin
       - run: docker build . --tag ghcr.io/${{ github.repository }}:${{ github.ref_name }}
       - run: docker push ghcr.io/${{ github.repository }}:${{ github.ref_name }}

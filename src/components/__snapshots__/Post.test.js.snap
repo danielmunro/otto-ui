@@ -3,7 +3,6 @@
 exports[`renders correctly 1`] = `
 <div
   className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-qevyti-MuiPaper-root-MuiCard-root"
-  onClick={[Function]}
 >
   <div
     className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-8h65ya-MuiAvatar-root"
@@ -70,26 +69,31 @@ exports[`renders correctly 1`] = `
       </a>
     </h6>
     <div
-      style={
-        Object {
-          "maxHeight": 190,
-          "overflow": "hidden",
-        }
-      }
+      onClick={[Function]}
     >
-      <p>
-        hello world
-      </p>
+      <div
+        className="post"
+        style={
+          Object {
+            "cursor": "auto",
+            "maxHeight": "inherit",
+          }
+        }
+      >
+        <p>
+          hello world
+        </p>
+      </div>
+      <div
+        style={
+          Object {
+            "textAlign": "center",
+            "width": "100%",
+          }
+        }
+      />
     </div>
     <div />
   </div>
-  <div
-    style={
-      Object {
-        "display": "flex",
-        "justifyContent": "space-evenly",
-      }
-    }
-  />
 </div>
 `;
